@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+!pragma layout smetana
+
+class main {
+}
+
+class Player {
+- int HP
+- int damage
+- String playerName
+- Storage storage
+}
+
+class Monsters {
+Int hitPoints
+Int damage
+String monsterName
+}
+
+class BattleSystem {
+Int turn
+
+attack()
+heal()
+useItem()
+escapeBattle()
+}
+
+class Storage {
+ArrayList<Item> playerItems
+
+loadPlayerItemsFromDBToArrayList()
+}
+
+class Levels {
+Int levelCounter
+BattleSystem battleSystem
+Monsters monsters
+}
+
+class Item {
+String itemName
+Int id
+String rarity
+ArrayList<Item> itemTypes
+
+createItem(String selectRandomItemRarity, String selectRandomItemType)
+String selectRandomItemRarity()
+String selectRandomItemType()
+loadItemsFromDBToArrayList()
+}
+
+class LootChest {
+Int gold
+Item item
+
+openLootChest()
+}
+
+
+
+@enduml
