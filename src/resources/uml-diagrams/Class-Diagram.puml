@@ -18,13 +18,13 @@ class Player {
 }
 
 class Monsters {
-Int hitPoints
-Int damage
+int hitPoints
+int damage
 String monsterName
 }
 
 class BattleSystem {
-Int turn
+int turn
 
 attack()
 heal()
@@ -39,14 +39,14 @@ loadPlayerItemsFromDBToArrayList()
 }
 
 class Levels {
-Int levelCounter
+int levelCounter
 BattleSystem battleSystem
 Monsters monsters
 }
 
 class Item {
 String itemName
-Int id
+int id
 String rarity
 ArrayList<Item> itemTypes
 
@@ -57,7 +57,7 @@ loadItemsFromDBToArrayList()
 }
 
 class LootChest {
-Int gold
+int gold
 Item item
 
 openLootChest()
