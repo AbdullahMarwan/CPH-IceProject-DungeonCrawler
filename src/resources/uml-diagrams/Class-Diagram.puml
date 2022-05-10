@@ -1,10 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
 !pragma layout smetana
 
 class main {
@@ -63,6 +59,32 @@ Item item
 openLootChest()
 }
 
+class Tiles {
 
+}
+
+class MonsterBattle {
+}
+
+class ItemShop {
+}
+
+class Options {
+}
+
+
+main <|-- Levels
+Levels <|-- Player
+Levels <|-- Options
+Player <|-- Storage
+Player <|-- Item
+LootChest <|-- Item
+Levels <|-- LootChest
+Levels <|-- Tiles
+Tiles <|-- ItemShop
+Tiles <|-- WeaponSmith
+Tiles <|-- MonsterBattle
+MonsterBattle <|-- Monsters
+MonsterBattle <|-- BattleSystem
 
 @enduml
