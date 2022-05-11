@@ -72,6 +72,19 @@ class ItemShop {
 class Options {
 }
 
+interface IO {
+    - saveGameData();
+    - saveTeamData();
+    - saveTournamentData();
+
+}
+
+class fileIO {
+    - readGameData(String path);
+    - readTeamData(String path);
+    - readTournamentData(String path);
+}
+
 
 main <|-- Levels
 Levels <|-- Player
@@ -86,5 +99,7 @@ Tiles <|-- WeaponSmith
 Tiles <|-- MonsterBattle
 MonsterBattle <|-- Monsters
 MonsterBattle <|-- BattleSystem
+IO <|-- fileIO
+Levels -- IO
 
 @enduml
