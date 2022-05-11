@@ -3,6 +3,9 @@
 
 !pragma layout smetana
 
+
+
+
 class main {
 }
 
@@ -24,8 +27,13 @@ int turn
 
 attack()
 heal()
+viewStorage()
 useItem()
 escapeBattle()
+}
+
+class GameController{
+
 }
 
 class Storage {
@@ -35,9 +43,9 @@ loadPlayerItemsFromDBToArrayList()
 }
 
 class Levels {
-int levelCounter
-BattleSystem battleSystem
-Monsters monsters
+ArrayList<Fields> fields
+
+addFieldsToArrayList()
 }
 
 class Item {
@@ -59,17 +67,32 @@ Item item
 openLootChest()
 }
 
-class Tiles {
+class Fields {
 
 }
 
+class weaponSmith{
+}
+
 class MonsterBattle {
+
+startBattle()
 }
 
 class ItemShop {
 }
 
 class Options {
+
+Save current data to DB/FileIO
+
+Enter shop
+View Self stats
+
+viewPlayerStats()
+saveData()
+viewStorage()
+restToHeal()
 }
 
 interface IO {
@@ -79,27 +102,28 @@ interface IO {
 
 }
 
-class fileIO {
+class FileIO {
     - readGameData(String path);
     - readTeamData(String path);
     - readTournamentData(String path);
 }
 
+main *-- GameController
+GameController *-- Player
+GameController *-- Levels
+GameController *-- Options
+Player *-- Storage
+Storage o-- Item
+Levels *-- Fields
+Fields <|-- ItemShop
+Fields <|-- LootChest
+Fields <|-- weaponSmith
+Fields <|-- MonsterBattle
+GameController *-- FileIO
+MonsterBattle *-- Monsters
+MonsterBattle *-- BattleSystem
 
-main <|-- Levels
-Levels <|-- Player
-Levels <|-- Options
-Player <|-- Storage
-Player <|-- Item
-LootChest <|-- Item
-Levels <|-- LootChest
-Levels <|-- Tiles
-Tiles <|-- ItemShop
-Tiles <|-- WeaponSmith
-Tiles <|-- MonsterBattle
-MonsterBattle <|-- Monsters
-MonsterBattle <|-- BattleSystem
-IO <|-- fileIO
-Levels -- IO
+FileIO <|-- IO
+'Spørg om pilen fra IO vender rigtigt'
 
 @enduml
