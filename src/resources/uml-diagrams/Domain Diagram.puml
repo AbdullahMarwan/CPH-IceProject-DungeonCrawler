@@ -1,26 +1,28 @@
 @startuml
 !pragma layout smetana
 
-(Main) <|-- (GameController)
-(GameController) <|-- (Player)
-(GameController) <|-- (Level)
-(GameController) <|-- (Option)
-(GameController) <|-- (FileIO)
+'(Main) <|-- (GameController)
+'(GameController) <|-- (Player)
+'(GameController) <|-- (Level)
+'(GameController) <|-- (FileIO)
 
-(Player) <|-- (Storage)
-(Storage) <|-- (Item)
+(Player) *-- (Storage)
+(Storage) *-- (Item)
 
-(Level) <|-- (Fields)
+(Level) *-- (Fields)
+(Level) *-- (Player)
 
-(FileIO) <|-- (IO)
+
+'(FileIO) <|-- (IO)
 
 (Fields) <|-- (LootChest)
 (Fields) <|-- (WeaponSmith)
 (Fields) <|-- (MonsterBattle)
 (Fields) <|-- (ItemShop)
+(Fields) *-- (Item)
 
-(MonsterBattle) <|-- (Monster)
-(MonsterBattle) <|-- (BattleSystem)
+(MonsterBattle) *-- (Monster)
+'(MonsterBattle) <|-- (BattleSystem)
 
 
 @enduml

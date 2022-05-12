@@ -10,45 +10,51 @@ class main {
 }
 
 class Player {
-    - int HP
-    - int damage
-    - int gold
-    - String playerName
-    - Storage storage
+    - int HP;
+    - int damage;
+    - int gold;
+    - String playerName;
+    - Storage storage;
+
+    - viewPlayerStats();
+    - viewStorage();
+    - restToHeal();
 }
 
 class Monsters {
-    - int hitPoints
-    - int damage
-    - String monsterName
+    - int hitPoints;
+    - int damage;
+    - String monsterName;
 }
 
 class BattleSystem {
-    - int turn
+    - int turn;
 
     - attack();
     - heal();
-    - viewStorage();
     - useItem();
     - escapeBattle();
 }
 
 class GameController{
+    - ArrayList<Level> levels;
+    + initializePlayer();
+    - saveData();
 
 }
 
 class Storage {
-    - ArrayList<Item> playerItems
+    - ArrayList<Item> playerItems;
 
-    + loadPlayerItemsFromFileToArrayList()
-    + addItemToPlayerItemList()
-    + removeItemFromPlayerItemList()
+    + loadPlayerItemsFromFileToArrayList();
+    + addItemToPlayerItemList();
+    + removeItemFromPlayerItemList();
 }
 
-class Levels {
-    - ArrayList<Fields> fields
+class Level {
+    - ArrayList<Field> fields;
 
-    + addFieldsToArrayList();
+    + addFieldToArrayList();
 }
 
 class Item {
@@ -68,7 +74,7 @@ class LootChest {
     - getRandomGold();
 }
 
-abstract class Fields {
+abstract class Field {
     - String fieldName;
     - Item item;
 
@@ -84,23 +90,12 @@ class MonsterBattle {
 }
 
 class ItemShop {
-
-
+    - showRandomItem();
     - buyItem();
-}
-
-class Options {
-
-    - viewPlayerStats();
-    - saveData();
-    - viewStorage();
-    - restToHeal();
 }
 
 interface IO {
     - saveGameData();
-    - saveTeamData();
-    - saveTournamentData();
 
 }
 
@@ -112,22 +107,21 @@ class FileIO {
 
 main *-- GameController
 GameController *-- Player
-GameController *-- Levels
-GameController *-- Options
+GameController *-- Level
 Player *-- Storage
-Storage o-- Item
-Levels *-- Fields
-Fields <|-- ItemShop
-Fields <|-- LootChest
-Fields <|-- weaponSmith
-Fields <|-- MonsterBattle
+Storage *-- Item
+Level *-- Field
+Field <|-- ItemShop
+Field <|-- LootChest
+Field <|-- weaponSmith
+Field <|-- MonsterBattle
 GameController *-- FileIO
 MonsterBattle *-- Monsters
 MonsterBattle *-- BattleSystem
 
-FileIO <|-- IO
+FileIO --|> IO
 'Spørg om pilen fra IO vender rigtigt'
 
-Fields *-- Item
+Field *-- Item
 
 @enduml

@@ -6,10 +6,10 @@ actor Monster
 
 rectangle DungeonCrawlerGame {
     Player -- (InGamePlayer)
-    (InGamePlayer) --> (Option)
+    (InGamePlayer) --> (GameController)
 
-    (Option) --> (Levels)
-    (Option) --> (Storage)
+    (GameController) --> (Levels)
+    (GameController) --> (Storage)
 
     (Storage) --> (Item)
 
