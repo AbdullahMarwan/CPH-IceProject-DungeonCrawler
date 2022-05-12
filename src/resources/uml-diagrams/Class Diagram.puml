@@ -10,27 +10,27 @@ class main {
 }
 
 class Player {
-- int HP
-- int damage
-- int gold
-- String playerName
-- Storage storage
+    - int HP
+    - int damage
+    - int gold
+    - String playerName
+    - Storage storage
 }
 
 class Monsters {
-int hitPoints
-int damage
-String monsterName
+    - int hitPoints
+    - int damage
+    - String monsterName
 }
 
 class BattleSystem {
-int turn
+    - int turn
 
-attack()
-heal()
-viewStorage()
-useItem()
-escapeBattle()
+    - attack();
+    - heal();
+    - viewStorage();
+    - useItem();
+    - escapeBattle();
 }
 
 class GameController{
@@ -38,39 +38,41 @@ class GameController{
 }
 
 class Storage {
-ArrayList<Item> playerItems
+    - ArrayList<Item> playerItems
 
-+ loadPlayerItemsFromFileToArrayList()
-+ addItemToPlayerItemList()
-+ removeItemFromPlayerItemList()
+    + loadPlayerItemsFromFileToArrayList()
+    + addItemToPlayerItemList()
+    + removeItemFromPlayerItemList()
 }
 
 class Levels {
-ArrayList<Fields> fields
+    - ArrayList<Fields> fields
 
-addFieldsToArrayList()
+    + addFieldsToArrayList();
 }
 
 class Item {
-String itemName
-int id
-String rarity
-ArrayList<Item> itemTypes
+    - String itemName;
+    - int id;
+    - String rarity;
+    + ArrayList<Item> itemTypes;
 
-createItem(String selectRandomItemRarity, String selectRandomItemType)
-String selectRandomItemRarity()
-String selectRandomItemType()
-loadItemsFromDBToArrayList()
+    - createItem(String selectRandomItemRarity, String selectRandomItemType);
+    - String selectRandomItemRarity();
+    - String selectRandomItemType();
+    - loadItemsFromDBToArrayList();
 }
 
 class LootChest {
+    - getRandomItem();
+    - getRandomGold();
 }
 
 abstract class Fields {
-String fieldName
-Item item
+    - String fieldName;
+    - Item item;
 
-doFunction()
+    - doFunction();
 }
 
 class weaponSmith{
@@ -78,18 +80,21 @@ class weaponSmith{
 
 class MonsterBattle {
 
-startBattle()
+    - startBattle();
 }
 
 class ItemShop {
+
+
+    - buyItem();
 }
 
 class Options {
 
-viewPlayerStats()
-saveData()
-viewStorage()
-restToHeal()
+    - viewPlayerStats();
+    - saveData();
+    - viewStorage();
+    - restToHeal();
 }
 
 interface IO {

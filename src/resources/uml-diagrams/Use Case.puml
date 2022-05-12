@@ -1,0 +1,23 @@
+@startuml
+!pragma layout smetana
+
+actor Player
+actor Monster
+
+rectangle DungeonCrawlerGame {
+    Player -- (InGamePlayer)
+    (InGamePlayer) --> (Option)
+
+    (Option) --> (Levels)
+    (Option) --> (Storage)
+
+    (Storage) --> (Item)
+
+    (Levels) --> (Fields)
+    (Fields) --> (Combat)
+
+    (Combat) -- Monster
+
+}
+
+@enduml
