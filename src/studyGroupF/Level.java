@@ -8,7 +8,12 @@ public class Level {
     ArrayList<Field> fields;
 
     public void addFieldToArrayList(){
-        
+
+    }
+
+    public int currentLevel(){
+
+        return currentLevel();
     }
 
 
