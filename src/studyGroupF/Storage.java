@@ -3,18 +3,17 @@ package studyGroupF;
 import java.util.ArrayList;
 
 public class Storage {
+    private Item item;
 
-    private ArrayList<Item> playerItems;
-
-    public void loadPlayerItemsFromFileToArrayList(){
-
-    }
-
-    public void addItemToPlayerItemList(){
+    public void loadPlayerItemsFromFileToArrayList() {
 
     }
 
-    public void removeItemFromPlayerItemList(){
+    public void addItemToPlayerItemList() {
+
+    }
+
+    public void removeItemFromPlayerItemList() {
 
     }
 
