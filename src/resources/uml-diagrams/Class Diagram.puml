@@ -103,8 +103,6 @@ interface IO {
 
 class FileIO {
     - readGameData(String path);
-    - readTeamData(String path);
-    - readTournamentData(String path);
 }
 
 main *-- GameController
