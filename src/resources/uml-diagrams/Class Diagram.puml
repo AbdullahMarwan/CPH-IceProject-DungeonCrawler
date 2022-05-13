@@ -25,6 +25,8 @@ class Monsters {
     - int hitPoints;
     - int damage;
     - String monsterName;
+
+    + createMonster();
 }
 
 class BattleSystem {
