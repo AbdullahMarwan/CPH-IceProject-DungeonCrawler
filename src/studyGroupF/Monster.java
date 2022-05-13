@@ -2,7 +2,7 @@ package studyGroupF;
 
 public class Monster {
 
-    private int hitPoints;
+    private int HP;
     private int damage;
     private String monsterName;
 
