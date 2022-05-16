@@ -13,7 +13,10 @@ public class GameController {
     Player player;
     Level level;
     FileIO fileIO;
+    Monster monster;
+
     ArrayList<Player> players = new ArrayList<>();
+    ArrayList<Monster> monsters = new ArrayList<>();
     ArrayList<Level> levels = new ArrayList<>();
 
     public void setUpGame() throws IOException {
@@ -48,7 +51,7 @@ public class GameController {
             players.add(player);
         }
 
-
+        initializeAMonster();
 
         //saveData(); To Save new Data
     }
@@ -89,6 +92,15 @@ public class GameController {
         //TODO call saveItemStorageData
     }
 
+    private void initializeAMonster() throws IOException {
+        clearMonsterArrayList();
+        monster = level.createMonster();
+        monsters.add(monster);
+
+        System.out.println("The monster created: " + monsters.get(0));
+    }
+
+
     public ArrayList<String> addPlayersToData() {
         ArrayList<String> data = new ArrayList<>();
 
@@ -109,5 +121,8 @@ public class GameController {
 
     private void clearPlayerArrayList(){
         players = new ArrayList<>();
+    }
+    private void clearMonsterArrayList(){
+        monsters = new ArrayList<>();
     }
 }

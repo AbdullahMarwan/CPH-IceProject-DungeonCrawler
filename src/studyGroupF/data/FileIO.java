@@ -1,16 +1,22 @@
 package studyGroupF.data;
 
-import studyGroupF.player.Player;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class FileIO implements IO {
-    File playerData = new File("src/studyGroupF/Data/PlayerData");
+    File playerDataFile = new File("src/studyGroupF/Data/PlayerData");
+    File monsterDataFile = new File("src/studyGroupF/Data/MonsterData");
+
+    int amountOfLinesInMonsterDataFile;
 
     @Override
     public ArrayList<String> readLevelData() {
@@ -19,23 +25,45 @@ public class FileIO implements IO {
 
     @Override
     public ArrayList<String> readPlayerData() throws FileNotFoundException {
-        ArrayList<String> data = new ArrayList<>();
+        ArrayList<String> playerData = new ArrayList<>();
 
         try {
-            Scanner scan = new Scanner(playerData);
+            Scanner scan = new Scanner(playerDataFile);
             while (scan.hasNextLine()) {
-                data.add(scan.nextLine());
+                playerData.add(scan.nextLine());
             }
         } catch (
                 FileNotFoundException e) {
             e.printStackTrace();
         }
-        return data;
+        return playerData;
+    }
+
+    @Override
+    public ArrayList<String> readMonsterData() throws IOException {
+        ArrayList<String> monsterData = new ArrayList<>();
+
+        List<String> lines = Files.readAllLines(Paths.get(String.valueOf(monsterDataFile)), Charset.defaultCharset());
+
+        System.out.println("Amount of lines: (fileIO) " + lines.size());
+        setAmountOfLinesInMonsterDataFile(lines.size());
+        //= lines.size();
+
+        try {
+            Scanner scan = new Scanner(monsterDataFile);
+            while (scan.hasNextLine()) {
+                monsterData.add(scan.nextLine());
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return monsterData;
     }
 
     @Override
     public boolean isPlayerDataAvailable() throws FileNotFoundException {
-        Scanner scan = new Scanner(playerData);
+        Scanner scan = new Scanner(playerDataFile);
 
         if (scan.hasNextLine()) {
             return true;
@@ -52,7 +80,7 @@ public class FileIO implements IO {
     @Override
     public void savePlayerData(ArrayList<String> data) throws IOException {
         try {
-            FileWriter myWriter = new FileWriter(playerData);
+            FileWriter myWriter = new FileWriter(playerDataFile);
             boolean header = true;
             for(String s : data)
             {
@@ -73,5 +101,13 @@ public class FileIO implements IO {
             System.out.println("An error occurred.");
         }
 
+    }
+
+    public int getAmountOfLinesInMonsterDataFile() {
+        return amountOfLinesInMonsterDataFile;
+    }
+
+    public void setAmountOfLinesInMonsterDataFile(int amountOfLinesInMonsterDataFile) {
+        this.amountOfLinesInMonsterDataFile = amountOfLinesInMonsterDataFile;
     }
 }
