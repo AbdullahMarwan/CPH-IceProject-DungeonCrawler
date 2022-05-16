@@ -22,7 +22,7 @@ public class Level {
     }
 
     public Monster createMonster() throws IOException {
-        //Initiliazing temporary variables that will be overriden a bit later. Values should be set to 0 in the start
+        //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start
         String monsterType = "";
         int HP = 0;
         int damage = 0;
@@ -31,26 +31,18 @@ public class Level {
         int minDamage = 0;
         int maxDamage = 0;
 
-
-
-
-
         ArrayList<String> data;
         data = fileIO.readMonsterData();
 
-        //TODO set 100 in SpecificLine to amount of lines in the file
-        System.out.println("Amount of lines in MonsterData " + fileIO.getAmountOfLinesInMonsterDataFile());
         Random line = new Random();
-        int specificLine = line.nextInt(fileIO.getAmountOfLinesInMonsterDataFile()-1) + 1;
-        //int specificLine = 3; //Temp solution
-        System.out.println("SpecificLine Chosen: " + specificLine);
+        int specificLine = line.nextInt(fileIO.getAmountOfLinesInMonsterDataFile() - 1) + 1;
+        //int specificLine = 3; //To test for specific line (To get the wanted line, just -1 SpecificLine)
 
         int counter = 0;
 
         for (String s : data) {
             //System.out.println(s);
             if (counter == specificLine) {
-                System.out.println("Counter: " + counter);
                 String[] values = s.split(", ");
 
                 monsterType = values[0];
@@ -62,15 +54,17 @@ public class Level {
             counter++;
         }
 
-        Random r = new Random();
-        HP = r.nextInt(maxHP) + minHP;
-
-        Random t = new Random();
-        damage = t.nextInt(maxDamage) + minDamage;
+        HP = randomFromMinMax(minHP, maxHP);
+        damage = randomFromMinMax(minDamage, maxDamage);
 
         Monster monster = new Monster(monsterType, HP, damage);
         return monster;
-        //TODO add the new monster to empty Arraylist
+    }
+
+    int randomFromMinMax(int min, int max) {
+        Random r = new Random();
+        int randomMinMax = r.nextInt((max - min) + 1) + min;
+        return randomMinMax;
     }
 
     private void increaseDifficulty() {

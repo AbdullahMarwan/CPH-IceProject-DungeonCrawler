@@ -44,10 +44,7 @@ public class FileIO implements IO {
         ArrayList<String> monsterData = new ArrayList<>();
 
         List<String> lines = Files.readAllLines(Paths.get(String.valueOf(monsterDataFile)), Charset.defaultCharset());
-
-        System.out.println("Amount of lines: (fileIO) " + lines.size());
         setAmountOfLinesInMonsterDataFile(lines.size());
-        //= lines.size();
 
         try {
             Scanner scan = new Scanner(monsterDataFile);

@@ -97,7 +97,7 @@ public class GameController {
         monster = level.createMonster();
         monsters.add(monster);
 
-        System.out.println("The monster created: " + monsters.get(0));
+        //System.out.println("The monster created: " + monsters.get(0));
     }
 
 
