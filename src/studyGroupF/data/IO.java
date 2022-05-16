@@ -1,6 +1,9 @@
 package studyGroupF.data;
 
+import studyGroupF.player.Player;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface IO {
@@ -11,6 +14,6 @@ public interface IO {
     boolean isPlayerDataAvailable() throws FileNotFoundException;
 
     void saveLevelData();
-    void savePlayerData();
 
+    void savePlayerData(ArrayList<String> data) throws IOException;
 }

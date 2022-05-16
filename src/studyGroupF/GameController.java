@@ -4,6 +4,7 @@ import studyGroupF.data.FileIO;
 import studyGroupF.player.Player;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class GameController {
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Level> levels = new ArrayList<>();
 
-    public void setUpGame() throws FileNotFoundException {
+    public void setUpGame() throws IOException {
         Scanner sc = new Scanner(System.in);
         level = new Level();
         fileIO = new FileIO();
@@ -47,6 +48,9 @@ public class GameController {
             players.add(player);
         }
 
+
+
+        //saveData(); To Save new Data
     }
 
     public void initializePreviousPlayerData() throws FileNotFoundException {
@@ -79,8 +83,28 @@ public class GameController {
         players.add(player);
     }
 
-    private void saveData() {
+    private void saveData() throws IOException {
+        fileIO.savePlayerData(addPlayersToData());
+        //TODO call saveLevelData
+        //TODO call saveItemStorageData
+    }
 
+    public ArrayList<String> addPlayersToData() {
+        ArrayList<String> data = new ArrayList<>();
+
+        for (Player t : players) {
+            data.add(t.getPlayerName() + ", ");
+            data.add(t.getMaxHP() + ", ");
+            data.add(t.getCurrentHP() + ", ");
+            data.add(t.getDamage() + ", ");
+            data.add(t.getGold() + ", ");
+            data.add(t.getCurrentLevel() + ", ");
+            data.add(t.getCurrentTile() + "");
+        }
+
+        System.out.println("The Data is: " + data);
+
+        return data;
     }
 
     private void clearPlayerArrayList(){

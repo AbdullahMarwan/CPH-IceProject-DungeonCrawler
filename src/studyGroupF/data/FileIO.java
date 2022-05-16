@@ -1,7 +1,11 @@
 package studyGroupF.data;
 
+import studyGroupF.player.Player;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,7 +50,28 @@ public class FileIO implements IO {
     }
 
     @Override
-    public void savePlayerData() {
+    public void savePlayerData(ArrayList<String> data) throws IOException {
+        try {
+            FileWriter myWriter = new FileWriter(playerData);
+            boolean header = true;
+            for(String s : data)
+            {
+                if (s.contains("Team") && !header) {
+                    header = true;
+                    myWriter.write("\n");
+                }
+                else
+                {
+                    header = false;
+                }
+                myWriter.write(s);
+            }
+            // myWriter.write(String.valueOf(data));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
 
     }
 }
