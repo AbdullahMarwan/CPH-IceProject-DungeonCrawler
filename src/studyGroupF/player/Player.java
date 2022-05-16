@@ -51,15 +51,12 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "playerName='" + playerName + '\'' +
-                ", maxHP=" + maxHP +
-                ", currentHP=" + currentHP +
-                ", damage=" + damage +
-                ", gold=" + gold +
-                ", currentLevel=" + currentLevel +
-                ", currentTile=" + currentTile +
-                '}';
+        return "Player name: " + playerName + "\n Max HP: " + maxHP
+                + "\n Current HP: " + currentHP
+                + "\n Damage: " + damage
+                + "\n Gold: " + gold
+                + "\n Current Level: " + currentLevel
+                + "\n Current tile: " + currentTile;
     }
 
     public String getPlayerName() {

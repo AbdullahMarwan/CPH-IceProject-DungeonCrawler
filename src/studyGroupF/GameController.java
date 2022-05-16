@@ -22,7 +22,8 @@ public class GameController {
 
         if (fileIO.isPlayerDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: ");
-            //TODO Print all of the previous player's stats
+            initializePreviousPlayerData();
+            System.out.println(players.get(0));
 
             System.out.println("Would you like to load previous data? ");
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
@@ -30,12 +31,18 @@ public class GameController {
 
             //TODO If previous PlayerData is chosen, select and load the level of that, if not start from level 1
             if (input.equals("l")) { //Load previous PlayerData
+                clearPlayerArrayList();
                 initializePreviousPlayerData();
             } else if (input.equals("n")) { //Initialize a new save
+                System.out.println("Starting a new save: ");
+                clearPlayerArrayList();
+                Player player = new Player();
+                players.add(player);
             }
 
         } else {
             System.out.println("No previous Data found, starting a new save: ");
+            clearPlayerArrayList();
             Player player = new Player();
             players.add(player);
         }
@@ -55,7 +62,7 @@ public class GameController {
         data = fileIO.readPlayerData();
 
         for (String s : data) {
-            System.out.println(s);
+            //System.out.println(s);
             String[] values = s.split(", ");
 
             playerName = values[0];
@@ -68,11 +75,15 @@ public class GameController {
         }
 
         Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile);
-        System.out.println("The player: " + player);
+        //System.out.println("The player: " + player);
         players.add(player);
     }
 
     private void saveData() {
 
+    }
+
+    private void clearPlayerArrayList(){
+        players = new ArrayList<>();
     }
 }
