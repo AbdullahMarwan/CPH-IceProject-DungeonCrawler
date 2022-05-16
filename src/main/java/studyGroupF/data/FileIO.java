@@ -13,8 +13,8 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class FileIO implements IO {
-    File playerDataFile = new File("src/studyGroupF/Data/PlayerData");
-    File monsterDataFile = new File("src/studyGroupF/Data/MonsterData");
+    File playerDataFile = new File("src/main/java/studyGroupF/Data/PlayerData");
+    File monsterDataFile = new File("src/main/java/studyGroupF/Data/MonsterData");
 
     int amountOfLinesInMonsterDataFile;
 

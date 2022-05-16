@@ -1,0 +1,127 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!pragma layout smetana
+
+
+skinparam backgroundColor gray
+
+class main {
+}
+
+class Player {
+    - int HP;
+    - int damage;
+    - int gold;
+    - String playerName;
+    - Storage storage;
+
+    - viewPlayerStats();
+    - viewStorage();
+    - restToHeal();
+}
+
+class Monsters {
+    - int hitPoints;
+    - int damage;
+    - String monsterName;
+
+    + createMonster();
+}
+
+class BattleSystem {
+    - int turn;
+
+    - attack();
+    - heal();
+    - useItem();
+    - escapeBattle();
+}
+
+class GameController{
+    - ArrayList<Level> levels;
+    + initializePlayer();
+    - saveData();
+
+}
+
+class Storage {
+    - ArrayList<Item> playerItems;
+
+    + loadPlayerItemsFromFileToArrayList();
+    + addItemToPlayerItemList();
+    + removeItemFromPlayerItemList();
+}
+
+class Level {
+    - ArrayList<Field> fields;
+
+    + addFieldToArrayList();
+}
+
+class Item {
+    - String itemName;
+    - int id;
+    - String rarity;
+    + ArrayList<Item> itemTypes;
+
+    - createItem(String selectRandomItemRarity, String selectRandomItemType);
+    - String selectRandomItemRarity();
+    - String selectRandomItemType();
+    - loadItemsFromDBToArrayList();
+}
+
+class LootChest {
+    - getRandomItem();
+    - getRandomGold();
+}
+
+abstract class Field {
+    - String fieldName;
+    - Item item;
+
+    - doFunction();
+}
+
+class weaponSmith{
+}
+
+class MonsterBattle {
+
+    - startBattle();
+}
+
+class ItemShop {
+    - showRandomItem();
+    - buyItem();
+}
+
+interface IO {
+    - saveGameData();
+
+}
+
+class FileIO {
+    - readGameData(String path);
+}
+
+main *-- GameController
+GameController *-- Player
+GameController *-- Level
+Player *-- Storage
+Storage *-- Item
+Level *-- Field
+Field <|-- ItemShop
+Field <|-- LootChest
+Field <|-- weaponSmith
+Field <|-- MonsterBattle
+GameController *-- FileIO
+MonsterBattle *-- Monsters
+MonsterBattle *-- BattleSystem
+
+FileIO --|> IO
+'Spørg om pilen fra IO vender rigtigt'
+
+Field *-- Item
+
+@enduml
