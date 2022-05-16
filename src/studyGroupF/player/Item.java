@@ -1,4 +1,4 @@
-package studyGroupF;
+package studyGroupF.player;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package studyGroupF.fields;
 
-import studyGroupF.Item;
+import studyGroupF.player.Item;
 
 public class LootChest extends Field{
     public LootChest(Item item, String fieldType, int fieldID) {

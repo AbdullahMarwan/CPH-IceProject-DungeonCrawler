@@ -1,6 +1,6 @@
 package studyGroupF.fields;
 
-import studyGroupF.Item;
+import studyGroupF.player.Item;
 
 public class ItemShop extends Field{
 

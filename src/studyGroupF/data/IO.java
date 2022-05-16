@@ -1,16 +1,16 @@
-package studyGroupF.Data;
+package studyGroupF.data;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public interface IO {
 
-    ArrayList<String> readGameData();
-    ArrayList<String> readPlayerData();
+    ArrayList<String> readLevelData();
+    ArrayList<String> readPlayerData() throws FileNotFoundException;
 
     boolean isPlayerDataAvailable() throws FileNotFoundException;
 
-    void saveGameData();
+    void saveLevelData();
     void savePlayerData();
 
 }

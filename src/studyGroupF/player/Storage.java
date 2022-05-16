@@ -1,6 +1,4 @@
-package studyGroupF;
-
-import java.util.ArrayList;
+package studyGroupF.player;
 
 public class Storage {
     private Item item;

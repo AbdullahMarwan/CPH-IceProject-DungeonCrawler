@@ -1,6 +1,6 @@
 package studyGroupF.fields;
 
-import studyGroupF.Item;
+import studyGroupF.player.Item;
 
 abstract class Field {
     protected String fieldType;

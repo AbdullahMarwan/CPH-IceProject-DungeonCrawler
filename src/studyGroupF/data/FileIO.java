@@ -1,4 +1,4 @@
-package studyGroupF.Data;
+package studyGroupF.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,13 +9,24 @@ public class FileIO implements IO {
     File playerData = new File("src/studyGroupF/Data/PlayerData");
 
     @Override
-    public ArrayList<String> readGameData() {
+    public ArrayList<String> readLevelData() {
         return null;
     }
 
     @Override
-    public ArrayList<String> readPlayerData() {
-        return null;
+    public ArrayList<String> readPlayerData() throws FileNotFoundException {
+        ArrayList<String> data = new ArrayList<>();
+
+        try {
+            Scanner scan = new Scanner(playerData);
+            while (scan.hasNextLine()) {
+                data.add(scan.nextLine());
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     @Override
@@ -30,7 +41,7 @@ public class FileIO implements IO {
     }
 
     @Override
-    public void saveGameData() {
+    public void saveLevelData() {
 
     }
 

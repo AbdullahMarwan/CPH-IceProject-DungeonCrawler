@@ -1,7 +1,7 @@
 package studyGroupF.fields;
 
 import studyGroupF.BattleSystem;
-import studyGroupF.Item;
+import studyGroupF.player.Item;
 import studyGroupF.Monster;
 
 public class MonsterBattle extends Field {
