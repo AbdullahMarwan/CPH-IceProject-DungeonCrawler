@@ -1,6 +1,5 @@
 package studyGroupF.player;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Item {
@@ -47,17 +46,19 @@ public class Item {
         return 1;
     }
 
+    /*
     //Method to perform the chosen item's effect
-    public void performUseItem(Item item, int goldGained) {
+    public int useItem(Item item, int goldGained, Player player) {
         int extraGold = 20;
         int extraMaxHP = 10;
 
         switch (id) {
-            case 1 -> { //Increase Gold Gained by [20-100]
-                player.setGold(goldGained + extraGold * item.rarityValue);
+            case 1 -> { //Increase Gold Gained by [20-120]
+                return goldGained + (extraGold * item.rarityValue);
+                //player.setGold(goldGained + extraGold * item.rarityValue);
             }
 
-            case 2 -> { //Increase Sword Damage by [1-5] for each enemy slain
+            case 2 -> { //Increase Sword Damage by [1-6] for each enemy slain
                 player.setDamage(player.getDamage() + item.rarityValue);
             }
 
@@ -67,6 +68,20 @@ public class Item {
 
         }
     }
+
+     */
+
+    public void goldTransaction(Player player, int gold, boolean obtainedFromLoot) {
+
+        if (obtainedFromLoot) {
+            //player.setGold(player.getGold() + gold + useItem());
+            //useItem(item, gold, player);
+        } else {
+            player.setGold(player.getGold() + gold);
+        }
+
+    }
+
 
     public void createItem() {
         //Randomly chooses item rarity
