@@ -1,7 +1,9 @@
 package studyGroupF;
 
 import studyGroupF.data.FileIO;
+import studyGroupF.player.Item;
 import studyGroupF.player.Player;
+import studyGroupF.player.Storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +16,8 @@ public class GameController {
     Level level;
     FileIO fileIO;
     Monster monster;
+    Storage storage;
+    Item item;
 
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Monster> monsters = new ArrayList<>();
@@ -23,6 +27,8 @@ public class GameController {
         Scanner sc = new Scanner(System.in);
         level = new Level();
         fileIO = new FileIO();
+        storage = new Storage();
+        item = new Item();
 
         if (fileIO.isPlayerDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: ");
@@ -50,6 +56,22 @@ public class GameController {
             Player player = new Player();
             players.add(player);
         }
+
+        //Testing adding item to storage
+        //item = new Item(item.createItem());
+
+        item = item.createItem();
+        players.get(0).addLootToPlayer(item);
+
+        Item item2 = new Item();
+        item2 = item.createItem();
+
+        players.get(0).addLootToPlayer(item2);
+
+        players.get(0).viewStorage();
+
+        //System.out.println(item);
+
 
         initializeAMonster();
 
@@ -84,6 +106,8 @@ public class GameController {
         Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile);
         //System.out.println("The player: " + player);
         players.add(player);
+
+        //players.get(0).setPlayerItems(storage.addItemToPlayerItemList(player.getPlayerItems(), item));
     }
 
     private void saveData() throws IOException {

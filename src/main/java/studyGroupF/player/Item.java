@@ -9,14 +9,17 @@ public class Item {
     private int id;
     private int rarityValue = 1;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
-    String[] itemTypes = {"Gold Statue", "Extra Damage", "Extra maxHP"};
+    String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 
-    public Item(String itemName, String itemType, String rarityName, int id, int rarityValue) {
+    public Item(String itemName, String itemType, String rarityName, int rarityValue, int id) {
         this.itemName = itemName;
         this.itemType = itemType;
         this.rarityName = rarityName;
-        this.id = id;
         this.rarityValue = rarityValue;
+        this.id = id;
+    }
+
+    public Item() {
     }
 
     public int setItemRarityValue(String rarityName) {
@@ -82,8 +85,7 @@ public class Item {
 
     }
 
-
-    public void createItem() {
+    public Item createItem() {
         //Randomly chooses item rarity
         String rarityName = selectRandomItemRarity();
 
@@ -96,9 +98,11 @@ public class Item {
         String itemType = selectRandomItemType(id);
 
         //Item name is combined from Rarity and Type of the item, for example: "Legendary Gold Statue"
-        String itemName = rarityName + itemType;
+        String itemName = rarityName + " " + itemType;
 
-        Item item = new Item(itemName, itemType, rarityName, id, rarityValue);
+        Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
+
+        return item;
     }
 
     public String selectRandomItemRarity() {
@@ -167,5 +171,14 @@ public class Item {
 
     public void setRarityValue(int rarityValue) {
         this.rarityValue = rarityValue;
+    }
+
+    @Override
+    public String toString() {
+        return "Item name: " + itemName
+                + "\n  Item type: " + itemType
+                + "\n  Rarity name: " + rarityName
+                + "\n  Rarity value: " + rarityValue
+                + "\n  ID: " + id;
     }
 }

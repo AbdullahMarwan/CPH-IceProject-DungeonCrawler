@@ -11,10 +11,10 @@ public class Player {
     private int gold = 15;
     private int currentLevel = 1;
     private int currentTile = 0;
-    private Storage storage;
+    private Storage storage = new Storage();
     private Item item;
 
-    private ArrayList<Item> playerItems;
+    private ArrayList<Item> playerItems = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -36,16 +36,25 @@ public class Player {
         this.playerName = sc.nextLine();
     }
 
+    public void addLootToPlayer(Item item) {
+        storage.addLootToStorage(playerItems, item);
+    }
 
-    void viewPlayerStats() {
+    public void viewPlayerStats(Player player) {
+        System.out.println(player);
+    }
+
+    public void viewStorage() {
+        int count = 1;
+
+        for (Item i : playerItems) {
+            System.out.println("Item " + count + " ) \n " + i);
+            count++;
+        }
 
     }
 
-    void viewStorage() {
-
-    }
-
-    void restToHeal() {
+    public void restToHeal() {
 
     }
 
@@ -113,5 +122,13 @@ public class Player {
 
     public void setCurrentTile(int currentTile) {
         this.currentTile = currentTile;
+    }
+
+    public ArrayList<Item> getPlayerItems() {
+        return playerItems;
+    }
+
+    public void setPlayerItems(ArrayList<Item> playerItems) {
+        this.playerItems = playerItems;
     }
 }
