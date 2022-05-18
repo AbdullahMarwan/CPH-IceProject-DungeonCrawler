@@ -11,7 +11,12 @@ public class Main {
 
         System.out.println("Welcome to the Dungeon Crawler Game!");
 
+        //Sets up game
         gC.setUpGame();
+
+        //Starts the game
+        gC.playGame();
+
         while (gameInProgress){
             //System.out.println("----------------------------------------------------------------------------------------------------");
 

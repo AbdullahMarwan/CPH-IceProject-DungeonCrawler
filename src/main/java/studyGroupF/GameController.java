@@ -45,6 +45,9 @@ public class GameController {
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeNewSave();
+            } else {
+                System.out.println("\n---Invalid input, try again---");
+                setUpGame();
             }
 
         } else { //No Data Found, start new save
@@ -56,7 +59,10 @@ public class GameController {
 
     public void initializeOldSave() throws FileNotFoundException {
         initializePreviousPlayerData();
-        level.loadPreviousLevel();
+        level.loadPreviousFieldsToLevel();
+        levels.add(level);
+        levels.get(0).setLevelNr(players.get(0).getCurrentLevel());
+
         //level.printFieldArray();
     }
 
@@ -65,32 +71,15 @@ public class GameController {
         Player player = new Player();
         players.add(player);
 
-        level.addFieldsToArray();
+        level.addRandomsFieldsToLevel();
+        levels.add(level);
         //level.printFieldArray();
     }
 
     public void playGame() throws IOException {
-        //Testing adding item to storage
-        //item = new Item(item.createItem());
 
-        item = item.createItem();
-        players.get(0).addLootToPlayer(item);
+        //System.out.println("player" + players.get(0));
 
-        Item item2 = new Item();
-        item2 = item.createItem();
-
-        players.get(0).addLootToPlayer(item2);
-
-        players.get(0).viewStorage();
-
-        //System.out.println(item);
-
-
-        level.printFieldArray();
-
-        initializeAMonster();
-
-        //saveData(); To Save new Data
     }
 
     public void initializePreviousPlayerData() throws FileNotFoundException {
@@ -164,4 +153,31 @@ public class GameController {
     private void clearMonsterArrayList() {
         monsters = new ArrayList<>();
     }
+
+    private void testAndLeftOvers() {
+        //Testing adding item to storage
+        //item = new Item(item.createItem());
+
+        item = item.createItem();
+        players.get(0).addLootToPlayer(item);
+
+        Item item2 = new Item();
+        item2 = item.createItem();
+
+        players.get(0).addLootToPlayer(item2);
+
+        players.get(0).viewStorage();
+
+        //System.out.println(item);
+
+
+        level.printFieldArray();
+
+        //initializeAMonster();
+
+        //saveData(); To Save new Data
+
+
+    }
+
 }
