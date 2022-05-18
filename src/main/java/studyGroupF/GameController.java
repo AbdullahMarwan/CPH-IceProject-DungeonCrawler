@@ -41,8 +41,7 @@ public class GameController {
 
             if (input.equals("l")) { //Load previous PlayerData
                 clearPlayerArrayList();
-                initializePreviousPlayerData();
-                level.addFieldsToArray(); //TODO If previous PlayerData is chosen, select and load the level of that, if not start from level 1
+                initializeOldSave();
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeNewSave();
@@ -55,14 +54,19 @@ public class GameController {
 
     }
 
+    public void initializeOldSave() throws FileNotFoundException {
+        initializePreviousPlayerData();
+        level.loadPreviousLevel();
+        //level.printFieldArray();
+    }
+
     public void initializeNewSave() {
         clearPlayerArrayList();
         Player player = new Player();
         players.add(player);
-        //System.out.println(player); //Debug
 
         level.addFieldsToArray();
-        level.printFieldArray();
+        //level.printFieldArray();
     }
 
     public void playGame() throws IOException {
@@ -134,7 +138,6 @@ public class GameController {
 
         //System.out.println("The monster created: " + monsters.get(0));
     }
-
 
     public ArrayList<String> addPlayersToData() {
         ArrayList<String> data = new ArrayList<>();

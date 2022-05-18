@@ -23,6 +23,30 @@ public class FieldList {
         fields = tempFields;
     }
 
+    public FieldList(int[] id) {
+        Field[] tempFields = new Field[id.length];
+        int i = id.length;
+
+        for (int o = 0; o < i; o++) {
+            tempFields[o] = getFieldByID(id[o]);
+        }
+
+        fields = tempFields;
+    }
+
+    public Field getFieldByID(int id) {
+
+        return switch (id) {
+            case 1 -> new MonsterBattle(item, "MonsterBattle", 1);
+            case 2 -> new LootChest(item, "LootChest", 2);
+            case 3 -> new ItemShop(item, "ItemShop", 3);
+            case 4 -> new WeaponSmith(item, "WeaponSmith", 4);
+            case 5 -> new EmptyField(item, "EmptyField", 5);
+            default -> throw new IllegalStateException("Unexpected value: " + id);
+        };
+
+    }
+
     public Field getRandomField() {
         Random r = new Random();
         int randomField = r.nextInt((100 - 1) + 1) + 1;
@@ -42,16 +66,6 @@ public class FieldList {
         }
 
         return new MonsterBattle(item, "MonsterBattle", 1);
-
-        /*
-        return switch (randomField) {
-            case 1 -> new ItemShop(item, "ItemShop", 1);
-            case 2 -> new LootChest(item, "LootChest", 2);
-            case 3 -> new MonsterBattle(item, "MonsterBattle", 3);
-            case 4 -> new WeaponSmith(item, "WeaponSmith", 4);
-            default -> new MonsterBattle(item, "MonsterBattle", 3);
-        };
-         */
     }
 
     public Field[] getFields() {

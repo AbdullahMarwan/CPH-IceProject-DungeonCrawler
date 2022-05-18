@@ -5,6 +5,7 @@ import studyGroupF.fields.FieldList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import studyGroupF.fields.*;
@@ -30,6 +31,28 @@ public class Level {
             System.out.println(f);
         }
     }
+
+    public void loadPreviousLevel() {
+        ArrayList<String> data;
+        data = fileIO.readLevelData();
+
+        for (String s : data) {
+            //System.out.println(s);
+            String[] values = s.split(", "); //1, 3, 1
+
+            int[] id = new int[values.length]; // Length 3
+
+            for (int i = 0; i < values.length; i++) {
+                id[i] = Integer.parseInt(values[i]);
+            }
+            
+            fieldList = new FieldList(id);
+
+            fields = fieldList.getFields();
+        }
+
+    }
+
 
     public Monster createMonster() throws IOException {
         //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start

@@ -15,12 +15,24 @@ import java.util.stream.Stream;
 public class FileIO implements IO {
     File playerDataFile = new File("src/main/java/studyGroupF/Data/PlayerData");
     File monsterDataFile = new File("src/main/java/studyGroupF/Data/MonsterData");
+    File levelDataFile = new File("src/main/java/studyGroupF/Data/LevelData");
 
     int amountOfLinesInMonsterDataFile;
 
     @Override
     public ArrayList<String> readLevelData() {
-        return null;
+        ArrayList<String> levelData = new ArrayList<>();
+
+        try {
+            Scanner scan = new Scanner(levelDataFile);
+            while (scan.hasNextLine()) {
+                levelData.add((scan.nextLine()));
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return levelData;
     }
 
     @Override
@@ -79,14 +91,11 @@ public class FileIO implements IO {
         try {
             FileWriter myWriter = new FileWriter(playerDataFile);
             boolean header = true;
-            for(String s : data)
-            {
+            for (String s : data) {
                 if (s.contains("Team") && !header) {
                     header = true;
                     myWriter.write("\n");
-                }
-                else
-                {
+                } else {
                     header = false;
                 }
                 myWriter.write(s);
