@@ -73,6 +73,8 @@ public class GameController {
         //System.out.println(item);
 
 
+        level.addFieldToArrayList();
+
         initializeAMonster();
 
         //saveData(); To Save new Data

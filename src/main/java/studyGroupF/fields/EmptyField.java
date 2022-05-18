@@ -2,9 +2,8 @@ package studyGroupF.fields;
 
 import studyGroupF.player.Item;
 
-public class ItemShop extends Field{
-
-    public ItemShop(Item item, String fieldType, int fieldID) {
+public class EmptyField extends Field{
+    public EmptyField(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
     }
 
@@ -15,7 +14,7 @@ public class ItemShop extends Field{
 
     @Override
     void introduction() {
-
+        System.out.println("You landed on an Empty Field, enjoy the view");
     }
 
     @Override

@@ -13,5 +13,8 @@ abstract class Field {
         this.fieldID = fieldID;
     }
 
-    abstract void doFunction(Item item);
+    abstract void doFunction();
+    abstract void introduction();
+    abstract int returnGold();
+    abstract Item returnLoot();
 }

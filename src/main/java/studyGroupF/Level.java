@@ -1,6 +1,7 @@
 package studyGroupF;
 
 import studyGroupF.data.FileIO;
+import studyGroupF.fields.FieldList;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -8,17 +9,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Level {
-    ArrayList<Field> fields;
     FileIO fileIO = new FileIO();
     Monster monster;
+    //Field field;
+    FieldList fieldList;
+    Field[] fields;
 
     public void addFieldToArrayList() {
+        /*
+        Random r = new Random();
+        int i = r.nextInt((15 - 5) + 1) + 5;
 
-    }
+        fieldList = new FieldList(i);
 
-    public int currentLevel() {
+         */
 
-        return currentLevel();
+
+        fields = fieldList.getFields();
     }
 
     public Monster createMonster() throws IOException {

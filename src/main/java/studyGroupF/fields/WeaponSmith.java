@@ -8,7 +8,22 @@ public class WeaponSmith extends Field{
     }
 
     @Override
-    void doFunction(Item item) {
+    void doFunction() {
 
+    }
+
+    @Override
+    void introduction() {
+
+    }
+
+    @Override
+    int returnGold() {
+        return 0;
+    }
+
+    @Override
+    Item returnLoot() {
+        return null;
     }
 }
