@@ -7,43 +7,21 @@ import java.util.Random;
 public class FieldList {
     private Item item;
     private int i;
-    //private Field[] fields;
-    private Field[] fields = new Field[i];
+    private Field[] fields;
     boolean itemShop = false;
     boolean weaponSmith = false;
 
-    /*
-    public FieldList() {
-        Random r = new Random();
-        int i = r.nextInt((15 - 5) + 1) + 5;
+    public FieldList(int i) {
+        this.i = i;
 
         Field[] tempFields = new Field[i];
 
         for (int o = 0; o < i; o++) {
-            //tempFields[o] = new ItemShop(item, "Shop", 1);
             tempFields[o] = getRandomField();
         }
 
         fields = tempFields;
     }
-    */
-
-
-    public FieldList(int i) {
-        this.i = i;
-
-        //Field[] tempFields = new Field[i];
-
-        for (int o = 0; o < i; o++) {
-            //tempFields[o] = new ItemShop(item, "Shop", 1);
-            //tempFields[o] = getRandomField();
-            fields[o] = getRandomField();
-        }
-
-        //fields = tempFields;
-    }
-
-
 
     public Field getRandomField (){
         Random r = new Random();

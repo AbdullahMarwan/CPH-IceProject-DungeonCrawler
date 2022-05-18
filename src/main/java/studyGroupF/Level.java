@@ -4,29 +4,32 @@ import studyGroupF.data.FileIO;
 import studyGroupF.fields.FieldList;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
+import studyGroupF.fields.*;
 
 public class Level {
     FileIO fileIO = new FileIO();
     Monster monster;
-    //Field field;
+    Field field;
     FieldList fieldList;
     Field[] fields;
 
-    public void addFieldToArrayList() {
-        /*
+    public void addFieldsToArray() {
         Random r = new Random();
         int i = r.nextInt((15 - 5) + 1) + 5;
 
         fieldList = new FieldList(i);
 
-         */
-
-
         fields = fieldList.getFields();
     }
+
+    public void printFieldArray (){
+        for (Field f : fields) {
+            System.out.println(f);
+        }
+    }
+
 
     public Monster createMonster() throws IOException {
         //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start

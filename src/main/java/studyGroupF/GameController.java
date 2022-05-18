@@ -72,8 +72,9 @@ public class GameController {
 
         //System.out.println(item);
 
-
-        level.addFieldToArrayList();
+        //Testing adding new Field Array + printing
+        level.addFieldsToArray();
+        level.printFieldArray();
 
         initializeAMonster();
 
