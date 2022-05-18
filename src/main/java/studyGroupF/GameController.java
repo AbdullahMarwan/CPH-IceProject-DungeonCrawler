@@ -82,10 +82,12 @@ public class GameController {
             rarityName = values[2];
             rarityValue = Integer.parseInt(values[3]);
             id = Integer.parseInt(values[4]);
+
+            Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
+            players.get(0).addLootToPlayer(item);
         }
 
-        Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
-        players.get(0).addLootToPlayer(item);
+        //players.get(0).viewStorage();
     }
 
     public void initializeOldLevel() {
@@ -138,10 +140,7 @@ public class GameController {
         }
 
         Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile);
-        //System.out.println("The player: " + player);
         players.add(player);
-
-        //players.get(0).setPlayerItems(storage.addItemToPlayerItemList(player.getPlayerItems(), item));
     }
 
     private void saveData() throws IOException {
