@@ -38,9 +38,9 @@ public class Level {
 
         for (String s : data) {
             //System.out.println(s);
-            String[] values = s.split(", "); //1, 3, 1
+            String[] values = s.split(", ");
 
-            int[] id = new int[values.length]; // Length 3
+            int[] id = new int[values.length];
 
             for (int i = 0; i < values.length; i++) {
                 id[i] = Integer.parseInt(values[i]);
