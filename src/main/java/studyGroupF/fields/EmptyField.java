@@ -2,7 +2,7 @@ package studyGroupF.fields;
 
 import studyGroupF.player.Item;
 
-public class EmptyField extends Field{
+public class EmptyField extends Field {
     public EmptyField(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
     }

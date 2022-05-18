@@ -6,6 +6,7 @@ import studyGroupF.fields.FieldList;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
 import studyGroupF.fields.*;
 
 public class Level {
@@ -17,19 +18,18 @@ public class Level {
 
     public void addFieldsToArray() {
         Random r = new Random();
-        int i = r.nextInt((15 - 5) + 1) + 5;
+        int i = r.nextInt((15 - 9) + 1) + 9;
 
         fieldList = new FieldList(i);
 
         fields = fieldList.getFields();
     }
 
-    public void printFieldArray (){
+    public void printFieldArray() {
         for (Field f : fields) {
             System.out.println(f);
         }
     }
-
 
     public Monster createMonster() throws IOException {
         //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start

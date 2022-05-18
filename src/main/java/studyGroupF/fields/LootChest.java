@@ -13,7 +13,6 @@ public class LootChest extends Field {
     @Override
     void doFunction() {
         item.createItem();
-
     }
 
     @Override

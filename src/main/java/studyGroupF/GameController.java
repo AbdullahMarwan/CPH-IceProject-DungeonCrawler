@@ -39,24 +39,33 @@ public class GameController {
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
             String input = sc.nextLine().toLowerCase(Locale.ROOT);
 
-            //TODO If previous PlayerData is chosen, select and load the level of that, if not start from level 1
             if (input.equals("l")) { //Load previous PlayerData
                 clearPlayerArrayList();
                 initializePreviousPlayerData();
+                level.addFieldsToArray(); //TODO If previous PlayerData is chosen, select and load the level of that, if not start from level 1
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
-                clearPlayerArrayList();
-                Player player = new Player();
-                players.add(player);
+                initializeNewSave();
             }
 
-        } else {
+        } else { //No Data Found, start new save
             System.out.println("No previous Data found, starting a new save: ");
-            clearPlayerArrayList();
-            Player player = new Player();
-            players.add(player);
+            initializeNewSave();
         }
 
+    }
+
+    public void initializeNewSave() {
+        clearPlayerArrayList();
+        Player player = new Player();
+        players.add(player);
+        //System.out.println(player); //Debug
+
+        level.addFieldsToArray();
+        level.printFieldArray();
+    }
+
+    public void playGame() throws IOException {
         //Testing adding item to storage
         //item = new Item(item.createItem());
 
@@ -72,8 +81,7 @@ public class GameController {
 
         //System.out.println(item);
 
-        //Testing adding new Field Array + printing
-        level.addFieldsToArray();
+
         level.printFieldArray();
 
         initializeAMonster();
@@ -146,10 +154,11 @@ public class GameController {
         return data;
     }
 
-    private void clearPlayerArrayList(){
+    private void clearPlayerArrayList() {
         players = new ArrayList<>();
     }
-    private void clearMonsterArrayList(){
+
+    private void clearMonsterArrayList() {
         monsters = new ArrayList<>();
     }
 }

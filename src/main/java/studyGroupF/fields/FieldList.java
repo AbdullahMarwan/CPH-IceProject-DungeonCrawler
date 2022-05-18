@@ -23,7 +23,7 @@ public class FieldList {
         fields = tempFields;
     }
 
-    public Field getRandomField (){
+    public Field getRandomField() {
         Random r = new Random();
         int randomField = r.nextInt((100 - 1) + 1) + 1;
 
