@@ -16,6 +16,7 @@ public class FileIO implements IO {
     File playerDataFile = new File("src/main/java/studyGroupF/Data/PlayerData");
     File monsterDataFile = new File("src/main/java/studyGroupF/Data/MonsterData");
     File levelDataFile = new File("src/main/java/studyGroupF/Data/LevelData");
+    File itemStorageFile = new File("src/main/java/studyGroupF/Data/PlayerItemStorage");
 
     int amountOfLinesInMonsterDataFile;
 
@@ -68,6 +69,22 @@ public class FileIO implements IO {
             e.printStackTrace();
         }
         return monsterData;
+    }
+
+    @Override
+    public ArrayList<String> readItemData() throws IOException {
+        ArrayList<String> itemStorageData = new ArrayList<>();
+
+        try {
+            Scanner scan = new Scanner(itemStorageFile);
+            while (scan.hasNextLine()) {
+                itemStorageData.add(scan.nextLine());
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return itemStorageData;
     }
 
     @Override

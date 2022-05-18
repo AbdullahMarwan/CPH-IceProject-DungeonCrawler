@@ -54,6 +54,7 @@ public class Level {
 
     }
 
+
     public Monster createMonster() throws IOException {
         //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start
         String monsterType = "";

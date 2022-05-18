@@ -6,8 +6,8 @@ public class Item {
     private String itemName;
     private String itemType;
     private String rarityName;
-    private int id;
     private int rarityValue = 1;
+    private int id;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
     String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 

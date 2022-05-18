@@ -57,8 +57,38 @@ public class GameController {
 
     }
 
-    public void initializeOldSave() throws FileNotFoundException {
+    public void initializeOldSave() throws IOException {
         initializePreviousPlayerData();
+        initializeOldLevel();
+        initializeOldItemStorage();
+    }
+
+    public void initializeOldItemStorage() throws IOException {
+        String itemName = "";
+        String itemType = "";
+        String rarityName = "";
+        int rarityValue = 0;
+        int id = 0;
+
+        ArrayList<String> data;
+        data = fileIO.readItemData();
+
+        for (String s : data) {
+            //System.out.println(s);
+            String[] values = s.split(", ");
+
+            itemName = values[0];
+            itemType = values[1];
+            rarityName = values[2];
+            rarityValue = Integer.parseInt(values[3]);
+            id = Integer.parseInt(values[4]);
+        }
+
+        Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
+        players.get(0).addLootToPlayer(item);
+    }
+
+    public void initializeOldLevel() {
         level.loadPreviousFieldsToLevel();
         levels.add(level);
         levels.get(0).setLevelNr(players.get(0).getCurrentLevel());

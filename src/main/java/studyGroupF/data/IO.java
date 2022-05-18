@@ -11,10 +11,10 @@ public interface IO {
     ArrayList<String> readLevelData();
     ArrayList<String> readPlayerData() throws FileNotFoundException;
     ArrayList<String> readMonsterData() throws IOException;
+    ArrayList<String> readItemData() throws IOException;
 
     boolean isPlayerDataAvailable() throws FileNotFoundException;
 
     void saveLevelData();
-
     void savePlayerData(ArrayList<String> data) throws IOException;
 }
