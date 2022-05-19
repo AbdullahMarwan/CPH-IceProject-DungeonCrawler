@@ -13,12 +13,12 @@ public class BattleSystem {
         this.monster = monster;
     }
 
-    public void displayHP () {
+    public void displayHP() {
         System.out.println(player.getPlayerName() + "'s HP: " + player.getCurrentHP() + "/" + player.getMaxHP());
         System.out.println(monster.getMonsterType() + "'s HP: " + monster.getHP());
     }
 
-    public void attack(boolean isPlayerTheAttacker){
+    public void attack(boolean isPlayerTheAttacker) {
         if (isPlayerTheAttacker) {
             monster.setHP(monster.getHP() - player.getDamage());
             System.out.println(player.getPlayerName() + "dealt" + player.getDamage() + " to monster!");
@@ -29,15 +29,14 @@ public class BattleSystem {
 
     }
 
-    public void heal(){
+    public void heal() {
+        int healAmount = (int) (player.getMaxHP() * 0.25);
 
+        player.setCurrentHP(player.getCurrentHP() + healAmount);
+        System.out.println("You have healed for: " + healAmount);
     }
 
-    public void useItem(){
-
-    }
-
-    public void escapeBattle(){
+    public void escapeBattle() {
 
     }
 

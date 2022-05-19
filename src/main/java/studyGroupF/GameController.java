@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class GameController {
@@ -140,7 +141,7 @@ public class GameController {
     public void combatOptions() {
         System.out.println("\n You are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
-                "2: View Item Storage\n" +
+                "2: Heal up\n" +
                 "3: View player stats\n"
         );
 
@@ -149,16 +150,27 @@ public class GameController {
 
         switch (choice) {
 
-            case "1" -> { //Go to next field
+            case "1" -> { //Attack Monster
                 System.out.println("Attacking monster: ");
                 battleSystem.attack(true);
             }
-            case "2" -> { //View Inventory
-                System.out.println("Here is your item storage: ");
-                players.get(0).viewStorage();
+            case "2" -> { //Heal up
+                if (players.get(0).getAmountOfPotions() > 0) {
+                    System.out.println("You have " + players.get(0).getAmountOfPotions() + ". Would you like to use one? Y/N");
+
+                    Scanner potion = new Scanner(System.in);
+
+                    if (potion.nextLine().equalsIgnoreCase("y")) {
+                        battleSystem.heal();
+                        players.get(0).setAmountOfPotions(player.getAmountOfPotions() - 1);
+                    } else {
+                        System.out.println("You decided to save your potion.");
+                    }
+                }
             }
+
             case "3" -> { //View stats
-                System.out.println("Here is your item storage: ");
+                System.out.println("Your stats: ");
                 System.out.println(players.get(0));
             }
 
@@ -190,7 +202,7 @@ public class GameController {
                 players.get(0).viewStorage();
             }
             case "3" -> { //View stats
-                System.out.println("Here is your item storage: ");
+                System.out.println("Your stats: ");
                 System.out.println(players.get(0));
             }
 
@@ -208,6 +220,7 @@ public class GameController {
         int gold = 0;
         int currentLevel = 0;
         int currentTile = 0;
+        int amountOfPotions = 0;
         String playerName = "";
 
         ArrayList<String> data;
@@ -224,9 +237,10 @@ public class GameController {
             gold = Integer.parseInt(values[4]);
             currentLevel = Integer.parseInt(values[5]);
             currentTile = Integer.parseInt(values[6]);
+            amountOfPotions = Integer.parseInt(values[7]);
         }
 
-        Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile);
+        Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile, amountOfPotions);
         players.add(player);
 
         //System.out.println(players.get(0));

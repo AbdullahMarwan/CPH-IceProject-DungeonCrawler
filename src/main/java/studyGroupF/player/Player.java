@@ -11,6 +11,7 @@ public class Player {
     private int gold = 15;
     private int currentLevel = 1;
     private int currentTile = 0;
+    private int amountOfPotions = 2;
     private Storage storage = new Storage();
     private Item item;
 
@@ -19,7 +20,7 @@ public class Player {
     Scanner sc = new Scanner(System.in);
 
     //Constructor used to load previous available playerdata
-    public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile) {
+    public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile, int amountOfPotions) {
         this.playerName = playerName;
         this.maxHP = maxHP;
         this.currentHP = currentHP;
@@ -27,6 +28,7 @@ public class Player {
         this.gold = gold;
         this.currentLevel = currentLevel;
         this.currentTile = currentTile;
+        this.amountOfPotions = amountOfPotions;
     }
 
     //When creating a new player, the user is asked for a name
@@ -126,5 +128,13 @@ public class Player {
 
     public void setPlayerItems(ArrayList<Item> playerItems) {
         this.playerItems = playerItems;
+    }
+
+    public int getAmountOfPotions() {
+        return amountOfPotions;
+    }
+
+    public void setAmountOfPotions(int amountOfPotions) {
+        this.amountOfPotions = amountOfPotions;
     }
 }
