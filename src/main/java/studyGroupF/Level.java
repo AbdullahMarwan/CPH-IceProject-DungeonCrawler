@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import studyGroupF.fields.*;
+import studyGroupF.player.Player;
 
 public class Level {
     FileIO fileIO = new FileIO();
@@ -20,23 +21,23 @@ public class Level {
     private String currentPhase;
     String[] gamePhases = {"Walking", "Combat", "Chest", "Shop"};
 
-    public void optionsFromPhase() {
+    public Level() {
+    }
 
-        switch (currentPhase) {
-            case "Walking" -> {
+    public String getCurrentPhase() {
+        return currentPhase;
+    }
 
-            }
-            case "Combat" -> {
+    public void setCurrentPhase(String currentPhase) {
+        this.currentPhase = currentPhase;
+    }
 
-            }
-            case "Chest" -> {
+    public String[] getGamePhases() {
+        return gamePhases;
+    }
 
-            }
-            case "Shop" -> {
-
-            }
-        }
-
+    public void setGamePhases(String[] gamePhases) {
+        this.gamePhases = gamePhases;
     }
 
     public void addRandomsFieldsToLevel() {

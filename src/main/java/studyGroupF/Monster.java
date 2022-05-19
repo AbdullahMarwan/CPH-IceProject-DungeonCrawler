@@ -15,8 +15,6 @@ public class Monster {
     private boolean isBoss = false;
     private FileIO fileIO = new FileIO();;
 
-    Level level = new Level();
-
     public Monster(String monsterType, int HP, int damage) {
         this.monsterType = monsterType;
         this.HP = HP;

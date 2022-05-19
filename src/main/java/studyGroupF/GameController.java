@@ -18,8 +18,9 @@ public class GameController {
     Monster monster;
     Storage storage;
     Item item;
+    BattleSystem battleSystem;
 
-    ArrayList<Player> players = new ArrayList<>();
+    public ArrayList<Player> players = new ArrayList<>();
     ArrayList<Monster> monsters = new ArrayList<>();
     ArrayList<Level> levels = new ArrayList<>();
 
@@ -29,6 +30,7 @@ public class GameController {
         fileIO = new FileIO();
         storage = new Storage();
         item = new Item();
+        battleSystem = new BattleSystem(player, monster);
 
         if (fileIO.isPlayerDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: ");
@@ -110,8 +112,93 @@ public class GameController {
 
     public void playGame() throws IOException {
 
+        optionsFromPhase();
+
         //System.out.println("player" + players.get(0));
 
+    }
+
+    public void optionsFromPhase() {
+
+        switch (level.getCurrentPhase()) {
+            case "Idle" -> {
+                idleOptions();
+            }
+            case "Combat" -> {
+                combatOptions();
+            }
+            case "Chest" -> {
+
+            }
+            case "Shop" -> {
+
+            }
+        }
+
+    }
+
+    public void combatOptions() {
+        System.out.println("\n You are in Combat, the following options are: \n" +
+                "1: Attack monster\n" +
+                "2: View Item Storage\n" +
+                "3: View player stats\n"
+        );
+
+        Scanner scan = new Scanner(System.in);
+        String choice = scan.nextLine();
+
+        switch (choice) {
+
+            case "1" -> { //Go to next field
+                System.out.println("Attacking monster: ");
+                battleSystem.attack(true);
+            }
+            case "2" -> { //View Inventory
+                System.out.println("Here is your item storage: ");
+                players.get(0).viewStorage();
+            }
+            case "3" -> { //View stats
+                System.out.println("Here is your item storage: ");
+                System.out.println(players.get(0));
+            }
+
+            default -> {
+                System.out.println("\n---Invalid input, try again---");
+                idleOptions();
+            }
+        }
+    }
+
+    public void idleOptions() {
+        System.out.println("\n You are idle, the following options are: \n" +
+                "1: Move to next field\n" +
+                "2: View Item Storage\n" +
+                "3: View player stats\n"
+        );
+
+        Scanner scan = new Scanner(System.in);
+        String choice = scan.nextLine();
+
+        switch (choice) {
+
+            case "1" -> { //Go to next field
+                System.out.println("Moving to next field: ");
+                players.get(0).setCurrentTile(player.getCurrentTile() + 1);
+            }
+            case "2" -> { //View Inventory
+                System.out.println("Here is your item storage: ");
+                players.get(0).viewStorage();
+            }
+            case "3" -> { //View stats
+                System.out.println("Here is your item storage: ");
+                System.out.println(players.get(0));
+            }
+
+            default -> {
+                System.out.println("\n---Invalid input, try again---");
+                idleOptions();
+            }
+        }
     }
 
     public void initializePreviousPlayerData() throws FileNotFoundException {

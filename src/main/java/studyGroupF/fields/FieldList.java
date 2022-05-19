@@ -42,6 +42,7 @@ public class FieldList {
             case 3 -> new ItemShop(item, "ItemShop", 3);
             case 4 -> new WeaponSmith(item, "WeaponSmith", 4);
             case 5 -> new EmptyField(item, "EmptyField", 5);
+            case 6 -> new CampFire(item, "CampFire", 6);
             default -> throw new IllegalStateException("Unexpected value: " + id);
         };
 
@@ -49,7 +50,7 @@ public class FieldList {
 
     public Field getRandomField() {
         Random r = new Random();
-        int randomField = r.nextInt((100 - 1) + 1) + 1;
+        int randomField = r.nextInt((130 - 1) + 1) + 1;
 
         if (randomField >= 1 && randomField <= 40) { //MonsterBattle
             return new MonsterBattle(item, "MonsterBattle", 1);
@@ -61,8 +62,10 @@ public class FieldList {
         } else if (randomField >= 86 && randomField <= 95 && weaponSmith == false) { //WeaponSmith
             weaponSmith = true;
             return new WeaponSmith(item, "WeaponSmith", 4);
-        } else if (randomField >= 96 && randomField <= 100) { //EmptyField
+        } else if (randomField >= 96 && randomField <= 115) { //EmptyField
             return new EmptyField(item, "EmptyField", 5);
+        } else if (randomField >= 116 && randomField <= 130) { //EmptyField
+            return new CampFire(item, "CampFire", 6);
         }
 
         return new MonsterBattle(item, "MonsterBattle", 1);

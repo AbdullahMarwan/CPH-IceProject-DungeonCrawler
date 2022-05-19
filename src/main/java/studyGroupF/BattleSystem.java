@@ -1,22 +1,43 @@
 package studyGroupF;
 
+import studyGroupF.player.Player;
+
 public class BattleSystem {
+    Player player;
+    Monster monster;
 
-    private int turn;
+    public int turn;
 
-    private void attack(){
+    public BattleSystem(Player player, Monster monster) {
+        this.player = player;
+        this.monster = monster;
+    }
+
+    public void displayHP () {
+        System.out.println(player.getPlayerName() + "'s HP: " + player.getCurrentHP() + "/" + player.getMaxHP());
+        System.out.println(monster.getMonsterType() + "'s HP: " + monster.getHP());
+    }
+
+    public void attack(boolean isPlayerTheAttacker){
+        if (isPlayerTheAttacker) {
+            monster.setHP(monster.getHP() - player.getDamage());
+            System.out.println(player.getPlayerName() + "dealt" + player.getDamage() + " to monster!");
+        } else if (!isPlayerTheAttacker) {
+            player.setCurrentHP(player.getCurrentHP() - monster.getDamage());
+            System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName());
+        }
 
     }
 
-    private void heal(){
+    public void heal(){
 
     }
 
-    private void useItem(){
+    public void useItem(){
 
     }
 
-    private void escapeBattle(){
+    public void escapeBattle(){
 
     }
 

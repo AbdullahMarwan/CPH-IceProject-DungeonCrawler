@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class MonsterBattle extends Field {
     private Monster monster;
-    private BattleSystem battleSystem = new BattleSystem();
+    //private BattleSystem battleSystem = new BattleSystem();
 
     public MonsterBattle(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
