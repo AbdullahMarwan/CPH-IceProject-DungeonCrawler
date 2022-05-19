@@ -23,24 +23,11 @@ public class MonsterBattle extends Field {
 
     @Override
     void doFunction(Item item, Player player) {
-
-    }
-
-    @Override
-    void introduction() {
         System.out.println("You landed on a Monster Field");
         System.out.println("You will be fighting against the following monster:" + monster);
+
     }
 
-    @Override
-    int returnGold() {
-        return 0;
-    }
-
-    @Override
-    Item returnLoot() {
-        return null;
-    }
 }
 
 

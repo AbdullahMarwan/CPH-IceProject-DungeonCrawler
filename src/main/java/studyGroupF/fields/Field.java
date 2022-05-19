@@ -17,12 +17,6 @@ public abstract class Field {
 
     abstract void doFunction(Item item, Player player);
 
-    abstract void introduction();
-
-    abstract int returnGold();
-
-    abstract Item returnLoot();
-
     @Override
     public String toString() {
         return fieldType;

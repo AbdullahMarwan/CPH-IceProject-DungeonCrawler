@@ -14,18 +14,4 @@ public class ItemShop extends Field{
 
     }
 
-    @Override
-    void introduction() {
-
-    }
-
-    @Override
-    int returnGold() {
-        return 0;
-    }
-
-    @Override
-    Item returnLoot() {
-        return null;
-    }
 }
