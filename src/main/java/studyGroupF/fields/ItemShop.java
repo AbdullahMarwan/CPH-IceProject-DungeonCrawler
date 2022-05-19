@@ -2,6 +2,7 @@ package studyGroupF.fields;
 
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
+import studyGroupF.player.States;
 
 public class ItemShop extends Field{
 
@@ -11,7 +12,9 @@ public class ItemShop extends Field{
 
     @Override
     void doFunction(Item item, Player player) {
+        player.setPlayerState(States.SHOP);
 
+        player.setPlayerState(States.IDLE);
     }
 
 }

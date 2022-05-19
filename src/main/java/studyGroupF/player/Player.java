@@ -12,6 +12,7 @@ public class Player {
     private int currentLevel = 1;
     private int currentTile = 0;
     private int amountOfPotions = 2;
+    private States playerState = States.IDLE;
     private Storage storage = new Storage();
     private Item item;
 
@@ -121,6 +122,14 @@ public class Player {
 
     public int getCurrentTile() {
         return currentTile;
+    }
+
+    public States getPlayerState() {
+        return playerState;
+    }
+
+    public void setPlayerState(States playerState) {
+        this.playerState = playerState;
     }
 
     public void setCurrentTile(int currentTile) {

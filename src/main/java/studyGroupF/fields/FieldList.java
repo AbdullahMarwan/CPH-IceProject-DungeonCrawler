@@ -3,6 +3,7 @@ package studyGroupF.fields;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class FieldList {
@@ -53,10 +54,12 @@ public class FieldList {
         return fields[index];
     }
 
-    public void doFunction(Item item, Player player, int index){
+    public void doFunction(Item item, Player player, int index) throws IOException {
         Field currentField = fields[index];
 
         currentField.doFunction(item, player);
+
+        //if currentField.get;
     }
 
     public Field getRandomField() {

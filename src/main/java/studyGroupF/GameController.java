@@ -34,11 +34,11 @@ public class GameController {
         battleSystem = new BattleSystem(player, monster);
 
         if (fileIO.isPlayerDataAvailable()) {
-            System.out.println("This is the current PlayerData in the Database: ");
+            System.out.println("This is the current PlayerData in the Database: \n");
             initializePreviousPlayerData();
             System.out.println(players.get(0));
 
-            System.out.println("Would you like to load previous data? ");
+            System.out.println("\nWould you like to load previous data? ");
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
             String input = sc.nextLine().toLowerCase(Locale.ROOT);
 
@@ -138,20 +138,19 @@ public class GameController {
 
     public void optionsFromPhase() throws IOException {
 
-        switch (level.getCurrentPhase()) {
-            case "Idle" -> {
-                idleOptions();
-            }
-            case "Combat" -> {
-                combatOptions();
-            }
-            case "Shop" -> {
+        switch (players.get(0).getPlayerState()) {
 
-            }
+            case IDLE -> idleOptions();
+            //case COMBAT -> combatOptions();
+            case SHOP -> shopOptions();
         }
 
     }
 
+    private void shopOptions() {
+    }
+
+    /*
     public void combatOptions() throws IOException {
         System.out.println("\n You are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
@@ -195,6 +194,8 @@ public class GameController {
         }
     }
 
+     */
+
     public void idleOptions() throws IOException {
         System.out.println("\n You are idle, the following options are: \n" +
                 "1: Move to next field\n" +
@@ -219,7 +220,7 @@ public class GameController {
                     Field newField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
                     System.out.println("You have landed on " + newField);
 
-                    level.doFieldFunction(item, players.get(0), players.get(0).getCurrentTile());
+                    levels.get(0).doFieldFunction(item, players.get(0), players.get(0).getCurrentTile());
                 }
             }
             case "2" -> { //View Inventory
@@ -281,14 +282,6 @@ public class GameController {
         //TODO call saveItemStorageData
     }
 
-    private void initializeAMonster() throws IOException {
-        clearMonsterArrayList();
-        monster = level.createMonster();
-        monsters.add(monster);
-
-        //System.out.println("The monster created: " + monsters.get(0));
-    }
-
     public ArrayList<String> addPlayersToData() {
         ArrayList<String> data = new ArrayList<>();
 
@@ -313,29 +306,6 @@ public class GameController {
 
     private void clearMonsterArrayList() {
         monsters = new ArrayList<>();
-    }
-
-    private void testAndLeftOvers() {
-        //Testing adding item to storage
-        //item = new Item(item.createItem());
-
-        item = item.createItem();
-        players.get(0).addLootToPlayer(item);
-
-        Item item2 = new Item();
-        item2 = item.createItem();
-
-        players.get(0).addLootToPlayer(item2);
-
-        players.get(0).viewStorage();
-
-        //System.out.println(item);
-
-        //initializeAMonster();
-
-        //saveData(); To Save new Data
-
-
     }
 
 }

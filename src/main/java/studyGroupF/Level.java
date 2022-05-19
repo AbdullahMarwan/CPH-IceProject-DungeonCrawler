@@ -19,7 +19,7 @@ public class Level {
     Field[] fields;
 
     public int levelNr = 1;
-    private String currentPhase = "Idle";
+    public String currentPhase = "Idle";
     String[] gamePhases = {"Idle", "Combat", "Shop"};
 
     public Level() {
@@ -50,12 +50,16 @@ public class Level {
         fields = fieldList.getFields();
     }
 
-    public void doFieldFunction(Item item, Player player, int index) {
+    public void doFieldFunction(Item item, Player player, int index) throws IOException {
         fieldList.doFunction(item, player, index);
     }
 
     public Field getCurrentField(int index) {
         return fieldList.currentField(index);
+    }
+
+    public void changePhase(String phase) {
+        setCurrentPhase(phase);
     }
 
     public void printFieldArray(int playerCurrentTile) {
@@ -108,53 +112,6 @@ public class Level {
             fields = fieldList.getFields();
         }
 
-    }
-
-
-    public Monster createMonster() throws IOException {
-        //Initializing temporary variables that will be overridden a bit later. Values should be set to 0 in the start
-        String monsterType = "";
-        int HP = 0;
-        int damage = 0;
-        int minHP = 0;
-        int maxHP = 0;
-        int minDamage = 0;
-        int maxDamage = 0;
-
-        ArrayList<String> data;
-        data = fileIO.readMonsterData();
-
-        Random line = new Random();
-        int specificLine = line.nextInt(fileIO.getAmountOfLinesInMonsterDataFile() - 1) + 1;
-        //int specificLine = 3; //To test for specific line (To get the wanted line, just -1 SpecificLine)
-
-        int counter = 0;
-
-        for (String s : data) {
-            //System.out.println(s);
-            if (counter == specificLine) {
-                String[] values = s.split(", ");
-
-                monsterType = values[0];
-                minHP = Integer.parseInt(values[1]);
-                maxHP = Integer.parseInt(values[2]);
-                minDamage = Integer.parseInt(values[3]);
-                maxDamage = Integer.parseInt(values[4]);
-            }
-            counter++;
-        }
-
-        HP = randomFromMinMax(minHP, maxHP);
-        damage = randomFromMinMax(minDamage, maxDamage);
-
-        Monster monster = new Monster(monsterType, HP, damage);
-        return monster;
-    }
-
-    int randomFromMinMax(int min, int max) {
-        Random r = new Random();
-        int randomMinMax = r.nextInt((max - min) + 1) + min;
-        return randomMinMax;
     }
 
     private void increaseDifficulty() {
