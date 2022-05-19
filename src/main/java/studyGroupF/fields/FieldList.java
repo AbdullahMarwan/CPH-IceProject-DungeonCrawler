@@ -1,6 +1,7 @@
 package studyGroupF.fields;
 
 import studyGroupF.player.Item;
+import studyGroupF.player.Player;
 
 import java.util.Random;
 
@@ -46,6 +47,16 @@ public class FieldList {
             default -> throw new IllegalStateException("Unexpected value: " + id);
         };
 
+    }
+
+    public Field currentField(int index) {
+        return fields[index];
+    }
+
+    public void doFunction(Item item, Player player, int index){
+        Field currentField = fields[index];
+
+        currentField.doFunction(item, player);
     }
 
     public Field getRandomField() {

@@ -1,6 +1,7 @@
 package studyGroupF;
 
 import studyGroupF.data.FileIO;
+import studyGroupF.fields.Field;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 import studyGroupF.player.Storage;
@@ -22,8 +23,8 @@ public class GameController {
     BattleSystem battleSystem;
 
     public ArrayList<Player> players = new ArrayList<>();
-    ArrayList<Monster> monsters = new ArrayList<>();
-    ArrayList<Level> levels = new ArrayList<>();
+    public ArrayList<Monster> monsters = new ArrayList<>();
+    public ArrayList<Level> levels = new ArrayList<>();
 
     public void setUpGame() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -57,6 +58,16 @@ public class GameController {
             System.out.println("No previous Data found, starting a new save: ");
             initializeNewSave();
         }
+
+    }
+
+    public void playGame() throws IOException {
+        System.out.println("Current tile: " + players.get(0).getCurrentTile());
+        Field currentField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
+        System.out.println(currentField);
+
+        optionsFromPhase();
+
 
     }
 
@@ -109,14 +120,6 @@ public class GameController {
         level.addRandomsFieldsToLevel();
         levels.add(level);
         //level.printFieldArray();
-    }
-
-    public void playGame() throws IOException {
-
-        optionsFromPhase();
-
-        //System.out.println("player" + players.get(0));
-
     }
 
     public void optionsFromPhase() {
@@ -195,7 +198,13 @@ public class GameController {
 
             case "1" -> { //Go to next field
                 System.out.println("Moving to next field: ");
-                players.get(0).setCurrentTile(player.getCurrentTile() + 1);
+                players.get(0).setCurrentTile(players.get(0).getCurrentTile() + 1);
+
+                System.out.println("New tile: " + players.get(0).getCurrentTile());
+                Field newField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
+                System.out.println("You have landed on" + newField);
+
+                level.doFieldFunction(item, players.get(0), players.get(0).getCurrentTile());
             }
             case "2" -> { //View Inventory
                 System.out.println("Here is your item storage: ");

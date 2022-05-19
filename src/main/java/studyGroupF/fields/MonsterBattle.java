@@ -3,6 +3,7 @@ package studyGroupF.fields;
 import studyGroupF.BattleSystem;
 import studyGroupF.player.Item;
 import studyGroupF.Monster;
+import studyGroupF.player.Player;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class MonsterBattle extends Field {
     }
 
     @Override
-    void doFunction() {
+    void doFunction(Item item, Player player) {
 
     }
 

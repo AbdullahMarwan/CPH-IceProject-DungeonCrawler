@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import studyGroupF.fields.*;
+import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
 public class Level {
@@ -18,8 +19,8 @@ public class Level {
     Field[] fields;
 
     private int levelNr = 1;
-    private String currentPhase;
-    String[] gamePhases = {"Walking", "Combat", "Chest", "Shop"};
+    private String currentPhase = "Idle";
+    String[] gamePhases = {"Idle", "Combat", "Chest", "Shop"};
 
     public Level() {
     }
@@ -47,6 +48,14 @@ public class Level {
         fieldList = new FieldList(i);
 
         fields = fieldList.getFields();
+    }
+
+    public void doFieldFunction(Item item, Player player, int index) {
+        fieldList.doFunction(item, player, index);
+    }
+
+    public Field getCurrentField(int index) {
+        return fieldList.currentField(index);
     }
 
     public void printFieldArray() {

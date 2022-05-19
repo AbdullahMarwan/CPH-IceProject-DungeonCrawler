@@ -42,6 +42,10 @@ public class Player {
         storage.addLootToStorage(playerItems, item);
     }
 
+    public void addGoldToPlayer(int goldGiven) {
+       this.gold = getGold() + goldGiven;
+    }
+
     public void viewStorage() {
         int count = 1;
 
@@ -63,7 +67,8 @@ public class Player {
                 + "\n Damage: " + damage
                 + "\n Gold: " + gold
                 + "\n Current Level: " + currentLevel
-                + "\n Current tile: " + currentTile;
+                + "\n Current tile: " + currentTile
+                + "\n Amount of potions: " + amountOfPotions;
     }
 
     public String getPlayerName() {

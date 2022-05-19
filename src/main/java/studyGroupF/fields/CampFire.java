@@ -1,6 +1,7 @@
 package studyGroupF.fields;
 
 import studyGroupF.player.Item;
+import studyGroupF.player.Player;
 
 public class CampFire extends Field{
     public CampFire(Item item, String fieldType, int fieldID) {
@@ -8,7 +9,7 @@ public class CampFire extends Field{
     }
 
     @Override
-    void doFunction() {
+    void doFunction(Item item, Player player) {
 
     }
 

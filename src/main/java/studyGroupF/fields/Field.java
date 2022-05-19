@@ -1,11 +1,14 @@
 package studyGroupF.fields;
 
 import studyGroupF.player.Item;
+import studyGroupF.player.Player;
 
 public abstract class Field {
     protected String fieldType;
     protected int fieldID;
     protected Item item;
+    protected Player player;
+
 
     public Field(Item item, String fieldType, int fieldID) {
         this.item = item;
@@ -13,7 +16,7 @@ public abstract class Field {
         this.fieldID = fieldID;
     }
 
-    abstract void doFunction();
+    abstract void doFunction(Item item, Player player);
 
     abstract void introduction();
 
