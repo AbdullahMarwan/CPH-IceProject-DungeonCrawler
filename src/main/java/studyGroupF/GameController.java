@@ -141,6 +141,8 @@ public class GameController {
 
         Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile);
         players.add(player);
+
+        //System.out.println(players.get(0));
     }
 
     private void saveData() throws IOException {

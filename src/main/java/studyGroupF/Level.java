@@ -17,6 +17,27 @@ public class Level {
     Field[] fields;
 
     private int levelNr = 1;
+    private String currentPhase;
+    String[] gamePhases = {"Walking", "Combat", "Chest", "Shop"};
+
+    public void optionsFromPhase() {
+
+        switch (currentPhase) {
+            case "Walking" -> {
+
+            }
+            case "Combat" -> {
+
+            }
+            case "Chest" -> {
+
+            }
+            case "Shop" -> {
+
+            }
+        }
+
+    }
 
     public void addRandomsFieldsToLevel() {
         Random r = new Random();
@@ -46,7 +67,7 @@ public class Level {
             for (int i = 0; i < values.length; i++) {
                 id[i] = Integer.parseInt(values[i]);
             }
-            
+
             fieldList = new FieldList(id);
 
             fields = fieldList.getFields();
@@ -56,7 +77,7 @@ public class Level {
 
 
     public Monster createMonster() throws IOException {
-        //Initializing temporary variables that will be overriden a bit later. Values should be set to 0 in the start
+        //Initializing temporary variables that will be overridden a bit later. Values should be set to 0 in the start
         String monsterType = "";
         int HP = 0;
         int damage = 0;

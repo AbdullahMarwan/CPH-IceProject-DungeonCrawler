@@ -40,10 +40,6 @@ public class Player {
         storage.addLootToStorage(playerItems, item);
     }
 
-    public void viewPlayerStats(Player player) {
-        System.out.println(player);
-    }
-
     public void viewStorage() {
         int count = 1;
 
