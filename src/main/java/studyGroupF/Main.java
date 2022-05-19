@@ -20,7 +20,18 @@ public class Main {
         while (gameInProgress){
             System.out.println("----------------------------------------------------------------------------------------------------");
             gC.playGame();
+            if (gC.players.get(0).getCurrentHP() <= 0) {
+                gameInProgress = false;
+            }
         }
 
+    }
+
+    public static boolean isGameInProgress() {
+        return gameInProgress;
+    }
+
+    public static void setGameInProgress(boolean gameInProgress) {
+        Main.gameInProgress = gameInProgress;
     }
 }

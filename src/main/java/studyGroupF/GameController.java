@@ -150,52 +150,6 @@ public class GameController {
     private void shopOptions() {
     }
 
-    /*
-    public void combatOptions() throws IOException {
-        System.out.println("\n You are in Combat, the following options are: \n" +
-                "1: Attack monster\n" +
-                "2: Heal up\n" +
-                "3: View player stats\n"
-        );
-
-        Scanner scan = new Scanner(System.in);
-        String choice = scan.nextLine();
-
-        switch (choice) {
-
-            case "1" -> { //Attack Monster
-                System.out.println("Attacking monster: ");
-                battleSystem.attack(true);
-            }
-            case "2" -> { //Heal up
-                if (players.get(0).getAmountOfPotions() > 0) {
-                    System.out.println("You have " + players.get(0).getAmountOfPotions() + ". Would you like to use one? Y/N");
-
-                    Scanner potion = new Scanner(System.in);
-
-                    if (potion.nextLine().equalsIgnoreCase("y")) {
-                        battleSystem.heal();
-                        players.get(0).setAmountOfPotions(player.getAmountOfPotions() - 1);
-                    } else {
-                        System.out.println("You decided to save your potion.");
-                    }
-                }
-            }
-
-            case "3" -> { //View stats
-                System.out.println("Your stats: ");
-                System.out.println(players.get(0));
-            }
-
-            default -> {
-                System.out.println("\n---Invalid input, try again---");
-                combatOptions();
-            }
-        }
-    }
-
-     */
-
     public void idleOptions() throws IOException {
         System.out.println("\n You are idle, the following options are: \n" +
                 "1: Move to next field\n" +
