@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class GameController {
@@ -62,13 +61,13 @@ public class GameController {
     }
 
     public void playGame() throws IOException {
-        System.out.println("Current tile: " + players.get(0).getCurrentTile());
+        levels.get(0).printFieldArray(players.get(0).getCurrentTile());
+
+        //System.out.println("Current tile: " + players.get(0).getCurrentTile() + 1); //+1 for Visual clarity
         Field currentField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
-        System.out.println(currentField);
+        System.out.println("Current field: " + currentField);
 
         optionsFromPhase();
-
-
     }
 
     public void initializeOldSave() throws IOException {
@@ -100,16 +99,12 @@ public class GameController {
             Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
             players.get(0).addLootToPlayer(item);
         }
-
-        //players.get(0).viewStorage();
     }
 
     public void initializeOldLevel() {
         level.loadPreviousFieldsToLevel();
         levels.add(level);
         levels.get(0).setLevelNr(players.get(0).getCurrentLevel());
-
-        //level.printFieldArray();
     }
 
     public void initializeNewSave() {
@@ -117,12 +112,31 @@ public class GameController {
         Player player = new Player();
         players.add(player);
 
-        level.addRandomsFieldsToLevel();
-        levels.add(level);
-        //level.printFieldArray();
+        initializeNewLevel();
     }
 
-    public void optionsFromPhase() {
+    public void initializeNewLevel() {
+        clearLevelArrayList();
+        level.addRandomsFieldsToLevel();
+        levels.add(level);
+        levels.get(0).setLevelNr(levels.get(0).getLevelNr() + 1);
+    }
+
+    public void goToNextLevel() {
+        int newLevelNr = levels.get(0).getLevelNr() + 1;
+
+        initializeNewLevel();
+        levels.get(0).setLevelNr(newLevelNr);
+        players.get(0).setCurrentLevel(newLevelNr);
+
+        players.get(0).setCurrentTile(0);
+    }
+
+    private void clearLevelArrayList() {
+        levels = new ArrayList<>();
+    }
+
+    public void optionsFromPhase() throws IOException {
 
         switch (level.getCurrentPhase()) {
             case "Idle" -> {
@@ -131,9 +145,6 @@ public class GameController {
             case "Combat" -> {
                 combatOptions();
             }
-            case "Chest" -> {
-
-            }
             case "Shop" -> {
 
             }
@@ -141,7 +152,7 @@ public class GameController {
 
     }
 
-    public void combatOptions() {
+    public void combatOptions() throws IOException {
         System.out.println("\n You are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
                 "2: Heal up\n" +
@@ -179,16 +190,17 @@ public class GameController {
 
             default -> {
                 System.out.println("\n---Invalid input, try again---");
-                idleOptions();
+                combatOptions();
             }
         }
     }
 
-    public void idleOptions() {
+    public void idleOptions() throws IOException {
         System.out.println("\n You are idle, the following options are: \n" +
                 "1: Move to next field\n" +
                 "2: View Item Storage\n" +
-                "3: View player stats\n"
+                "3: View player stats\n" +
+                "4: Save game\n"
         );
 
         Scanner scan = new Scanner(System.in);
@@ -197,14 +209,18 @@ public class GameController {
         switch (choice) {
 
             case "1" -> { //Go to next field
-                System.out.println("Moving to next field: ");
-                players.get(0).setCurrentTile(players.get(0).getCurrentTile() + 1);
+                if (levels.get(0).fields.length < players.get(0).getCurrentTile() + 2) {
+                    goToNextLevel();
+                } else {
+                    System.out.println("Moving to next field: ");
+                    players.get(0).setCurrentTile(players.get(0).getCurrentTile() + 1);
 
-                System.out.println("New tile: " + players.get(0).getCurrentTile());
-                Field newField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
-                System.out.println("You have landed on" + newField);
+                    //System.out.println("New tile: " + players.get(0).getCurrentTile()); //+1 for Visual clarity
+                    Field newField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
+                    System.out.println("You have landed on " + newField);
 
-                level.doFieldFunction(item, players.get(0), players.get(0).getCurrentTile());
+                    level.doFieldFunction(item, players.get(0), players.get(0).getCurrentTile());
+                }
             }
             case "2" -> { //View Inventory
                 System.out.println("Here is your item storage: ");
@@ -213,6 +229,10 @@ public class GameController {
             case "3" -> { //View stats
                 System.out.println("Your stats: ");
                 System.out.println(players.get(0));
+            }
+            case "4" -> { //Save Game
+                System.out.println("Saving game.");
+                saveData();
             }
 
             default -> {
@@ -310,9 +330,6 @@ public class GameController {
         players.get(0).viewStorage();
 
         //System.out.println(item);
-
-
-        level.printFieldArray();
 
         //initializeAMonster();
 

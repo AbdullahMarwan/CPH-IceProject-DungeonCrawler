@@ -18,9 +18,9 @@ public class Level {
     FieldList fieldList;
     Field[] fields;
 
-    private int levelNr = 1;
+    public int levelNr = 1;
     private String currentPhase = "Idle";
-    String[] gamePhases = {"Idle", "Combat", "Chest", "Shop"};
+    String[] gamePhases = {"Idle", "Combat", "Shop"};
 
     public Level() {
     }
@@ -58,10 +58,35 @@ public class Level {
         return fieldList.currentField(index);
     }
 
-    public void printFieldArray() {
-        for (Field f : fields) {
-            System.out.println(f);
+    public void printFieldArray(int playerCurrentTile) {
+        StringBuilder allFields = new StringBuilder("Level: ");
+
+        for (int i = 0; i < fields.length; i++) {
+            String fieldToString = "";
+            if (playerCurrentTile == i) {
+                fieldToString = fieldToString(0);
+            } else {
+                fieldToString = fieldToString(fieldList.currentField(i).getFieldID());
+            }
+
+            allFields.append(fieldToString);
         }
+
+        System.out.println(allFields);
+    }
+
+    public String fieldToString(int id) {
+
+        return switch (id) {
+            case 0 -> "[+]"; //Player
+            case 1 -> "[M]"; //MonsterBattle
+            case 2 -> "[G]"; //LootChest
+            case 3 -> "[I]"; //ItemShop
+            case 4 -> "[W]"; //WeaponSmith
+            case 5 -> "[0]"; //EmptyField
+            case 6 -> "[C]"; //CampFire
+            default -> throw new IllegalStateException("Unexpected value: " + id);
+        };
     }
 
     public void loadPreviousFieldsToLevel() {

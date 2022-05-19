@@ -9,7 +9,6 @@ public abstract class Field {
     protected Item item;
     protected Player player;
 
-
     public Field(Item item, String fieldType, int fieldID) {
         this.item = item;
         this.fieldType = fieldType;
@@ -26,8 +25,7 @@ public abstract class Field {
 
     @Override
     public String toString() {
-        return "Field Type: " + fieldType
-                + "\n Field ID: " + fieldID;
+        return fieldType;
     }
 
     public String getFieldType() {
