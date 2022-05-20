@@ -1,5 +1,7 @@
 //These are the default Monster stats and written in the following order: [MonsterType, minHP, maxHP, minDMG, maxDMG]
-Skeleton, 50, 100, 20, 30
-Zombie, 100, 150, 10, 20
-Dragon, 500, 1000, 50, 100
-Spider, 10, 20, 1, 10
+Skeleton, 50, 100, 10, 20
+Zombie, 75, 125, 5, 15
+Baby Dragon, 250, 500, 5, 25
+Spider, 10,20,1,10
+Gorilla, 25, 75, 10, 15
+Boar, 15, 25, 15, 20
