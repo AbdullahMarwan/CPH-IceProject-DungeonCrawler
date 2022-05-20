@@ -14,7 +14,8 @@ public class Monster {
     private String monsterType;
     private boolean isBoss = false;
     private FileIO fileIO = new FileIO();
-    double statIncrease = 1.0;
+
+    double statIncrease=1.0;
 
     public Monster(String monsterType, int HP, int damage, int maxHP) {
         this.monsterType = monsterType;
@@ -27,7 +28,7 @@ public class Monster {
 
     }
 
-    public Monster createMonster() throws IOException {
+    public Monster createMonster(int levelNr) throws IOException {
         //Initializing temporary variables that will be overridden a bit later. Values should be set to 0 in the start
         String monsterType = "";
         int HP = 0;
@@ -37,7 +38,7 @@ public class Monster {
         int minDamage = 0;
         int maxDamage = 0;
         int maximumHP = 0;
-
+        double statIncrease=increaseDifficulty(levelNr);
         ArrayList<String> data;
         data = fileIO.readMonsterData();
 
@@ -73,6 +74,9 @@ public class Monster {
         Random r = new Random();
         int randomMinMax = r.nextInt((max - min) + 1) + min;
         return randomMinMax;
+    }
+    public double increaseDifficulty(int levelNr) {
+        return Math.pow(1.5,levelNr-1);
     }
 
     //TODO method for setting up BossFights, where the chosen MonsterType becomes a Boss with 3-5x the stats of a normal minion of its typ

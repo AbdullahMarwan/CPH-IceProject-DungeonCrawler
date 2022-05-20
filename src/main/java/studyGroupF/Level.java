@@ -23,6 +23,7 @@ public class Level {
     public Level() {
     }
 
+
     public void addRandomsFieldsToLevel() {
         Random r = new Random();
         int i = r.nextInt((15 - 9) + 1) + 9;
@@ -89,16 +90,6 @@ public class Level {
 
             fields = fieldList.getFields();
         }
-
-    }
-
-    public void increaseDifficulty(int levelNr) {
-        
-
-        double statIncrease = levelNr;
-
-        monster.setStatIncrease(statIncrease);
-
 
     }
 

@@ -25,7 +25,7 @@ public class MonsterBattle extends Field {
     void doFunction(Item item, Player player) throws IOException {
         monster = new Monster();
 
-        monster = monster.createMonster();
+        monster = monster.createMonster(player.getCurrentLevel());
 
         battleSystem = new BattleSystem(player, monster);
 

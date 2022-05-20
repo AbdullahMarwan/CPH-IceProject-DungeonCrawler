@@ -105,6 +105,7 @@ public class GameController {
         level.loadPreviousFieldsToLevel();
         levels.add(level);
         levels.get(0).setLevelNr(players.get(0).getCurrentLevel());
+        System.out.println("[LEVEL "+levels.get(0).getLevelNr()+"]");
     }
 
     public void initializeNewSave() {
@@ -120,6 +121,7 @@ public class GameController {
         level.addRandomsFieldsToLevel();
         levels.add(level);
         levels.get(0).setLevelNr(levels.get(0).getLevelNr() + 1);
+        System.out.println("[LEVEL "+levels.get(0).getLevelNr()+"]");
     }
 
     public void goToNextLevel() {
@@ -128,7 +130,6 @@ public class GameController {
         initializeNewLevel();
         levels.get(0).setLevelNr(newLevelNr);
         players.get(0).setCurrentLevel(newLevelNr);
-        levels.get(0).increaseDifficulty(newLevelNr);
 
         players.get(0).setCurrentTile(0);
     }
