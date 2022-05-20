@@ -61,7 +61,7 @@ public class CampFire extends Field {
     public void campFireOptions(Player player) {
         System.out.println("\n" + campFireIntroduction);
         System.out.println("\n You are in Campfire, the following options are: \n" +
-                "1: Rest (Heal" + restHealAmount + ")\n" +
+                "1: Rest (Heal " + restHealAmount + ")\n" +
                 "2: Eat (Gain " + eatMaxHP + " MaxHP)\n" +
                 "3: Salvage (Gain " + campFireSalvageGold + " Gold)\n" +
                 "4: View player stats\n"

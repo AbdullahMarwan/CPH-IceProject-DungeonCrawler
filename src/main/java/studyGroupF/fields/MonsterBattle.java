@@ -35,6 +35,7 @@ public class MonsterBattle extends Field {
             System.out.println("-----Turn " + battleTurn + "-----");
             displayHP(player);
             combatOptions(player); //Player chooses options such as attack and heal
+            checkWinner(player);
             battleSystem.attack(false); //Monster attacks
             checkWinner(player);
             battleTurn++;
