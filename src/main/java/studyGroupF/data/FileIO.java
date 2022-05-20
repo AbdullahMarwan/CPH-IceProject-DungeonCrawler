@@ -102,15 +102,17 @@ public class FileIO implements IO {
         try {
             FileWriter myWriter = new FileWriter(itemStorageFile);
 
-            boolean header = true;
+            int counter = 0;
+
             for (String s : data) {
-                if (s.contains(",") && !header) {
-                    header = true;
+
+                if (counter == 5) {
                     myWriter.write("\n");
-                } else {
-                    header = false;
+                    counter = 0;
                 }
+
                 myWriter.write(s);
+                counter++;
             }
             // myWriter.write(String.valueOf(data));
             myWriter.close();

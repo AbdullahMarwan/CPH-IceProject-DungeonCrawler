@@ -239,13 +239,6 @@ public class GameController {
         ArrayList<String> data = new ArrayList<>();
 
         for (Item t : players.get(0).getPlayerItems()) {
-            //Hell's Blade, Extra Damage, Epic, 5, 2
-            //        this.itemName = itemName;
-            //        this.itemType = itemType;
-            //        this.rarityName = rarityName;
-            //        this.rarityValue = rarityValue;
-            //        this.id = id;
-
             data.add(t.getItemName() + ", ");
             data.add(t.getItemType() + ", ");
             data.add(t.getRarityName() + ", ");
