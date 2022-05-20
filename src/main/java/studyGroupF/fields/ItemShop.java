@@ -61,7 +61,8 @@ public class ItemShop extends Field {
         System.out.println("\nYou are in the Item Shop, the following options are: \n" +
                 "1: View items in shop\n" +
                 "2: View Player item Storage\n" +
-                "3: View player stats\n"
+                "3: View player stats\n"+
+                "4: Exit the shop\n"
         );
 
         Scanner scan = new Scanner(System.in);
