@@ -14,6 +14,7 @@ public class Monster {
     private String monsterType;
     private boolean isBoss = false;
     private FileIO fileIO = new FileIO();
+    double statIncrease = 1.0;
 
     public Monster(String monsterType, int HP, int damage, int maxHP) {
         this.monsterType = monsterType;
@@ -60,8 +61,8 @@ public class Monster {
             counter++;
         }
 
-        HP = randomFromMinMax(minHP, maxHP);
-        damage = randomFromMinMax(minDamage, maxDamage);
+        HP = (int) (randomFromMinMax(minHP, maxHP) * statIncrease);
+        damage = (int) (randomFromMinMax(minDamage, maxDamage) * statIncrease);
         maximumHP = HP;
         Monster monster = new Monster(monsterType, HP, damage, maximumHP);
 
@@ -122,6 +123,14 @@ public class Monster {
 
     public void setMaxHP(int maxHP) {
         this.maxHP = maxHP;
+    }
+
+    public double getStatIncrease() {
+        return statIncrease;
+    }
+
+    public void setStatIncrease(double statIncrease) {
+        this.statIncrease = statIncrease;
     }
 
     @Override

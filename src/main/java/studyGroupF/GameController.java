@@ -128,6 +128,7 @@ public class GameController {
         initializeNewLevel();
         levels.get(0).setLevelNr(newLevelNr);
         players.get(0).setCurrentLevel(newLevelNr);
+        levels.get(0).increaseDifficulty(newLevelNr);
 
         players.get(0).setCurrentTile(0);
     }
@@ -196,7 +197,7 @@ public class GameController {
         }
     }
 
-    public void initializePreviousPlayerData() throws FileNotFoundException {
+    public void initializePreviousPlayerData() {
         int maxHP = 0;
         int currentHP = 0;
         int damage = 0;
@@ -225,8 +226,6 @@ public class GameController {
 
         Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile, amountOfPotions);
         players.add(player);
-
-        //System.out.println(players.get(0));
     }
 
     private void saveData() throws IOException {
@@ -267,8 +266,6 @@ public class GameController {
 
         }
 
-        //System.out.println("The Data is: " + data);
-
         return data;
     }
 
@@ -285,8 +282,6 @@ public class GameController {
             data.add(t.getCurrentTile() + ", ");
             data.add(t.getAmountOfPotions() + "");
         }
-
-        //System.out.println("The Data is: " + data);
 
         return data;
     }

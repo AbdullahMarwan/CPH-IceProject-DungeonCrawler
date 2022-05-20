@@ -92,23 +92,14 @@ public class Level {
 
     }
 
-    private void increaseDifficulty() {
-        monster.setDamage(monster.getDamage() + 10);
+    public void increaseDifficulty(int levelNr) {
+        
 
-         /*
-        String[] monsterName = {"Skeleton","Zombie"};
-        int skeletonBaseHP = 5;
-        int skeletonHP = (skeletonBaseHP * level.currentLevel());
-        damage = (1*level.currentLevel());
+        double statIncrease = levelNr;
+
+        monster.setStatIncrease(statIncrease);
 
 
-    public Monster newSkeleton(){
-        return new Monster("Skeleton", createMonster().skeletonHP, 5);
-    }
-    public static Monster newZombie(){
-        return new Monster("Zombie", newZombie().HP, 10);
-    }
-     */
     }
 
     @Override
