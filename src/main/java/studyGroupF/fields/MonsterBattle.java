@@ -95,6 +95,8 @@ public class MonsterBattle extends Field {
                         System.out.println("\n---Invalid input, try again---");
                         combatOptions(player);
                     }
+                } else {
+                    System.out.println("You have 0 Potions");
                 }
             }
 

@@ -11,7 +11,7 @@ public class Player {
     private int gold = 15;
     private int currentLevel = 1;
     private int currentTile = 0;
-    private int amountOfPotions = 2;
+    private int amountOfPotions = 3;
     private Storage storage = new Storage();
     private Item item;
 
