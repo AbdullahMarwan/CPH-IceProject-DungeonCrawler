@@ -10,12 +10,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class FileIO implements IO {
     File playerDataFile = new File("src/main/java/studyGroupF/Data/PlayerData");
     File monsterDataFile = new File("src/main/java/studyGroupF/Data/MonsterData");
     File levelDataFile = new File("src/main/java/studyGroupF/Data/LevelData");
+    File itemStorageFile = new File("src/main/java/studyGroupF/Data/PlayerItemStorage");
 
     int amountOfLinesInMonsterDataFile;
 
@@ -36,7 +36,7 @@ public class FileIO implements IO {
     }
 
     @Override
-    public ArrayList<String> readPlayerData() throws FileNotFoundException {
+    public ArrayList<String> readPlayerData() {
         ArrayList<String> playerData = new ArrayList<>();
 
         try {
@@ -71,6 +71,22 @@ public class FileIO implements IO {
     }
 
     @Override
+    public ArrayList<String> readItemData() {
+        ArrayList<String> itemStorageData = new ArrayList<>();
+
+        try {
+            Scanner scan = new Scanner(itemStorageFile);
+            while (scan.hasNextLine()) {
+                itemStorageData.add(scan.nextLine());
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return itemStorageData;
+    }
+
+    @Override
     public boolean isPlayerDataAvailable() throws FileNotFoundException {
         Scanner scan = new Scanner(playerDataFile);
 
@@ -82,22 +98,50 @@ public class FileIO implements IO {
     }
 
     @Override
-    public void saveLevelData() {
+    public void saveItemStorageData(ArrayList<String> data) throws IOException {
+        try {
+            FileWriter myWriter = new FileWriter(itemStorageFile);
 
+            int counter = 0;
+
+            for (String s : data) {
+
+                if (counter == 6) {
+                    myWriter.write("\n");
+                    counter = 0;
+                }
+
+                myWriter.write(s);
+                counter++;
+            }
+            // myWriter.write(String.valueOf(data));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
     }
 
     @Override
-    public void savePlayerData(ArrayList<String> data) throws IOException {
+    public void saveLevelData(ArrayList<String> data) {
+        try {
+            FileWriter myWriter = new FileWriter(levelDataFile);
+            for (String s : data) {
+                myWriter.write(s);
+            }
+            // myWriter.write(String.valueOf(data));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
+    }
+
+    @Override
+    public void savePlayerData(ArrayList<String> data) {
         try {
             FileWriter myWriter = new FileWriter(playerDataFile);
-            boolean header = true;
             for (String s : data) {
-                if (s.contains("Team") && !header) {
-                    header = true;
-                    myWriter.write("\n");
-                } else {
-                    header = false;
-                }
                 myWriter.write(s);
             }
             // myWriter.write(String.valueOf(data));

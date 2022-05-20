@@ -1,7 +1,9 @@
 package studyGroupF.fields;
 
 import studyGroupF.player.Item;
+import studyGroupF.player.Player;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class FieldList {
@@ -17,7 +19,11 @@ public class FieldList {
         Field[] tempFields = new Field[i];
 
         for (int o = 0; o < i; o++) {
-            tempFields[o] = getRandomField();
+            if (o == 0) {
+                tempFields[o] = getFieldByID(5);
+            } else {
+                tempFields[o] = getRandomField();
+            }
         }
 
         fields = tempFields;
@@ -42,27 +48,40 @@ public class FieldList {
             case 3 -> new ItemShop(item, "ItemShop", 3);
             case 4 -> new WeaponSmith(item, "WeaponSmith", 4);
             case 5 -> new EmptyField(item, "EmptyField", 5);
+            case 6 -> new CampFire(item, "CampFire", 6);
             default -> throw new IllegalStateException("Unexpected value: " + id);
         };
 
     }
 
+    public Field currentField(int index) {
+        return fields[index];
+    }
+
+    public void doFunction(Item item, Player player, int index) throws IOException {
+        Field currentField = fields[index];
+
+        currentField.doFunction(item, player);
+    }
+
     public Field getRandomField() {
         Random r = new Random();
-        int randomField = r.nextInt((100 - 1) + 1) + 1;
+        int randomField = r.nextInt((130 - 1) + 1) + 1;
 
         if (randomField >= 1 && randomField <= 40) { //MonsterBattle
             return new MonsterBattle(item, "MonsterBattle", 1);
         } else if (randomField >= 41 && randomField <= 65) { //LootChest
             return new LootChest(item, "LootChest", 2);
-        } else if (randomField >= 66 && randomField <= 85 && itemShop == false) { //ItemShop
+        } else if (randomField >= 66 && randomField <= 85 && !itemShop) { //ItemShop
             itemShop = true;
             return new ItemShop(item, "ItemShop", 3);
-        } else if (randomField >= 86 && randomField <= 95 && weaponSmith == false) { //WeaponSmith
+        } else if (randomField >= 86 && randomField <= 95 && !weaponSmith) { //WeaponSmith
             weaponSmith = true;
             return new WeaponSmith(item, "WeaponSmith", 4);
-        } else if (randomField >= 96 && randomField <= 100) { //EmptyField
+        } else if (randomField >= 96 && randomField <= 115) { //EmptyField
             return new EmptyField(item, "EmptyField", 5);
+        } else if (randomField >= 116 && randomField <= 130) { //EmptyField
+            return new CampFire(item, "CampFire", 6);
         }
 
         return new MonsterBattle(item, "MonsterBattle", 1);

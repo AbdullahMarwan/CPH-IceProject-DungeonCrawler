@@ -1,22 +1,26 @@
 package studyGroupF.player;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Item {
     private String itemName;
     private String itemType;
     private String rarityName;
-    private int id;
     private int rarityValue = 1;
+    private int id;
+    private int goldCost;
+    private boolean inUse = false;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
     String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 
-    public Item(String itemName, String itemType, String rarityName, int rarityValue, int id) {
+    public Item(String itemName, String itemType, String rarityName, int rarityValue, int id, boolean inUse) {
         this.itemName = itemName;
         this.itemType = itemType;
         this.rarityName = rarityName;
         this.rarityValue = rarityValue;
         this.id = id;
+        this.inUse = inUse;
     }
 
     public Item() {
@@ -49,40 +53,38 @@ public class Item {
         return 1;
     }
 
-    /*
-    //Method to perform the chosen item's effect
-    public int useItem(Item item, int goldGained, Player player) {
-        int extraGold = 20;
-        int extraMaxHP = 10;
+    //Method to perform the chosen items effect
+    public void useItems(ArrayList<Item> playerItems, Player player) {
+        int extraGold = 10;
+        int extraMaxHP = 5;
+        int extraDMG = 2;
 
-        switch (id) {
-            case 1 -> { //Increase Gold Gained by [20-120]
-                return goldGained + (extraGold * item.rarityValue);
-                //player.setGold(goldGained + extraGold * item.rarityValue);
+        for (Item i : playerItems) {
+
+            switch (i.getId()) {
+                case 1 -> { //Increase Gold Gained
+                    if (!inUse) {
+                        player.setExtraGoldGain(player.getExtraGoldGain() + extraGold * i.getRarityValue());
+                        i.inUse = true;
+                    }
+                }
+
+                case 2 -> { //Increase Sword Damage
+                    if (!inUse) {
+                        player.setDamage(player.getDamage() + extraDMG * i.getRarityValue());
+                        i.inUse = true;
+                    }
+                }
+
+                case 3 -> { //Increase MaxHP
+                    if (!inUse) {
+                        player.setMaxHP(player.getMaxHP() + extraMaxHP * i.getRarityValue());
+                        i.inUse = true;
+                    }
+                }
+
             }
-
-            case 2 -> { //Increase Sword Damage by [1-6] for each enemy slain
-                player.setDamage(player.getDamage() + item.rarityValue);
-            }
-
-            case 3 -> { //Increase MaxHP by 10-50
-                player.setMaxHP(player.getMaxHP() + extraMaxHP * item.rarityValue);
-            }
-
         }
-    }
-
-     */
-
-    public void goldTransaction(Player player, int gold, boolean obtainedFromLoot) {
-
-        if (obtainedFromLoot) {
-            //player.setGold(player.getGold() + gold + useItem());
-            //useItem(item, gold, player);
-        } else {
-            player.setGold(player.getGold() + gold);
-        }
-
     }
 
     public Item createItem() {
@@ -100,9 +102,9 @@ public class Item {
         //Item name is combined from Rarity and Type of the item, for example: "Legendary Gold Statue"
         String itemName = rarityName + " " + itemType;
 
-        Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
+        boolean inUse = false;
 
-        return item;
+        return new Item(itemName, itemType, rarityName, rarityValue, id, inUse);
     }
 
     public String selectRandomItemRarity() {
@@ -173,12 +175,45 @@ public class Item {
         this.rarityValue = rarityValue;
     }
 
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public int getGoldCost() {
+        return goldCost;
+    }
+
+    public void setGoldCost(int goldCost) {
+        this.goldCost = goldCost;
+    }
+
+    public String[] getItemRarities() {
+        return itemRarities;
+    }
+
+    public String[] getItemTypes() {
+        return itemTypes;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+
     @Override
     public String toString() {
         return "Item name: " + itemName
                 + "\n  Item type: " + itemType
                 + "\n  Rarity name: " + rarityName
                 + "\n  Rarity value: " + rarityValue
-                + "\n  ID: " + id;
+                + "\n  ID: " + id
+                + "\n  Active? " + inUse;
     }
 }

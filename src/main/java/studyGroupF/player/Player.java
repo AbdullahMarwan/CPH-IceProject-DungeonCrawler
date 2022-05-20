@@ -11,6 +11,8 @@ public class Player {
     private int gold = 15;
     private int currentLevel = 1;
     private int currentTile = 0;
+    private int amountOfPotions = 3;
+    private int extraGoldGain = 1;
     private Storage storage = new Storage();
     private Item item;
 
@@ -19,7 +21,7 @@ public class Player {
     Scanner sc = new Scanner(System.in);
 
     //Constructor used to load previous available playerdata
-    public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile) {
+    public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile, int amountOfPotions, int extraGoldGain) {
         this.playerName = playerName;
         this.maxHP = maxHP;
         this.currentHP = currentHP;
@@ -27,6 +29,8 @@ public class Player {
         this.gold = gold;
         this.currentLevel = currentLevel;
         this.currentTile = currentTile;
+        this.amountOfPotions = amountOfPotions;
+        this.extraGoldGain = extraGoldGain;
     }
 
     //When creating a new player, the user is asked for a name
@@ -36,12 +40,15 @@ public class Player {
         this.playerName = sc.nextLine();
     }
 
-    public void addLootToPlayer(Item item) {
+    public void addLootToPlayer(Item item, Player player) {
         storage.addLootToStorage(playerItems, item);
+        item.useItems(playerItems, player);
     }
 
-    public void viewPlayerStats(Player player) {
-        System.out.println(player);
+    public void addGoldToPlayer(int goldGiven) {
+        int combinedGold = goldGiven + getExtraGoldGain();
+        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " ["+ combinedGold + "] ");
+        this.gold = getGold() + goldGiven + getExtraGoldGain();
     }
 
     public void viewStorage() {
@@ -54,10 +61,6 @@ public class Player {
 
     }
 
-    public void restToHeal() {
-
-    }
-
     @Override
     public String toString() {
         return "Player name: " + playerName + "\n Max HP: " + maxHP
@@ -65,7 +68,9 @@ public class Player {
                 + "\n Damage: " + damage
                 + "\n Gold: " + gold
                 + "\n Current Level: " + currentLevel
-                + "\n Current tile: " + currentTile;
+                + "\n Current tile: " + currentTile
+                + "\n Amount of potions: " + amountOfPotions
+                + "\n Extra gold gain: " + extraGoldGain;
     }
 
     public String getPlayerName() {
@@ -130,5 +135,21 @@ public class Player {
 
     public void setPlayerItems(ArrayList<Item> playerItems) {
         this.playerItems = playerItems;
+    }
+
+    public int getAmountOfPotions() {
+        return amountOfPotions;
+    }
+
+    public void setAmountOfPotions(int amountOfPotions) {
+        this.amountOfPotions = amountOfPotions;
+    }
+
+    public int getExtraGoldGain() {
+        return extraGoldGain;
+    }
+
+    public void setExtraGoldGain(int extraGoldGain) {
+        this.extraGoldGain = extraGoldGain;
     }
 }

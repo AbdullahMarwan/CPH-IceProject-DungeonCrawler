@@ -1,11 +1,15 @@
 package studyGroupF.fields;
 
 import studyGroupF.player.Item;
+import studyGroupF.player.Player;
+
+import java.io.IOException;
 
 public abstract class Field {
     protected String fieldType;
     protected int fieldID;
     protected Item item;
+    protected Player player;
 
     public Field(Item item, String fieldType, int fieldID) {
         this.item = item;
@@ -13,18 +17,11 @@ public abstract class Field {
         this.fieldID = fieldID;
     }
 
-    abstract void doFunction();
-
-    abstract void introduction();
-
-    abstract int returnGold();
-
-    abstract Item returnLoot();
+    abstract void doFunction(Item item, Player player) throws IOException;
 
     @Override
     public String toString() {
-        return "Field Type: " + fieldType
-                + "\n Field ID: " + fieldID;
+        return fieldType;
     }
 
     public String getFieldType() {
