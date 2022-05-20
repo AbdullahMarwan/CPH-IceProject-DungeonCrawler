@@ -6,7 +6,6 @@ import studyGroupF.Monster;
 import studyGroupF.player.Player;
 import studyGroupF.player.States;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;

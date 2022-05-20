@@ -100,9 +100,7 @@ public class Item {
         //Item name is combined from Rarity and Type of the item, for example: "Legendary Gold Statue"
         String itemName = rarityName + " " + itemType;
 
-        Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
-
-        return item;
+        return new Item(itemName, itemType, rarityName, rarityValue, id);
     }
 
     public String selectRandomItemRarity() {

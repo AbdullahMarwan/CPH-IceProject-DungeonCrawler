@@ -45,6 +45,7 @@ public class GameController {
             if (input.equals("l")) { //Load previous PlayerData
                 clearPlayerArrayList();
                 initializeOldSave();
+
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeNewSave();

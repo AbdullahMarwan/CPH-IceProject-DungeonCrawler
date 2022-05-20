@@ -2,11 +2,6 @@ package studyGroupF;
 
 import studyGroupF.data.FileIO;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
 public class Monster {
     private int HP;
     private int bossHP;
