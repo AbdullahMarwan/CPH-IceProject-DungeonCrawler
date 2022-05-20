@@ -41,7 +41,7 @@ public class Level {
     }
 
     public void printFieldArray(int playerCurrentTile) {
-        StringBuilder allFields = new StringBuilder("Level: ");
+        StringBuilder allFields = new StringBuilder("Level map: ");
 
         for (int i = 0; i < fields.length; i++) {
             String fieldToString = "";

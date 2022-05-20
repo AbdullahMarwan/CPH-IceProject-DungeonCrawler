@@ -137,11 +137,12 @@ public class GameController {
     }
 
     public void idleOptions() throws IOException {
-        System.out.println("\n You are idle, the following options are: \n" +
+        System.out.println("\nYou are idle, the following options are: \n" +
                 "1: Move to next field\n" +
                 "2: View Item Storage\n" +
                 "3: View player stats\n" +
-                "4: Save game\n"
+                "4: View Map Icons\n" +
+                "5: Save game\n"
         );
 
         Scanner scan = new Scanner(System.in);
@@ -172,6 +173,18 @@ public class GameController {
                 System.out.println(players.get(0));
             }
             case "4" -> { //Save Game
+                System.out.println("This is the different map Icons: ");
+                System.out.println(
+                        "[+] Player\n" +
+                                "[M] MonsterBattle\n" +
+                                "[G] LootChest\n" +
+                                "[I] ItemShop\n" +
+                                "[W] WeaponSmith\n" +
+                                "[0] EmptyField\n" +
+                                "[C] CampFire\n"
+                );
+            }
+            case "5" -> { //Save Game
                 System.out.println("Saving game.");
                 saveData();
             }

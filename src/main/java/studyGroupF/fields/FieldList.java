@@ -19,7 +19,11 @@ public class FieldList {
         Field[] tempFields = new Field[i];
 
         for (int o = 0; o < i; o++) {
-            tempFields[o] = getRandomField();
+            if (o == 0) {
+                tempFields[o] = getFieldByID(5);
+            } else {
+                tempFields[o] = getRandomField();
+            }
         }
 
         fields = tempFields;
