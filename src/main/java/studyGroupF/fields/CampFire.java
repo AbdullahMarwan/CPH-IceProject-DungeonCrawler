@@ -72,16 +72,14 @@ public class CampFire extends Field {
 
         switch (choice) {
 
-            case "1" -> { //Rest
-                restOption(player);
-            }
-            case "2" -> { //Eat
-                eatOption(player);
-            }
+            case "1" -> //Rest
+                    restOption(player);
 
-            case "3" -> { //Salvage
+            case "2" -> //Eat
+                    eatOption(player);
+
+            case "3" ->  //Salvage
                 salvageOption(player);
-            }
 
             case "4" -> { //View stats
                 System.out.println("Your stats: ");
