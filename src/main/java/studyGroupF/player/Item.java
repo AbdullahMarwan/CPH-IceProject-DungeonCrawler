@@ -8,6 +8,7 @@ public class Item {
     private String rarityName;
     private int rarityValue = 1;
     private int id;
+    private int goldCost;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
     String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 
@@ -178,6 +179,22 @@ public class Item {
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
+    }
+
+    public int getGoldCost() {
+        return goldCost;
+    }
+
+    public void setGoldCost(int goldCost) {
+        this.goldCost = goldCost;
+    }
+
+    public String[] getItemRarities() {
+        return itemRarities;
+    }
+
+    public String[] getItemTypes() {
+        return itemTypes;
     }
 
     @Override
