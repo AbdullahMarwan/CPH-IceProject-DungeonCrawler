@@ -32,13 +32,15 @@ public class MonsterBattle extends Field {
         System.out.println("\nYou will be fighting against the following monster: \n " + monster + "\n");
 
         while (inCombat) {
-            System.out.println("-----Turn " + battleTurn + "-----");
-            displayHP(player);
-            combatOptions(player); //Player chooses options such as attack and heal
             checkWinner(player);
-            battleSystem.attack(false); //Monster attacks
-            checkWinner(player);
-            battleTurn++;
+            if(battleSystem.areAlive())
+            {
+                System.out.println("-----Turn " + battleTurn + "-----");
+                displayHP(player);
+                combatOptions(player); //Player chooses options such as attack and heal
+                battleSystem.attack(); //Monster attacks
+                battleTurn++;
+            }
         }
 
     }
@@ -79,7 +81,6 @@ public class MonsterBattle extends Field {
 
             case "1" -> { //Attack Monster
                 System.out.println("Attacking monster: ");
-                battleSystem.attack(true);
             }
             case "2" -> { //Heal up
                 if (player.getAmountOfPotions() > 0) {

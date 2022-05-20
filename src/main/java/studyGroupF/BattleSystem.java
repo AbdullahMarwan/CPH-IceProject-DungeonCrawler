@@ -13,15 +13,22 @@ public class BattleSystem {
         this.monster = monster;
     }
 
-    public void attack(boolean isPlayerTheAttacker) {
-        if (isPlayerTheAttacker) {
+    public void attack() {
+        if(areAlive())
+        {
             monster.setHP(monster.getHP() - player.getDamage());
             System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!\n");
-        } else if (!isPlayerTheAttacker) {
+            if(areAlive())
+            {
             player.setCurrentHP(player.getCurrentHP() - monster.getDamage());
             System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName() + "\n");
+            }
         }
+    }
 
+    public boolean areAlive()
+    {
+        return monster.getHP()>0&&player.getCurrentHP()>0;
     }
 
     public void heal() {
