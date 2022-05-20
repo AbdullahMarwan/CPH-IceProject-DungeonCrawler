@@ -55,6 +55,7 @@ public class ItemShop extends Field {
             System.out.println("Would you like to buy " + item.getItemName() + " for " + item.getGoldCost() + " ? Y/N");
             if (sc.nextLine().equalsIgnoreCase("y")) {
                 System.out.println("You have bought " + item.getItemName());
+                player.setGold(player.getGold() - item.getGoldCost());
                 player.addLootToPlayer(item, player);
                 shopItems.remove(item);
             }

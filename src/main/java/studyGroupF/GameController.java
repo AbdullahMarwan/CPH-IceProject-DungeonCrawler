@@ -107,7 +107,7 @@ public class GameController {
         level.loadPreviousFieldsToLevel();
         levels.add(level);
         levels.get(0).setLevelNr(players.get(0).getCurrentLevel());
-        System.out.println("[LEVEL "+levels.get(0).getLevelNr()+"]");
+        System.out.println("[LEVEL " + levels.get(0).getLevelNr() + "]");
     }
 
     public void initializeNewSave() {
@@ -122,8 +122,8 @@ public class GameController {
         clearLevelArrayList();
         level.addRandomsFieldsToLevel();
         levels.add(level);
-        levels.get(0).setLevelNr(levels.get(0).getLevelNr() + 1);
-        System.out.println("[LEVEL "+levels.get(0).getLevelNr()+"]");
+        levels.get(0).setLevelNr(levels.get(0).getLevelNr());
+        System.out.println("[LEVEL " + levels.get(0).getLevelNr() + "]");
     }
 
     public void goToNextLevel() {
@@ -250,9 +250,7 @@ public class GameController {
             data.add(t.getId() + ", ");
             data.add(t.isInUse() + "");
         }
-
-        System.out.println("The Data is: " + data);
-
+        
         return data;
     }
 

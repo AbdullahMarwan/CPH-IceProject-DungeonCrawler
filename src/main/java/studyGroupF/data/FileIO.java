@@ -106,7 +106,7 @@ public class FileIO implements IO {
 
             for (String s : data) {
 
-                if (counter == 5) {
+                if (counter == 6) {
                     myWriter.write("\n");
                     counter = 0;
                 }

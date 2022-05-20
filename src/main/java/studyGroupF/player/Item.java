@@ -55,30 +55,32 @@ public class Item {
 
     //Method to perform the chosen items effect
     public void useItems(ArrayList<Item> playerItems, Player player) {
-        int extraGold = 20;
-        int extraMaxHP = 10;
-        int extraDMG = 1;
+        int extraGold = 10;
+        int extraMaxHP = 5;
+        int extraDMG = 2;
 
         for (Item i : playerItems) {
 
             switch (i.getId()) {
-                case 1 -> { //Increase Gold Gained by [20-120]
+                case 1 -> { //Increase Gold Gained
                     if (!inUse) {
                         player.setExtraGoldGain(player.getExtraGoldGain() + extraGold * i.getRarityValue());
                         i.inUse = true;
                     }
                 }
 
-                case 2 -> { //Increase Sword Damage by [1-6] for each enemy slain
+                case 2 -> { //Increase Sword Damage
                     if (!inUse) {
                         player.setDamage(player.getDamage() + extraDMG * i.getRarityValue());
                         i.inUse = true;
                     }
                 }
 
-                case 3 -> { //Increase MaxHP by [10-60]
-                    player.setMaxHP(player.getMaxHP() + extraMaxHP * i.getRarityValue());
-                    i.inUse = true;
+                case 3 -> { //Increase MaxHP
+                    if (!inUse) {
+                        player.setMaxHP(player.getMaxHP() + extraMaxHP * i.getRarityValue());
+                        i.inUse = true;
+                    }
                 }
 
             }

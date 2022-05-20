@@ -46,6 +46,8 @@ public class Player {
     }
 
     public void addGoldToPlayer(int goldGiven) {
+        int combinedGold = goldGiven + getExtraGoldGain();
+        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " ["+ combinedGold + "] ");
         this.gold = getGold() + goldGiven + getExtraGoldGain();
     }
 

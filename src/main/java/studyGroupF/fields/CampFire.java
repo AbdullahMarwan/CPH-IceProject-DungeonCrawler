@@ -49,7 +49,7 @@ public class CampFire extends Field {
     }
 
     public void salvageOption(Player player) {
-        System.out.println("\nYou salvage the " + campFireState + "Campfire for a total of " + campFireSalvageGold + "Gold");
+        System.out.println("\nYou salvage the " + campFireState + "Campfire for a total of " + campFireSalvageGold + " Gold");
         player.addGoldToPlayer(campFireSalvageGold);
     }
 
