@@ -98,12 +98,7 @@ public class FileIO implements IO {
     }
 
     @Override
-    public void saveLevelData() {
-
-    }
-
-    @Override
-    public void savePlayerData(ArrayList<String> data) {
+    public void saveItemStorageData(ArrayList<String> data) throws IOException {
         try {
             FileWriter myWriter = new FileWriter(playerDataFile);
             boolean header = true;
@@ -114,6 +109,36 @@ public class FileIO implements IO {
                 } else {
                     header = false;
                 }
+                myWriter.write(s);
+            }
+            // myWriter.write(String.valueOf(data));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
+    }
+
+    @Override
+    public void saveLevelData(ArrayList<String> data) {
+        try {
+            FileWriter myWriter = new FileWriter(levelDataFile);
+            for (String s : data) {
+                myWriter.write(s);
+            }
+            // myWriter.write(String.valueOf(data));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred.");
+        }
+    }
+
+    @Override
+    public void savePlayerData(ArrayList<String> data) {
+        try {
+            FileWriter myWriter = new FileWriter(playerDataFile);
+            for (String s : data) {
                 myWriter.write(s);
             }
             // myWriter.write(String.valueOf(data));

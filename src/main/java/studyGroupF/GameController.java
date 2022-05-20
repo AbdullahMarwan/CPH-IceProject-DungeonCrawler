@@ -231,8 +231,28 @@ public class GameController {
 
     private void saveData() throws IOException {
         fileIO.savePlayerData(addPlayersToData());
-        //TODO call saveLevelData
+        fileIO.saveLevelData(addLevelToData());
         //TODO call saveItemStorageData
+    }
+
+    public ArrayList<String> addLevelToData() {
+        ArrayList<String> data = new ArrayList<>();
+
+        for (Level l : levels) {
+
+            for (int i = 0; i < level.fields.length; i++) {
+                if (i == level.fields.length-1) {
+                    data.add(l.fieldList.currentField(i).getFieldID() + "");
+                } else {
+                    data.add(l.fieldList.currentField(i).getFieldID() + ", ");
+                }
+            }
+
+        }
+
+        System.out.println("The Data is: " + data);
+
+        return data;
     }
 
     public ArrayList<String> addPlayersToData() {
@@ -245,7 +265,8 @@ public class GameController {
             data.add(t.getDamage() + ", ");
             data.add(t.getGold() + ", ");
             data.add(t.getCurrentLevel() + ", ");
-            data.add(t.getCurrentTile() + "");
+            data.add(t.getCurrentTile() + ", ");
+            data.add(t.getAmountOfPotions() + "");
         }
 
         System.out.println("The Data is: " + data);

@@ -13,6 +13,8 @@ public interface IO {
 
     boolean isPlayerDataAvailable() throws FileNotFoundException;
 
-    void saveLevelData();
+    void saveItemStorageData(ArrayList<String> data) throws IOException;
+    void saveLevelData(ArrayList<String> data);
+
     void savePlayerData(ArrayList<String> data) throws IOException;
 }
