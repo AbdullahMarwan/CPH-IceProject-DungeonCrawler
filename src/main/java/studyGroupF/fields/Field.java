@@ -10,7 +10,6 @@ public abstract class Field {
     protected int fieldID;
     protected Item item;
     protected Player player;
-    protected String fieldPhase = "Idle";
 
     public Field(Item item, String fieldType, int fieldID) {
         this.item = item;
@@ -19,15 +18,6 @@ public abstract class Field {
     }
 
     abstract void doFunction(Item item, Player player) throws IOException;
-
-    /*
-    abstract String getFieldPhase();
-
-    public void setFieldPhase(String fieldPhase) {
-        this.fieldPhase = fieldPhase;
-    }
-
-     */
 
     @Override
     public String toString() {

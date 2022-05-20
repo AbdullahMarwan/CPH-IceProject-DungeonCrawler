@@ -19,26 +19,8 @@ public class Level {
     Field[] fields;
 
     public int levelNr = 1;
-    public String currentPhase = "Idle";
-    String[] gamePhases = {"Idle", "Combat", "Shop"};
 
     public Level() {
-    }
-
-    public String getCurrentPhase() {
-        return currentPhase;
-    }
-
-    public void setCurrentPhase(String currentPhase) {
-        this.currentPhase = currentPhase;
-    }
-
-    public String[] getGamePhases() {
-        return gamePhases;
-    }
-
-    public void setGamePhases(String[] gamePhases) {
-        this.gamePhases = gamePhases;
     }
 
     public void addRandomsFieldsToLevel() {
@@ -56,10 +38,6 @@ public class Level {
 
     public Field getCurrentField(int index) {
         return fieldList.currentField(index);
-    }
-
-    public void changePhase(String phase) {
-        setCurrentPhase(phase);
     }
 
     public void printFieldArray(int playerCurrentTile) {

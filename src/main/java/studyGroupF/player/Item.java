@@ -49,6 +49,7 @@ public class Item {
         return 1;
     }
 
+
     /*
     //Method to perform the chosen item's effect
     public int useItem(Item item, int goldGained, Player player) {
@@ -57,11 +58,11 @@ public class Item {
 
         switch (id) {
             case 1 -> { //Increase Gold Gained by [20-120]
-                return goldGained + (extraGold * item.rarityValue);
+                //goldGained + (extraGold * item.rarityValue);
                 //player.setGold(goldGained + extraGold * item.rarityValue);
             }
 
-            case 2 -> { //Increase Sword Damage by [1-6] for each enemy slain
+            case 2 -> { //Increase Sword Damage by [1-6] 5 for each enemy slain
                 player.setDamage(player.getDamage() + item.rarityValue);
             }
 

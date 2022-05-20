@@ -4,7 +4,6 @@ import studyGroupF.BattleSystem;
 import studyGroupF.player.Item;
 import studyGroupF.Monster;
 import studyGroupF.player.Player;
-import studyGroupF.player.States;
 
 import java.io.IOException;
 import java.util.Random;
@@ -25,13 +24,7 @@ public class MonsterBattle extends Field {
     void doFunction(Item item, Player player) throws IOException {
         monster = new Monster();
 
-        player.setPlayerState(States.COMBAT);
-
-        try {
-            monster = monster.createMonster();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        monster = monster.createMonster();
 
         battleSystem = new BattleSystem(player, monster);
 
@@ -44,7 +37,6 @@ public class MonsterBattle extends Field {
             checkWinner(player);
         }
 
-        player.setPlayerState(States.IDLE);
     }
 
     public void checkWinner(Player player) {
@@ -69,7 +61,7 @@ public class MonsterBattle extends Field {
         System.out.println(monster.getMonsterType() + "'s HP: " + monster.getHP());
     }
 
-    public void combatOptions(Player player) throws IOException {
+    public void combatOptions(Player player) {
         System.out.println("\n You are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
                 "2: Heal up\n" +

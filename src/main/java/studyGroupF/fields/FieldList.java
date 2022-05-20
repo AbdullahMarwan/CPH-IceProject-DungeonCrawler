@@ -58,8 +58,6 @@ public class FieldList {
         Field currentField = fields[index];
 
         currentField.doFunction(item, player);
-
-        //if currentField.get;
     }
 
     public Field getRandomField() {

@@ -22,7 +22,6 @@ public class GameController {
     BattleSystem battleSystem;
 
     public ArrayList<Player> players = new ArrayList<>();
-    public ArrayList<Monster> monsters = new ArrayList<>();
     public ArrayList<Level> levels = new ArrayList<>();
 
     public void setUpGame() throws IOException {
@@ -68,7 +67,7 @@ public class GameController {
         Field currentField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
         System.out.println("Current field: " + currentField);
 
-        optionsFromPhase();
+        idleOptions();
     }
 
     public void initializeOldSave() throws IOException {
@@ -135,20 +134,6 @@ public class GameController {
 
     private void clearLevelArrayList() {
         levels = new ArrayList<>();
-    }
-
-    public void optionsFromPhase() throws IOException {
-
-        switch (players.get(0).getPlayerState()) {
-
-            case IDLE -> idleOptions();
-            //case COMBAT -> combatOptions();
-            case SHOP -> shopOptions();
-        }
-
-    }
-
-    private void shopOptions() {
     }
 
     public void idleOptions() throws IOException {
@@ -257,10 +242,6 @@ public class GameController {
 
     private void clearPlayerArrayList() {
         players = new ArrayList<>();
-    }
-
-    private void clearMonsterArrayList() {
-        monsters = new ArrayList<>();
     }
 
 }
