@@ -87,18 +87,6 @@ public class Item {
         }
     }
 
-
-    public void goldTransaction(Player player, int gold, boolean obtainedFromLoot) {
-
-        if (obtainedFromLoot) {
-            //player.setGold(player.getGold() + gold + useItem());
-            //useItem(item, gold, player);
-        } else {
-            player.setGold(player.getGold() + gold);
-        }
-
-    }
-
     public Item createItem() {
         //Randomly chooses item rarity
         String rarityName = selectRandomItemRarity();
