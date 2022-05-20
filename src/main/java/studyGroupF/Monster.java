@@ -8,16 +8,18 @@ import java.util.Random;
 
 public class Monster {
     private int HP;
+    private int maxHP;
     private int bossHP;
     private int damage;
     private String monsterType;
     private boolean isBoss = false;
     private FileIO fileIO = new FileIO();
 
-    public Monster(String monsterType, int HP, int damage) {
+    public Monster(String monsterType, int HP, int damage, int maxHP) {
         this.monsterType = monsterType;
         this.HP = HP;
         this.damage = damage;
+        this.maxHP = maxHP;
     }
 
     public Monster() {
@@ -33,6 +35,7 @@ public class Monster {
         int maxHP = 0;
         int minDamage = 0;
         int maxDamage = 0;
+        int maximumHP = 0;
 
         ArrayList<String> data;
         data = fileIO.readMonsterData();
@@ -59,7 +62,8 @@ public class Monster {
 
         HP = randomFromMinMax(minHP, maxHP);
         damage = randomFromMinMax(minDamage, maxDamage);
-        Monster monster = new Monster(monsterType, HP, damage);
+        maximumHP = HP;
+        Monster monster = new Monster(monsterType, HP, damage, maximumHP);
 
         return monster;
     }
@@ -110,6 +114,14 @@ public class Monster {
 
     public void setBoss(boolean boss) {
         isBoss = boss;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     @Override

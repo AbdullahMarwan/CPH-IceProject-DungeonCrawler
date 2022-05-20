@@ -16,10 +16,10 @@ public class BattleSystem {
     public void attack(boolean isPlayerTheAttacker) {
         if (isPlayerTheAttacker) {
             monster.setHP(monster.getHP() - player.getDamage());
-            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!");
+            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!\n");
         } else if (!isPlayerTheAttacker) {
             player.setCurrentHP(player.getCurrentHP() - monster.getDamage());
-            System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName());
+            System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName() + "\n");
         }
 
     }

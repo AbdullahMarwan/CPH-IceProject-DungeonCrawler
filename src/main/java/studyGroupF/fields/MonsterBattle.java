@@ -15,6 +15,7 @@ public class MonsterBattle extends Field {
     boolean inCombat = true;
     int minGold = 20;
     int maxGold = 100;
+    int battleTurn = 1;
 
     public MonsterBattle(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
@@ -28,13 +29,15 @@ public class MonsterBattle extends Field {
 
         battleSystem = new BattleSystem(player, monster);
 
-        System.out.println("You will be fighting against the following monster: \n " + monster);
+        System.out.println("\nYou will be fighting against the following monster: \n " + monster + "\n");
 
         while (inCombat) {
+            System.out.println("-----Turn " + battleTurn + "-----");
             displayHP(player);
             combatOptions(player); //Player chooses options such as attack and heal
             battleSystem.attack(false); //Monster attacks
             checkWinner(player);
+            battleTurn++;
         }
 
     }
@@ -58,7 +61,7 @@ public class MonsterBattle extends Field {
 
     public void displayHP(Player player) {
         System.out.println(player.getPlayerName() + "'s HP: " + player.getCurrentHP() + "/" + player.getMaxHP());
-        System.out.println(monster.getMonsterType() + "'s HP: " + monster.getHP());
+        System.out.println(monster.getMonsterType() + "'s HP: " + monster.getHP() + "/" + monster.getMaxHP());
     }
 
     public void combatOptions(Player player) {

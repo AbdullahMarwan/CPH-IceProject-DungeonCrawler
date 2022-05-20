@@ -232,8 +232,32 @@ public class GameController {
     private void saveData() throws IOException {
         fileIO.savePlayerData(addPlayersToData());
         fileIO.saveLevelData(addLevelToData());
-        //TODO call saveItemStorageData
+        fileIO.saveItemStorageData(addItemStorageToData());
     }
+
+    public ArrayList<String> addItemStorageToData() {
+        ArrayList<String> data = new ArrayList<>();
+
+        for (Item t : players.get(0).getPlayerItems()) {
+            //Hell's Blade, Extra Damage, Epic, 5, 2
+            //        this.itemName = itemName;
+            //        this.itemType = itemType;
+            //        this.rarityName = rarityName;
+            //        this.rarityValue = rarityValue;
+            //        this.id = id;
+
+            data.add(t.getItemName() + ", ");
+            data.add(t.getItemType() + ", ");
+            data.add(t.getRarityName() + ", ");
+            data.add(t.getRarityValue() + ", ");
+            data.add(t.getId() + "");
+        }
+
+        System.out.println("The Data is: " + data);
+
+        return data;
+    }
+
 
     public ArrayList<String> addLevelToData() {
         ArrayList<String> data = new ArrayList<>();
@@ -241,7 +265,7 @@ public class GameController {
         for (Level l : levels) {
 
             for (int i = 0; i < level.fields.length; i++) {
-                if (i == level.fields.length-1) {
+                if (i == level.fields.length - 1) {
                     data.add(l.fieldList.currentField(i).getFieldID() + "");
                 } else {
                     data.add(l.fieldList.currentField(i).getFieldID() + ", ");
@@ -250,7 +274,7 @@ public class GameController {
 
         }
 
-        System.out.println("The Data is: " + data);
+        //System.out.println("The Data is: " + data);
 
         return data;
     }
@@ -269,7 +293,7 @@ public class GameController {
             data.add(t.getAmountOfPotions() + "");
         }
 
-        System.out.println("The Data is: " + data);
+        //System.out.println("The Data is: " + data);
 
         return data;
     }

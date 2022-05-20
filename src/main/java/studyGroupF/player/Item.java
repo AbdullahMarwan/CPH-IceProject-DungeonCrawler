@@ -172,6 +172,14 @@ public class Item {
         this.rarityValue = rarityValue;
     }
 
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
     @Override
     public String toString() {
         return "Item name: " + itemName

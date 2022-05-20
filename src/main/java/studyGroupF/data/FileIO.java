@@ -100,10 +100,11 @@ public class FileIO implements IO {
     @Override
     public void saveItemStorageData(ArrayList<String> data) throws IOException {
         try {
-            FileWriter myWriter = new FileWriter(playerDataFile);
+            FileWriter myWriter = new FileWriter(itemStorageFile);
+
             boolean header = true;
             for (String s : data) {
-                if (s.contains("Team") && !header) {
+                if (s.contains(",") && !header) {
                     header = true;
                     myWriter.write("\n");
                 } else {
