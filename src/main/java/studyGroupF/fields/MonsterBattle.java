@@ -47,7 +47,7 @@ public class MonsterBattle extends Field {
 
     public void checkWinner(Player player) {
         if (player.getCurrentHP() <= 0) {
-            System.out.println("You died a honorable death...");
+            System.out.println("You died an honorable death...");
             inCombat = false;
         } else if (monster.getHP() <= 0) {
             System.out.println("You have defeated the monster");

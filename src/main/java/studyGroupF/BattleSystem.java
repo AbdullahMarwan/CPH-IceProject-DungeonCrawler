@@ -32,7 +32,7 @@ public class BattleSystem {
     }
 
     public void heal() {
-        int healAmount = (int) (player.getMaxHP() * 0.25);
+        int healAmount = (int) (player.getMaxHP() * 0.5);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
         System.out.println("You have healed for: " + healAmount);

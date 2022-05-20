@@ -82,6 +82,7 @@ public class GameController {
         String rarityName = "";
         int rarityValue = 0;
         int id = 0;
+        boolean inUse = false;
 
         ArrayList<String> data;
         data = fileIO.readItemData();
@@ -95,9 +96,10 @@ public class GameController {
             rarityName = values[2];
             rarityValue = Integer.parseInt(values[3]);
             id = Integer.parseInt(values[4]);
+            inUse = Boolean.parseBoolean(values[5]);
 
-            Item item = new Item(itemName, itemType, rarityName, rarityValue, id);
-            players.get(0).addLootToPlayer(item);
+            Item item = new Item(itemName, itemType, rarityName, rarityValue, id, inUse);
+            players.get(0).addLootToPlayer(item, player);
         }
     }
 
@@ -199,6 +201,7 @@ public class GameController {
     }
 
     public void initializePreviousPlayerData() {
+        String playerName = "";
         int maxHP = 0;
         int currentHP = 0;
         int damage = 0;
@@ -206,7 +209,7 @@ public class GameController {
         int currentLevel = 0;
         int currentTile = 0;
         int amountOfPotions = 0;
-        String playerName = "";
+        int extraGoldGain = 0;
 
         ArrayList<String> data;
         data = fileIO.readPlayerData();
@@ -223,9 +226,10 @@ public class GameController {
             currentLevel = Integer.parseInt(values[5]);
             currentTile = Integer.parseInt(values[6]);
             amountOfPotions = Integer.parseInt(values[7]);
+            extraGoldGain = Integer.parseInt(values[8]);
         }
 
-        Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile, amountOfPotions);
+        Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile, amountOfPotions, extraGoldGain);
         players.add(player);
     }
 
@@ -243,7 +247,8 @@ public class GameController {
             data.add(t.getItemType() + ", ");
             data.add(t.getRarityName() + ", ");
             data.add(t.getRarityValue() + ", ");
-            data.add(t.getId() + "");
+            data.add(t.getId() + ", ");
+            data.add(t.isInUse() + "");
         }
 
         System.out.println("The Data is: " + data);
@@ -281,7 +286,8 @@ public class GameController {
             data.add(t.getGold() + ", ");
             data.add(t.getCurrentLevel() + ", ");
             data.add(t.getCurrentTile() + ", ");
-            data.add(t.getAmountOfPotions() + "");
+            data.add(t.getAmountOfPotions() + ", ");
+            data.add(t.getExtraGoldGain() + "");
         }
 
         return data;

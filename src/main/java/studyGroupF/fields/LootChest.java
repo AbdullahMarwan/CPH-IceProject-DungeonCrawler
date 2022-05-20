@@ -29,7 +29,7 @@ public class LootChest extends Field {
             Item randomItem = item.createItem();
 
             System.out.println("You have received the following item: \n " + randomItem);
-            player.addLootToPlayer(randomItem);
+            player.addLootToPlayer(randomItem, player);
         } else if (sc.nextLine().equalsIgnoreCase("n")) { //Leave the Chest
             System.out.println("You walk away from the chest...");
         } else {
