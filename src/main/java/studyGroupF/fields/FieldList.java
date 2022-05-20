@@ -72,10 +72,10 @@ public class FieldList {
             return new MonsterBattle(item, "MonsterBattle", 1);
         } else if (randomField >= 41 && randomField <= 65) { //LootChest
             return new LootChest(item, "LootChest", 2);
-        } else if (randomField >= 66 && randomField <= 85 && itemShop == false) { //ItemShop
+        } else if (randomField >= 66 && randomField <= 85 && !itemShop) { //ItemShop
             itemShop = true;
             return new ItemShop(item, "ItemShop", 3);
-        } else if (randomField >= 86 && randomField <= 95 && weaponSmith == false) { //WeaponSmith
+        } else if (randomField >= 86 && randomField <= 95 && !weaponSmith) { //WeaponSmith
             weaponSmith = true;
             return new WeaponSmith(item, "WeaponSmith", 4);
         } else if (randomField >= 96 && randomField <= 115) { //EmptyField

@@ -3,7 +3,6 @@ package studyGroupF.fields;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
-import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
