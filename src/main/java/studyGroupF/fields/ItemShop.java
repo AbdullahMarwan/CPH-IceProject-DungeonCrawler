@@ -4,13 +4,11 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ItemShop extends Field {
     ArrayList<Item> shopItems = new ArrayList<>();
-    private int amountOfShopItems = 3;
     boolean shopInProgress = true;
 
     public ItemShop(Item item, String fieldType, int fieldID) {
@@ -26,6 +24,7 @@ public class ItemShop extends Field {
     }
 
     public void createShopItems(Item item) {
+        int amountOfShopItems = 3;
         for (int i = 0; i < amountOfShopItems; i++) {
             item = item.createItem();
 
@@ -105,11 +104,14 @@ public class ItemShop extends Field {
     }
 
     public void shopOptions(Item item, Player player) throws IOException {
-        System.out.println("\nYou are in the Item Shop, the following options are: \n" +
-                "1: View items in shop\n" +
-                "2: View Player item Storage\n" +
-                "3: View player stats\n" +
-                "4: Exit the shop\n"
+        System.out.println("""
+
+                You are in the Item Shop, the following options are:\s
+                1: View items in shop
+                2: View Player item Storage
+                3: View player stats
+                4: Exit the shop
+                """
         );
 
         Scanner scan = new Scanner(System.in);

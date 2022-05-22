@@ -23,7 +23,6 @@ public class Main {
                 gameInProgress = false;
             }
         }
-
     }
 
     public static boolean isGameInProgress() {

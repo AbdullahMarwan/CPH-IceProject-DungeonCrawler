@@ -6,8 +6,6 @@ public class BattleSystem {
     Player player;
     Monster monster;
 
-    public int turnNr = 1;
-
     public BattleSystem(Player player, Monster monster) {
         this.player = player;
         this.monster = monster;
@@ -36,13 +34,5 @@ public class BattleSystem {
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
         System.out.println("You have healed for: " + healAmount);
-    }
-
-    public int getTurnNr() {
-        return turnNr;
-    }
-
-    public void setTurnNr(int turnNr) {
-        this.turnNr = turnNr;
     }
 }

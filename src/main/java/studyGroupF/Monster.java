@@ -13,9 +13,7 @@ public class Monster {
     private int damage;
     private String monsterType;
     private boolean isBoss = false;
-    private FileIO fileIO = new FileIO();
-
-    double statIncrease=1.0;
+    private final FileIO fileIO = new FileIO();
 
     public Monster(String monsterType, int HP, int damage, int maxHP) {
         this.monsterType = monsterType;
@@ -31,13 +29,13 @@ public class Monster {
     public Monster createMonster(int levelNr) throws IOException {
         //Initializing temporary variables that will be overridden a bit later. Values should be set to 0 in the start
         String monsterType = "";
-        int HP = 0;
-        int damage = 0;
+        int HP;
+        int damage;
         int minHP = 0;
         int maxHP = 0;
         int minDamage = 0;
         int maxDamage = 0;
-        int maximumHP = 0;
+        int maximumHP;
         double statIncrease=increaseDifficulty(levelNr);
         ArrayList<String> data;
         data = fileIO.readMonsterData();
@@ -65,15 +63,13 @@ public class Monster {
         HP = (int) (randomFromMinMax(minHP, maxHP) * statIncrease);
         damage = (int) (randomFromMinMax(minDamage, maxDamage) * statIncrease);
         maximumHP = HP;
-        Monster monster = new Monster(monsterType, HP, damage, maximumHP);
 
-        return monster;
+        return new Monster(monsterType, HP, damage, maximumHP);
     }
 
     int randomFromMinMax(int min, int max) {
         Random r = new Random();
-        int randomMinMax = r.nextInt((max - min) + 1) + min;
-        return randomMinMax;
+        return r.nextInt((max - min) + 1) + min;
     }
     public double increaseDifficulty(int levelNr) {
         return Math.pow(1.5,levelNr-1);
@@ -101,16 +97,8 @@ public class Monster {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
     public String getMonsterType() {
         return monsterType;
-    }
-
-    public void setMonsterType(String monsterType) {
-        this.monsterType = monsterType;
     }
 
     public boolean isBoss() {
@@ -123,18 +111,6 @@ public class Monster {
 
     public int getMaxHP() {
         return maxHP;
-    }
-
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
-    }
-
-    public double getStatIncrease() {
-        return statIncrease;
-    }
-
-    public void setStatIncrease(double statIncrease) {
-        this.statIncrease = statIncrease;
     }
 
     @Override
