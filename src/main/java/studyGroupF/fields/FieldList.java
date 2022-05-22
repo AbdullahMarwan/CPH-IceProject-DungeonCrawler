@@ -8,13 +8,11 @@ import java.util.Random;
 
 public class FieldList {
     private Item item;
-    private int i;
     private Field[] fields;
     boolean itemShop = false;
     boolean weaponSmith = false;
 
     public FieldList(int i) {
-        this.i = i;
 
         Field[] tempFields = new Field[i];
 
@@ -95,11 +93,7 @@ public class FieldList {
         this.fields = fields;
     }
 
-    public int getI() {
-        return i;
-    }
-
-    public void setI(int i) {
-        this.i = i;
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

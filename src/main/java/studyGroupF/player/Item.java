@@ -129,19 +129,14 @@ public class Item {
     }
 
     public String selectRandomItemType(int id) {
-        String itemType = "";
 
         return switch (id) {
-            case 1 -> itemType = itemTypes[0];
-            case 2 -> itemType = itemTypes[1];
-            case 3 -> itemType = itemTypes[2];
+            case 1 -> itemTypes[0];
+            case 2 -> itemTypes[1];
+            case 3 -> itemTypes[2];
             default -> "Broken";
         };
     }
-
-    public void loadItemsFromFileToArrayList() {
-    }
-
 
     public String getItemName() {
         return itemName;

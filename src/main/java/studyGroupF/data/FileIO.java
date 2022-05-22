@@ -90,15 +90,11 @@ public class FileIO implements IO {
     public boolean isPlayerDataAvailable() throws FileNotFoundException {
         Scanner scan = new Scanner(playerDataFile);
 
-        if (scan.hasNextLine()) {
-            return true;
-        }
-
-        return false;
+        return scan.hasNextLine();
     }
 
     @Override
-    public void saveItemStorageData(ArrayList<String> data) throws IOException {
+    public void saveItemStorageData(ArrayList<String> data) {
         try {
             FileWriter myWriter = new FileWriter(itemStorageFile);
 

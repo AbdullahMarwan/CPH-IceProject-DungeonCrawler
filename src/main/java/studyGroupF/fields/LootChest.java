@@ -38,9 +38,7 @@ public class LootChest extends Field {
         }
     }
 
-    public int getMinGold() {
-        return minGold;
-    }
+    public int getMinGold() {return minGold;}
 
     public void setMinGold(int minGold) {
         this.minGold = minGold;

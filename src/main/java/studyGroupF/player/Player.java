@@ -13,14 +13,13 @@ public class Player {
     private int currentTile = 0;
     private int amountOfPotions = 3;
     private int extraGoldGain = 1;
-    private Storage storage = new Storage();
-    private Item item;
+    private final Storage storage = new Storage();
 
     private ArrayList<Item> playerItems = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
-    //Constructor used to load previous available playerdata
+    //Constructor used to load previous available player Data
     public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile, int amountOfPotions, int extraGoldGain) {
         this.playerName = playerName;
         this.maxHP = maxHP;
