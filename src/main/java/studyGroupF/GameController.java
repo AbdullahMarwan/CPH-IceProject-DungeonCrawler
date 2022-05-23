@@ -6,6 +6,7 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 import studyGroupF.player.Storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -69,19 +70,19 @@ public class GameController {
         idleOptions();
     }
 
-    public void initializeOldSave() {
+    public void initializeOldSave() throws IOException {
         initializePreviousPlayerData();
         initializeOldLevel();
         initializeOldItemStorage();
     }
 
-    public void initializeOldItemStorage() {
-        String itemName;
-        String itemType;
-        String rarityName;
-        int rarityValue;
-        int id;
-        boolean inUse;
+    public void initializeOldItemStorage() throws IOException {
+        String itemName = "";
+        String itemType = "";
+        String rarityName = "";
+        int rarityValue = 0;
+        int id = 0;
+        boolean inUse = false;
 
         ArrayList<String> data;
         data = fileIO.readItemData();
@@ -140,15 +141,12 @@ public class GameController {
     }
 
     public void idleOptions() throws IOException {
-        System.out.println("""
-
-                You are idle, the following options are:\s
-                1: Move to next field
-                2: View Item Storage
-                3: View player stats
-                4: View Map Icons
-                5: Save game
-                """
+        System.out.println("\nYou are idle, the following options are: \n" +
+                "1: Move to next field\n" +
+                "2: View Item Storage\n" +
+                "3: View player stats\n" +
+                "4: View Map Icons\n" +
+                "5: Save game\n"
         );
 
         Scanner scan = new Scanner(System.in);
@@ -181,15 +179,13 @@ public class GameController {
             case "4" -> { //Save Game
                 System.out.println("This is the different map Icons: ");
                 System.out.println(
-                        """
-                                [+] Player
-                                [M] MonsterBattle
-                                [G] LootChest
-                                [I] ItemShop
-                                [W] WeaponSmith
-                                [C] CampFire
-                                [0] EmptyField
-                                """
+                        "[+] Player\n" +
+                                "[M] MonsterBattle\n" +
+                                "[G] LootChest\n" +
+                                "[I] ItemShop\n" +
+                                "[W] WeaponSmith\n" +
+                                "[0] EmptyField\n" +
+                                "[C] CampFire\n"
                 );
             }
             case "5" -> { //Save Game
@@ -237,7 +233,7 @@ public class GameController {
         players.add(player);
     }
 
-    private void saveData() {
+    private void saveData() throws IOException {
         fileIO.savePlayerData(addPlayersToData());
         fileIO.saveLevelData(addLevelToData());
         fileIO.saveItemStorageData(addItemStorageToData());

@@ -7,10 +7,10 @@ public class Item {
     private String itemName;
     private String itemType;
     private String rarityName;
-    private int rarityValue = 1;
+    private int rarityValue;
     private int id;
     private int goldCost;
-    private boolean inUse = false;
+    private boolean inUse;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
     String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 
@@ -21,9 +21,6 @@ public class Item {
         this.rarityValue = rarityValue;
         this.id = id;
         this.inUse = inUse;
-    }
-
-    public Item() {
     }
 
     public int setItemRarityValue(String rarityName) {
@@ -129,11 +126,12 @@ public class Item {
     }
 
     public String selectRandomItemType(int id) {
+        String itemType = "";
 
         return switch (id) {
-            case 1 -> itemTypes[0];
-            case 2 -> itemTypes[1];
-            case 3 -> itemTypes[2];
+            case 1 -> itemType = itemTypes[0];
+            case 2 -> itemType = itemTypes[1];
+            case 3 -> itemType = itemTypes[2];
             default -> "Broken";
         };
     }

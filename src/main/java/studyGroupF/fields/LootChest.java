@@ -10,8 +10,8 @@ public class LootChest extends Field {
     public LootChest(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
     }
-    int minGold = 20;
-    int maxGold = 100;
+    private int minGold = 20;
+    private int maxGold = 100;
 
     @Override
     void doFunction(Item item, Player player) {
@@ -38,7 +38,9 @@ public class LootChest extends Field {
         }
     }
 
-    public int getMinGold() {return minGold;}
+    public int getMinGold() {
+        return minGold;
+    }
 
     public void setMinGold(int minGold) {
         this.minGold = minGold;
