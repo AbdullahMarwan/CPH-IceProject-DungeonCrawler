@@ -22,7 +22,7 @@ public class MonsterBattle extends Field {
     }
 
     @Override
-    void doFunction(Item item, Player player) throws IOException {
+    public void doFunction(Item item, Player player) throws IOException {
         monster = new Monster();
 
         monster = monster.createMonster(player.getCurrentLevel());
@@ -68,13 +68,10 @@ public class MonsterBattle extends Field {
     }
 
     public void combatOptions(Player player) {
-        System.out.println("""
-
-                You are in Combat, the following options are:\s
-                1: Attack monster
-                2: Heal up
-                3: View player stats
-                """
+        System.out.println("\n You are in Combat, the following options are: \n" +
+                "1: Attack monster\n" +
+                "2: Heal up\n" +
+                "3: View player stats\n"
         );
 
         Scanner scan = new Scanner(System.in);
@@ -82,8 +79,9 @@ public class MonsterBattle extends Field {
 
         switch (choice) {
 
-            case "1" -> //Attack Monster
-                    System.out.println("Attacking monster: ");
+            case "1" -> { //Attack Monster
+                System.out.println("Attacking monster: ");
+            }
             case "2" -> { //Heal up
                 if (player.getAmountOfPotions() > 0) {
                     System.out.println("You have " + player.getAmountOfPotions() + ". Would you like to use one? Y/N");
@@ -116,7 +114,9 @@ public class MonsterBattle extends Field {
         }
     }
 
-    public boolean isInCombat() {return inCombat;}
+    public boolean isInCombat() {
+        return inCombat;
+    }
 
     public void setInCombat(boolean inCombat) {
         this.inCombat = inCombat;

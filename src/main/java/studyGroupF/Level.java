@@ -13,6 +13,8 @@ import studyGroupF.player.Player;
 
 public class Level {
     FileIO fileIO = new FileIO();
+    Monster monster;
+    Field field;
     FieldList fieldList;
     Field[] fields;
 
@@ -43,7 +45,7 @@ public class Level {
         StringBuilder allFields = new StringBuilder("Level map: ");
 
         for (int i = 0; i < fields.length; i++) {
-            String fieldToString;
+            String fieldToString = "";
             if (playerCurrentTile == i) {
                 fieldToString = fieldToString(0);
             } else {
