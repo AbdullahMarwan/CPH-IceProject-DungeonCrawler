@@ -33,24 +33,29 @@ public class MonsterBattle extends Field {
 
         while (inCombat) {
             checkWinner(player);
-            if(battleSystem.areAlive())
-            {
-                System.out.println("-----Turn " + battleTurn + "-----");
-                displayHP(player);
-                combatOptions(player); //Player chooses options such as attack and heal
-                battleSystem.attack(); //Monster attacks
-                battleTurn++;
-            }
+            System.out.println("-----Turn " + battleTurn + "-----");
+            displayHP(player);
+
+            combatOptions(player); //Player chooses options such as attack and heal
+
+            battleTurn++;
         }
 
     }
 
+    public void playerFinishedTurn(Player player) {
+        checkWinner(player);
+        if (inCombat) {
+            battleSystem.attack(false); //Monster attacks
+        }
+    }
+
     public void checkWinner(Player player) {
         if (player.getCurrentHP() <= 0) {
-            System.out.println("You died an honorable death...");
+            System.out.println("\nYou died an honorable death...");
             inCombat = false;
         } else if (monster.getHP() <= 0) {
-            System.out.println("You have defeated the monster");
+            System.out.println("\nYou have defeated the monster");
             inCombat = false;
 
             Random r = new Random();
@@ -70,7 +75,7 @@ public class MonsterBattle extends Field {
     public void combatOptions(Player player) {
         System.out.println("\n You are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
-                "2: Heal up\n" +
+                "2: Heal up (" + player.getAmountOfPotions() + " potions)\n" +
                 "3: View player stats\n"
         );
 
@@ -81,17 +86,21 @@ public class MonsterBattle extends Field {
 
             case "1" -> { //Attack Monster
                 System.out.println("Attacking monster: ");
+                battleSystem.attack(true); //Player attacks
+                playerFinishedTurn(player);
             }
             case "2" -> { //Heal up
                 if (player.getAmountOfPotions() > 0) {
-                    System.out.println("You have " + player.getAmountOfPotions() + ". Would you like to use one? Y/N");
+                    System.out.println("You have " + player.getAmountOfPotions() + " potions. Would you like to use one? Y/N");
 
                     Scanner potion = new Scanner(System.in);
+                    String potionChoice = potion.nextLine();
 
-                    if (potion.nextLine().equalsIgnoreCase("y")) {
+                    if (potionChoice.equalsIgnoreCase("y")) {
                         battleSystem.heal();
                         player.setAmountOfPotions(player.getAmountOfPotions() - 1);
-                    } else if (potion.nextLine().equalsIgnoreCase("y")) {
+                        playerFinishedTurn(player);
+                    } else if (potionChoice.equalsIgnoreCase("n")) {
                         System.out.println("You decided to save your potion.");
                     } else {
                         System.out.println("\n---Invalid input, try again---");
@@ -105,6 +114,7 @@ public class MonsterBattle extends Field {
             case "3" -> { //View stats
                 System.out.println("Your stats: ");
                 System.out.println(player);
+                combatOptions(player);
             }
 
             default -> {
@@ -112,14 +122,6 @@ public class MonsterBattle extends Field {
                 combatOptions(player);
             }
         }
-    }
-
-    public boolean isInCombat() {
-        return inCombat;
-    }
-
-    public void setInCombat(boolean inCombat) {
-        this.inCombat = inCombat;
     }
 
     public int getMinGold() {
