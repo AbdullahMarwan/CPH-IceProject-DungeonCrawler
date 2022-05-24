@@ -71,8 +71,8 @@ public class ItemShop extends Field {
         int count = 1;
 
         System.out.println("You have " + player.getGold() + " gold.");
-        System.out.println("These are the items currently available in this shop: ");
         System.out.println("Select the item you want by Typing it's number: ");
+        System.out.println("These are the items currently available in this shop: ");
 
         for (Item i : shopItems) {
             System.out.println("Item " + count + " ) \n Cost: " + i.getGoldCost() +

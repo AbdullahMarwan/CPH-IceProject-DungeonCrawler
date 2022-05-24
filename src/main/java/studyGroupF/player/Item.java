@@ -23,6 +23,7 @@ public class Item {
         this.inUse = inUse;
     }
 
+    //Empty constructor used to call methods
     public Item() {
 
     }
@@ -88,6 +89,7 @@ public class Item {
         }
     }
 
+    //Created a fully randomized item
     public Item createItem() {
         //Randomly chooses item rarity
         String rarityName = selectRandomItemRarity();
