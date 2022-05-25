@@ -13,7 +13,6 @@ public class Player {
     private int currentTile = 0;
     private int amountOfPotions = 3;
     private int extraGoldGain = 1;
-    private Storage storage = new Storage();
     private Item item;
 
     private ArrayList<Item> playerItems = new ArrayList<>();
@@ -41,7 +40,7 @@ public class Player {
     }
 
     public void addLootToPlayer(Item item, Player player) {
-        storage.addLootToStorage(playerItems, item);
+        playerItems.add(item);
         item.useItems(playerItems, player);
     }
 

@@ -6,29 +6,20 @@ public class BattleSystem {
     Player player;
     Monster monster;
 
-    public int turnNr = 1;
-
     public BattleSystem(Player player, Monster monster) {
         this.player = player;
         this.monster = monster;
     }
 
-    public void attack() {
-        if(areAlive())
-        {
+    public void attack(boolean isPlayerTheAttacker) {
+        if (isPlayerTheAttacker) {
             monster.setHP(monster.getHP() - player.getDamage());
-            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!\n");
-            if(areAlive())
-            {
+            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!");
+        } else if (!isPlayerTheAttacker) {
             player.setCurrentHP(player.getCurrentHP() - monster.getDamage());
             System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName() + "\n");
-            }
         }
-    }
 
-    public boolean areAlive()
-    {
-        return monster.getHP()>0&&player.getCurrentHP()>0;
     }
 
     public void heal() {
@@ -38,11 +29,4 @@ public class BattleSystem {
         System.out.println("You have healed for: " + healAmount);
     }
 
-    public int getTurnNr() {
-        return turnNr;
-    }
-
-    public void setTurnNr(int turnNr) {
-        this.turnNr = turnNr;
-    }
 }

@@ -4,9 +4,7 @@ import studyGroupF.data.FileIO;
 import studyGroupF.fields.Field;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
-import studyGroupF.player.Storage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -17,7 +15,6 @@ public class GameController {
     Level level;
     FileIO fileIO;
     Monster monster;
-    Storage storage;
     Item item;
     BattleSystem battleSystem;
 
@@ -28,7 +25,6 @@ public class GameController {
         Scanner sc = new Scanner(System.in);
         level = new Level();
         fileIO = new FileIO();
-        storage = new Storage();
         item = new Item();
         battleSystem = new BattleSystem(player, monster);
 
@@ -250,7 +246,7 @@ public class GameController {
             data.add(t.getId() + ", ");
             data.add(t.isInUse() + "");
         }
-        
+
         return data;
     }
 

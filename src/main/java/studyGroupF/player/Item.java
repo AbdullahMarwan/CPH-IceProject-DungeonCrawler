@@ -7,10 +7,10 @@ public class Item {
     private String itemName;
     private String itemType;
     private String rarityName;
-    private int rarityValue;
+    private int rarityValue = 1;
     private int id;
     private int goldCost;
-    private boolean inUse;
+    private boolean inUse = false;
     String[] itemRarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"};
     String[] itemTypes = {"Extra Gold", "Extra Damage", "Extra maxHP"};
 
@@ -21,6 +21,11 @@ public class Item {
         this.rarityValue = rarityValue;
         this.id = id;
         this.inUse = inUse;
+    }
+
+    //Empty constructor used to call methods
+    public Item() {
+
     }
 
     public int setItemRarityValue(String rarityName) {
@@ -52,8 +57,8 @@ public class Item {
 
     //Method to perform the chosen items effect
     public void useItems(ArrayList<Item> playerItems, Player player) {
-        int extraGold = 10;
-        int extraMaxHP = 5;
+        int extraGold = 1;
+        int extraMaxHP = 2;
         int extraDMG = 2;
 
         for (Item i : playerItems) {
@@ -84,6 +89,7 @@ public class Item {
         }
     }
 
+    //Created a fully randomized item
     public Item createItem() {
         //Randomly chooses item rarity
         String rarityName = selectRandomItemRarity();
