@@ -18,6 +18,11 @@ public class GameController {
     Item item;
     BattleSystem battleSystem;
 
+    enum SaveState {
+        OLD_SAVE,
+        NEW_SAVE
+    }
+
     public ArrayList<Player> players = new ArrayList<>();
     public ArrayList<Level> levels = new ArrayList<>();
 
@@ -66,13 +71,13 @@ public class GameController {
         idleOptions();
     }
 
-    public void initializeOldSave() throws IOException {
+    public void initializeOldSave() {
         initializePreviousPlayerData();
-        initializeOldLevel();
+        initializeLevel(SaveState.OLD_SAVE);
         initializeOldItemStorage();
     }
 
-    public void initializeOldItemStorage() throws IOException {
+    public void initializeOldItemStorage() {
         String itemName = "";
         String itemType = "";
         String rarityName = "";
@@ -99,33 +104,36 @@ public class GameController {
         }
     }
 
-    public void initializeOldLevel() {
-        level.loadPreviousFieldsToLevel();
+    public void initializeLevel(SaveState saveState) {
+
+        switch (saveState) {
+            case OLD_SAVE -> {
+                level.loadPreviousFieldsToLevel();
+            }
+            case NEW_SAVE -> {
+                clearLevelArrayList();
+                level.addRandomsFieldsToLevel();
+            }
+        }
+
         levels.add(level);
-        levels.get(0).setLevelNr(players.get(0).getCurrentLevel());
+        levels.get(0).setLevelNr(levels.get(0).getLevelNr());
         System.out.println("[LEVEL " + levels.get(0).getLevelNr() + "]");
     }
+
 
     public void initializeNewSave() {
         clearPlayerArrayList();
         Player player = new Player();
         players.add(player);
 
-        initializeNewLevel();
-    }
-
-    public void initializeNewLevel() {
-        clearLevelArrayList();
-        level.addRandomsFieldsToLevel();
-        levels.add(level);
-        levels.get(0).setLevelNr(levels.get(0).getLevelNr());
-        System.out.println("[LEVEL " + levels.get(0).getLevelNr() + "]");
+        initializeLevel(SaveState.NEW_SAVE);
     }
 
     public void goToNextLevel() {
         int newLevelNr = levels.get(0).getLevelNr() + 1;
 
-        initializeNewLevel();
+        initializeLevel(SaveState.NEW_SAVE);
         levels.get(0).setLevelNr(newLevelNr);
         players.get(0).setCurrentLevel(newLevelNr);
 
