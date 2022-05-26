@@ -4,6 +4,9 @@ import studyGroupF.data.FileIO;
 import studyGroupF.fields.Field;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
+import studyGroupF.shared.BattleSystem;
+import studyGroupF.shared.Level;
+import studyGroupF.shared.Monster;
 
 import java.io.IOException;
 import java.util.ArrayList;

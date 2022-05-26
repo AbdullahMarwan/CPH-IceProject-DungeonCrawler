@@ -1,4 +1,4 @@
-package studyGroupF;
+package studyGroupF.shared;
 
 import studyGroupF.player.Player;
 

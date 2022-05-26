@@ -1,4 +1,4 @@
-package studyGroupF;
+package studyGroupF.shared;
 
 import studyGroupF.data.FileIO;
 import studyGroupF.fields.FieldList;
@@ -12,11 +12,11 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
 public class Level {
-    FileIO fileIO = new FileIO();
-    Monster monster;
-    Field field;
-    FieldList fieldList;
-    Field[] fields;
+    private FileIO fileIO = new FileIO();
+    private Monster monster;
+    private Field field;
+    public FieldList fieldList;
+    public Field[] fields;
 
     public int levelNr = 1;
 
