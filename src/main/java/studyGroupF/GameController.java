@@ -1,5 +1,6 @@
 package studyGroupF;
 
+import studyGroupF.data.DataManager;
 import studyGroupF.data.FileIO;
 import studyGroupF.fields.Field;
 import studyGroupF.player.Item;
@@ -7,7 +8,9 @@ import studyGroupF.player.Player;
 import studyGroupF.shared.BattleSystem;
 import studyGroupF.shared.Level;
 import studyGroupF.shared.Monster;
+import studyGroupF.shared.SaveState;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -21,11 +24,6 @@ public class GameController {
     Item item;
     BattleSystem battleSystem;
 
-    enum SaveState {
-        OLD_SAVE,
-        NEW_SAVE
-    }
-
     public ArrayList<Player> players = new ArrayList<>();
     public ArrayList<Level> levels = new ArrayList<>();
 
@@ -38,7 +36,8 @@ public class GameController {
 
         if (fileIO.isPlayerDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: \n");
-            initializePreviousPlayerData();
+            clearPlayerArrayList();
+            players.add(DataManager.initializePreviousPlayerData());
             System.out.println(players.get(0));
 
             System.out.println("\nWould you like to load previous data? ");
@@ -47,11 +46,11 @@ public class GameController {
 
             if (input.equals("l")) { //Load previous PlayerData
                 clearPlayerArrayList();
-                initializeOldSave();
+                initializeFullGame(SaveState.OLD_SAVE);
 
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
-                initializeNewSave();
+                initializeFullGame(SaveState.NEW_SAVE);
             } else {
                 System.out.println("\n---Invalid input, try again---");
                 setUpGame();
@@ -59,52 +58,34 @@ public class GameController {
 
         } else { //No Data Found, start new save
             System.out.println("No previous Data found, starting a new save: ");
-            initializeNewSave();
+            initializeFullGame(SaveState.NEW_SAVE);
         }
 
     }
 
     public void playGame() throws IOException {
         levels.get(0).printFieldArray(players.get(0).getCurrentTile());
-
-        //System.out.println("Current tile: " + players.get(0).getCurrentTile() + 1); //+1 for Visual clarity
+        
         Field currentField = levels.get(0).getCurrentField(players.get(0).getCurrentTile());
         System.out.println("Current field: " + currentField);
 
         idleOptions();
     }
 
-    public void initializeOldSave() {
-        initializePreviousPlayerData();
-        initializeLevel(SaveState.OLD_SAVE);
-        initializeOldItemStorage();
+    public void initializeFullGame(SaveState saveState) {
+        //Player Data
+        clearPlayerArrayList();
+        players.add(DataManager.initializePlayerData(saveState));
+
+        //Level Data
+        initializeLevel(saveState);
+
+        //Item storage Data
+        players.get(0).setPlayerItems(DataManager.initializeStorageData(saveState));
     }
 
-    public void initializeOldItemStorage() {
-        String itemName = "";
-        String itemType = "";
-        String rarityName = "";
-        int rarityValue = 0;
-        int id = 0;
-        boolean inUse = false;
-
-        ArrayList<String> data;
-        data = fileIO.readItemData();
-
-        for (String s : data) {
-            //System.out.println(s);
-            String[] values = s.split(", ");
-
-            itemName = values[0];
-            itemType = values[1];
-            rarityName = values[2];
-            rarityValue = Integer.parseInt(values[3]);
-            id = Integer.parseInt(values[4]);
-            inUse = Boolean.parseBoolean(values[5]);
-
-            Item item = new Item(itemName, itemType, rarityName, rarityValue, id, inUse);
-            players.get(0).addLootToPlayer(item, player);
-        }
+    private void saveFullGame() throws IOException {
+        DataManager.saveData(levels, players);
     }
 
     public void initializeLevel(SaveState saveState) {
@@ -124,15 +105,6 @@ public class GameController {
         System.out.println("[LEVEL " + levels.get(0).getLevelNr() + "]");
     }
 
-
-    public void initializeNewSave() {
-        clearPlayerArrayList();
-        Player player = new Player();
-        players.add(player);
-
-        initializeLevel(SaveState.NEW_SAVE);
-    }
-
     public void goToNextLevel() {
         int newLevelNr = levels.get(0).getLevelNr() + 1;
 
@@ -145,6 +117,10 @@ public class GameController {
 
     private void clearLevelArrayList() {
         levels = new ArrayList<>();
+    }
+
+    private void clearPlayerArrayList() {
+        players = new ArrayList<>();
     }
 
     public void idleOptions() throws IOException {
@@ -183,7 +159,7 @@ public class GameController {
                 System.out.println("Your stats: ");
                 System.out.println(players.get(0));
             }
-            case "4" -> { //Save Game
+            case "4" -> { //Map Icons
                 System.out.println("This is the different map Icons: ");
                 System.out.println(
                         "[+] Player\n" +
@@ -197,7 +173,7 @@ public class GameController {
             }
             case "5" -> { //Save Game
                 System.out.println("Saving game.");
-                saveData();
+                saveFullGame();
             }
 
             default -> {
@@ -205,101 +181,6 @@ public class GameController {
                 idleOptions();
             }
         }
-    }
-
-    public void initializePreviousPlayerData() {
-        String playerName = "";
-        int maxHP = 0;
-        int currentHP = 0;
-        int damage = 0;
-        int gold = 0;
-        int currentLevel = 0;
-        int currentTile = 0;
-        int amountOfPotions = 0;
-        int extraGoldGain = 0;
-
-        ArrayList<String> data;
-        data = fileIO.readPlayerData();
-
-        for (String s : data) {
-            //System.out.println(s);
-            String[] values = s.split(", ");
-
-            playerName = values[0];
-            maxHP = Integer.parseInt(values[1]);
-            currentHP = Integer.parseInt(values[2]);
-            damage = Integer.parseInt(values[3]);
-            gold = Integer.parseInt(values[4]);
-            currentLevel = Integer.parseInt(values[5]);
-            currentTile = Integer.parseInt(values[6]);
-            amountOfPotions = Integer.parseInt(values[7]);
-            extraGoldGain = Integer.parseInt(values[8]);
-        }
-
-        Player player = new Player(playerName, maxHP, currentHP, damage, gold, currentLevel, currentTile, amountOfPotions, extraGoldGain);
-        players.add(player);
-    }
-
-    private void saveData() throws IOException {
-        fileIO.savePlayerData(addPlayersToData());
-        fileIO.saveLevelData(addLevelToData());
-        fileIO.saveItemStorageData(addItemStorageToData());
-    }
-
-    public ArrayList<String> addItemStorageToData() {
-        ArrayList<String> data = new ArrayList<>();
-
-        for (Item t : players.get(0).getPlayerItems()) {
-            data.add(t.getItemName() + ", ");
-            data.add(t.getItemType() + ", ");
-            data.add(t.getRarityName() + ", ");
-            data.add(t.getRarityValue() + ", ");
-            data.add(t.getId() + ", ");
-            data.add(t.isInUse() + "");
-        }
-
-        return data;
-    }
-
-
-    public ArrayList<String> addLevelToData() {
-        ArrayList<String> data = new ArrayList<>();
-
-        for (Level l : levels) {
-
-            for (int i = 0; i < level.fields.length; i++) {
-                if (i == level.fields.length - 1) {
-                    data.add(l.fieldList.currentField(i).getFieldID() + "");
-                } else {
-                    data.add(l.fieldList.currentField(i).getFieldID() + ", ");
-                }
-            }
-
-        }
-
-        return data;
-    }
-
-    public ArrayList<String> addPlayersToData() {
-        ArrayList<String> data = new ArrayList<>();
-
-        for (Player t : players) {
-            data.add(t.getPlayerName() + ", ");
-            data.add(t.getMaxHP() + ", ");
-            data.add(t.getCurrentHP() + ", ");
-            data.add(t.getDamage() + ", ");
-            data.add(t.getGold() + ", ");
-            data.add(t.getCurrentLevel() + ", ");
-            data.add(t.getCurrentTile() + ", ");
-            data.add(t.getAmountOfPotions() + ", ");
-            data.add(t.getExtraGoldGain() + "");
-        }
-
-        return data;
-    }
-
-    private void clearPlayerArrayList() {
-        players = new ArrayList<>();
     }
 
 }

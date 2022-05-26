@@ -90,7 +90,7 @@ public class Level {
 
             fields = fieldList.getFields();
         }
-
+        
     }
 
     @Override
