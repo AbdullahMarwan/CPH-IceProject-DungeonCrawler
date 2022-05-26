@@ -26,6 +26,10 @@ public class BattleSystem {
         int healAmount = (int) (player.getMaxHP() * 0.5);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
+        //TODO Checks if the healed amount exceeds MaxHP
+        if(player.getCurrentHP() > player.getMaxHP()){
+            player.setCurrentHP(player.getMaxHP());
+        }
         System.out.println("You have healed for: " + healAmount);
     }
 
