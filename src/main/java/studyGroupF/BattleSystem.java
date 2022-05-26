@@ -22,7 +22,7 @@ public class BattleSystem {
 
     }
 
-    public void heal() {
+    public void heal() { //TODO Move to player and cap heal to max HP
         int healAmount = (int) (player.getMaxHP() * 0.5);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
