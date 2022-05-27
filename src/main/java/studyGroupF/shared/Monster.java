@@ -1,21 +1,27 @@
 package studyGroupF.shared;
 
-import studyGroupF.data.FileIO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import studyGroupF.data.DataManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+@JsonIgnoreProperties(value = {
+        "HP",
+        "statIncrease"
+})
 public class Monster {
     private int HP;
+    private int minHP;
     private int maxHP;
-    private int bossHP;
+
+    private int minDMG;
+    private int maxDMG;
     private int damage;
     private String monsterType;
-    private boolean isBoss = false;
-    private FileIO fileIO = new FileIO();
 
-    double statIncrease=1.0;
+    double statIncrease = 1.0;
 
     public Monster(String monsterType, int HP, int damage, int maxHP) {
         this.monsterType = monsterType;
@@ -25,47 +31,19 @@ public class Monster {
     }
 
     public Monster() {
-
     }
 
-    public Monster createMonster(int levelNr) throws IOException {
-        //Initializing temporary variables that will be overridden a bit later. Values should be set to 0 in the start
-        String monsterType = "";
-        int HP = 0;
-        int damage = 0;
-        int minHP = 0;
-        int maxHP = 0;
-        int minDamage = 0;
-        int maxDamage = 0;
-        int maximumHP = 0;
-        double statIncrease=increaseDifficulty(levelNr);
-        ArrayList<String> data;
-        data = fileIO.readMonsterData();
+    public ArrayList<Monster> getMonsters() {
+        return DataManager.getInstance().getGameValues().getMonsters();
+    }
 
-        Random line = new Random();
-        int specificLine = line.nextInt(fileIO.getAmountOfLinesInMonsterDataFile() - 1) + 1;
-        //int specificLine = 3; //To test for specific line (To get the wanted line, just -1 SpecificLine)
+    public Monster createMonster(int levelNr) {
+        double statIncrease = increaseDifficulty(levelNr);
 
-        int counter = 0;
-
-        for (String s : data) {
-            //System.out.println(s);
-            if (counter == specificLine) {
-                String[] values = s.split(", ");
-
-                monsterType = values[0];
-                minHP = Integer.parseInt(values[1]);
-                maxHP = Integer.parseInt(values[2]);
-                minDamage = Integer.parseInt(values[3]);
-                maxDamage = Integer.parseInt(values[4]);
-            }
-            counter++;
-        }
-
-        HP = (int) (randomFromMinMax(minHP, maxHP) * statIncrease);
-        damage = (int) (randomFromMinMax(minDamage, maxDamage) * statIncrease);
-        maximumHP = HP;
-        Monster monster = new Monster(monsterType, HP, damage, maximumHP);
+        Monster monster = getMonsters().get(new Random().nextInt(getMonsters().size()));
+        monster.setHP((int) (randomFromMinMax(monster.getMinHP(), monster.getMaxHP()) * statIncrease));
+        monster.setDamage((int) (randomFromMinMax(monster.getMinDMG(), monster.getMaxDMG()) * statIncrease));
+        monster.setMaxHP(monster.getHP());
 
         return monster;
     }
@@ -75,8 +53,9 @@ public class Monster {
         int randomMinMax = r.nextInt((max - min) + 1) + min;
         return randomMinMax;
     }
+
     public double increaseDifficulty(int levelNr) {
-        return Math.pow(1.5,levelNr-1);
+        return Math.pow(1.5, levelNr - 1);
     }
 
     //TODO method for setting up BossFights, where the chosen MonsterType becomes a Boss with 3-5x the stats of a normal minion of its typ
@@ -87,14 +66,6 @@ public class Monster {
 
     public void setHP(int HP) {
         this.HP = HP;
-    }
-
-    public int getBossHP() {
-        return bossHP;
-    }
-
-    public void setBossHP(int bossHP) {
-        this.bossHP = bossHP;
     }
 
     public int getDamage() {
@@ -113,14 +84,6 @@ public class Monster {
         this.monsterType = monsterType;
     }
 
-    public boolean isBoss() {
-        return isBoss;
-    }
-
-    public void setBoss(boolean boss) {
-        isBoss = boss;
-    }
-
     public int getMaxHP() {
         return maxHP;
     }
@@ -135,6 +98,30 @@ public class Monster {
 
     public void setStatIncrease(double statIncrease) {
         this.statIncrease = statIncrease;
+    }
+
+    public int getMinHP() {
+        return minHP;
+    }
+
+    public void setMinHP(int minHP) {
+        this.minHP = minHP;
+    }
+
+    public int getMinDMG() {
+        return minDMG;
+    }
+
+    public void setMinDMG(int minDMG) {
+        this.minDMG = minDMG;
+    }
+
+    public int getMaxDMG() {
+        return maxDMG;
+    }
+
+    public void setMaxDMG(int maxDMG) {
+        this.maxDMG = maxDMG;
     }
 
     @Override

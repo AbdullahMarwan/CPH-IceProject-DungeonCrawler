@@ -11,6 +11,10 @@ public abstract class Field {
     protected Item item;
     protected Player player;
 
+    public Field(int fieldID) {
+        this.fieldID = fieldID;
+    }
+
     public Field(Item item, String fieldType, int fieldID) {
         this.item = item;
         this.fieldType = fieldType;

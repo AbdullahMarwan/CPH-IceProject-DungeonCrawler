@@ -1,6 +1,6 @@
 package studyGroupF.shared;
 
-import studyGroupF.data.FileIO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import studyGroupF.fields.FieldList;
 
 import java.io.IOException;
@@ -11,18 +11,16 @@ import studyGroupF.fields.*;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
+@JsonIgnoreProperties(value = { "fieldList" })
 public class Level {
-    private FileIO fileIO = new FileIO();
-    private Monster monster;
-    private Field field;
     public FieldList fieldList;
     public Field[] fields;
 
     public int levelNr = 1;
 
     public Level() {
+        addRandomsFieldsToLevel();
     }
-
 
     public void addRandomsFieldsToLevel() {
         Random r = new Random();
@@ -70,27 +68,6 @@ public class Level {
             case 6 -> "[C]"; //CampFire
             default -> throw new IllegalStateException("Unexpected value: " + id);
         };
-    }
-
-    public void loadPreviousFieldsToLevel() {
-        ArrayList<String> data;
-        data = fileIO.readLevelData();
-
-        for (String s : data) {
-            //System.out.println(s);
-            String[] values = s.split(", ");
-
-            int[] id = new int[values.length];
-
-            for (int i = 0; i < values.length; i++) {
-                id[i] = Integer.parseInt(values[i]);
-            }
-
-            fieldList = new FieldList(id);
-
-            fields = fieldList.getFields();
-        }
-        
     }
 
     @Override
