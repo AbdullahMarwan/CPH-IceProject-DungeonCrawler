@@ -10,6 +10,7 @@ import studyGroupF.shared.Monster;
 import studyGroupF.shared.SaveState;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -28,12 +29,12 @@ public class GameController {
         DataManager.getInstance().setPlayerData(player);
     }
 
-    public Level getLevel() {
-        return DataManager.getInstance().getGameData().getLevel();
+    public ArrayList<Integer> getFields() {
+        return DataManager.getInstance().getGameData().getFieldsID();
     }
 
-    public void setLevel(Level level) {
-        DataManager.getInstance().setLevelData(level);
+    public void setFields(ArrayList<Integer> fieldsData) {
+        DataManager.getInstance().setFieldData(fieldsData);
     }
 
     public Monster getMonster() {
@@ -80,9 +81,9 @@ public class GameController {
     }
 
     public void playGame() throws IOException {
-        getLevel().printFieldArray(getPlayer().getCurrentTile());
+        level.printFieldArray(getPlayer().getCurrentTile());
 
-        Field currentField = getLevel().getCurrentField(getPlayer().getCurrentTile());
+        Field currentField = level.getCurrentField(getPlayer().getCurrentTile());
         System.out.println("Current field: " + currentField);
 
         idleOptions();
@@ -98,20 +99,26 @@ public class GameController {
     }
 
     public void initializeLevel(SaveState saveState) {
-        if (saveState == SaveState.NEW_SAVE) {
-            level.addRandomsFieldsToLevel();
+
+        switch (saveState) {
+
+            case OLD_SAVE -> {
+                level.loadPreviousFieldsToLevel(getFields());
+            }
+            case NEW_SAVE -> {
+                level.addRandomsFieldsToLevel();
+            }
         }
 
-        setLevel(level);
-        getLevel().setLevelNr(getLevel().getLevelNr());
-        System.out.println("[LEVEL " + getLevel().getLevelNr() + "]");
+        level.setLevelNr(level.getLevelNr());
+        System.out.println("[LEVEL " + level.getLevelNr() + "]");
     }
 
     public void goToNextLevel() {
-        int newLevelNr = getLevel().getLevelNr() + 1;
+        int newLevelNr = level.getLevelNr() + 1;
 
         initializeLevel(SaveState.NEW_SAVE);
-        getLevel().setLevelNr(newLevelNr);
+        level.setLevelNr(newLevelNr);
         getPlayer().setCurrentLevel(newLevelNr);
 
         getPlayer().setCurrentTile(0);
@@ -132,17 +139,17 @@ public class GameController {
         switch (choice) {
 
             case "1" -> { //Go to next field
-                if (getLevel().fields.length < getPlayer().getCurrentTile() + 2) {
+                if (level.fields.size() < getPlayer().getCurrentTile() + 2) {
                     goToNextLevel();
                 } else {
                     System.out.println("Moving to next field: ");
                     getPlayer().setCurrentTile(getPlayer().getCurrentTile() + 1);
 
                     //System.out.println("New tile: " + getPlayer().getCurrentTile()); //+1 for Visual clarity
-                    Field newField = getLevel().getCurrentField(getPlayer().getCurrentTile());
+                    Field newField = level.getCurrentField(getPlayer().getCurrentTile());
                     System.out.println("You have landed on " + newField);
 
-                    getLevel().doFieldFunction(item, getPlayer(), getPlayer().getCurrentTile());
+                    level.doFieldFunction(item, getPlayer(), getPlayer().getCurrentTile());
                 }
             }
             case "2" -> { //View Inventory

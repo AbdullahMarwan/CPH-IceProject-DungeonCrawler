@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class DataManager {
     private static DataManager dataManagerInstance = null;
     private GameData gameData = null;
-
     private GameValues gameValues = null;
     private File gameDataJsonFile = new File("src/main/resources/data/GameData.json");
     private File gameValuesJsonFile = new File("src/main/resources/data/GameValues.json");
@@ -96,8 +95,8 @@ public class DataManager {
         this.getGameData().setPlayer(player);
     }
 
-    public void setLevelData(Level level) {
-        this.getGameData().setLevel(level);
+    public void setFieldData(ArrayList<Integer> fieldData) {
+        this.getGameData().setFieldsID(fieldData);
     }
 
     public void initializeGame(SaveState saveState) {
@@ -121,8 +120,8 @@ public class DataManager {
         return this.getGameData().getPlayer();
     }
 
-    public Level initializePreviousFieldsToLevel() {
-        return this.getGameData().getLevel();
+    public ArrayList<Integer> initializePreviousFieldsToLevel() {
+        return this.getGameData().getFieldsID();
     }
 
     public Player initializeNewPlayerData() {

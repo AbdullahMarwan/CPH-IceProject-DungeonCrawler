@@ -11,10 +11,10 @@ import studyGroupF.fields.*;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
-@JsonIgnoreProperties(value = { "fieldList" })
+@JsonIgnoreProperties(value = {"fieldList"})
 public class Level {
     public FieldList fieldList;
-    public Field[] fields;
+    public ArrayList<Field> fields;
 
     public int levelNr = 1;
 
@@ -31,6 +31,13 @@ public class Level {
         fields = fieldList.getFields();
     }
 
+    public void loadPreviousFieldsToLevel(ArrayList<Integer> fieldIDs) {
+
+        fieldList = new FieldList(fieldIDs);
+
+        fields = fieldList.getFields();
+    }
+
     public void doFieldFunction(Item item, Player player, int index) throws IOException {
         fieldList.doFunction(item, player, index);
     }
@@ -42,7 +49,7 @@ public class Level {
     public void printFieldArray(int playerCurrentTile) {
         StringBuilder allFields = new StringBuilder("Level map: ");
 
-        for (int i = 0; i < fields.length; i++) {
+        for (int i = 0; i < fields.size(); i++) {
             String fieldToString = "";
             if (playerCurrentTile == i) {
                 fieldToString = fieldToString(0);
