@@ -1,4 +1,4 @@
-package studyGroupF;
+package studyGroupF.shared;
 
 import studyGroupF.player.Player;
 
@@ -22,10 +22,14 @@ public class BattleSystem {
 
     }
 
-    public void heal() {
+    public void heal() { //TODO Move to player and cap heal to max HP
         int healAmount = (int) (player.getMaxHP() * 0.5);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
+        //TODO Checks if the healed amount exceeds MaxHP
+        if(player.getCurrentHP() > player.getMaxHP()){
+            player.setCurrentHP(player.getMaxHP());
+        }
         System.out.println("You have healed for: " + healAmount);
     }
 

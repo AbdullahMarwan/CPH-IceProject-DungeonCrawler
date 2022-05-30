@@ -1,8 +1,8 @@
 package studyGroupF.fields;
 
-import studyGroupF.BattleSystem;
+import studyGroupF.shared.BattleSystem;
 import studyGroupF.player.Item;
-import studyGroupF.Monster;
+import studyGroupF.shared.Monster;
 import studyGroupF.player.Player;
 
 import java.io.IOException;

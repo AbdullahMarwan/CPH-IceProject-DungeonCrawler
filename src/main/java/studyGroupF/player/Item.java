@@ -1,8 +1,14 @@
 package studyGroupF.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+@JsonIgnoreProperties(value = {
+        "itemRarities",
+        "itemTypes"
+})
 public class Item {
     private String itemName;
     private String itemType;

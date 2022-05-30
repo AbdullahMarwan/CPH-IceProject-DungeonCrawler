@@ -1,0 +1,93 @@
+{
+  "player": {
+    "playerName": "Hamilton",
+    "maxHP": 100,
+    "currentHP": 64,
+    "damage": 14,
+    "gold": 150,
+    "currentLevel": 1,
+    "currentTile": 2,
+    "amountOfPotions": 3,
+    "extraGoldGain": 1,
+    "playerItems": [
+      {
+        "itemName": "Common Extra Damage",
+        "itemType": "Extra Damage",
+        "rarityName": "Common",
+        "rarityValue": 2,
+        "id": 2,
+        "goldCost": 0,
+        "inUse": true
+      }
+    ]
+  },
+  "level": {
+    "fields": [
+      {
+        "fieldType": "EmptyField",
+        "fieldID": 5
+      },
+      {
+        "fieldType": "LootChest",
+        "fieldID": 2,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "MonsterBattle",
+        "fieldID": 1,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "EmptyField",
+        "fieldID": 5
+      },
+      {
+        "fieldType": "LootChest",
+        "fieldID": 2,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "EmptyField",
+        "fieldID": 5
+      },
+      {
+        "fieldType": "MonsterBattle",
+        "fieldID": 1,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "MonsterBattle",
+        "fieldID": 1,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "LootChest",
+        "fieldID": 2,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "MonsterBattle",
+        "fieldID": 1,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "MonsterBattle",
+        "fieldID": 1,
+        "minGold": 20,
+        "maxGold": 100
+      },
+      {
+        "fieldType": "WeaponSmith",
+        "fieldID": 4
+      }
+    ],
+    "levelNr": 1
+  }
+}
