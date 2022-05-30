@@ -15,7 +15,6 @@ import studyGroupF.player.Player;
 public class Level {
     public FieldList fieldList;
     public ArrayList<Field> fields;
-
     public int levelNr = 1;
 
     public Level() {
@@ -75,6 +74,10 @@ public class Level {
             case 6 -> "[C]"; //CampFire
             default -> throw new IllegalStateException("Unexpected value: " + id);
         };
+    }
+
+    public ArrayList<Integer> returnFieldsIDs() {
+        return fieldList.fieldsToIDList(fields);
     }
 
     @Override

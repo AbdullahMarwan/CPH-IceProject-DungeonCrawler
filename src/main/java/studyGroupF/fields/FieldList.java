@@ -56,6 +56,14 @@ public class FieldList {
 
     }
 
+    public ArrayList<Integer> fieldsToIDList(ArrayList<Field> fields) {
+        ArrayList<Integer> allFieldsIDs = new ArrayList<>();
+        for (Field f : fields) {
+            allFieldsIDs.add(f.getFieldID());
+        }
+        return allFieldsIDs;
+    }
+
     public Field currentField(int index) {
         return fields.get(index);
     }

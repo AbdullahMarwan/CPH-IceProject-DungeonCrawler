@@ -21,31 +21,7 @@ public class GameController {
     Item item;
     BattleSystem battleSystem;
 
-    public Player getPlayer() {
-        return DataManager.getInstance().getGameData().getPlayer();
-    }
-
-    public void setPlayer(Player player) {
-        DataManager.getInstance().setPlayerData(player);
-    }
-
-    public ArrayList<Integer> getFields() {
-        return DataManager.getInstance().getGameData().getFieldsID();
-    }
-
-    public void setFields(ArrayList<Integer> fieldsData) {
-        DataManager.getInstance().setFieldData(fieldsData);
-    }
-
-    public Monster getMonster() {
-        return monster;
-    }
-
-    public void setMonster(Monster monster) {
-        this.monster = monster;
-    }
-
-    public void setUpGame() throws IOException {
+    public void setUpGame() {
         Scanner sc = new Scanner(System.in);
         level = new Level();
         item = new Item();
@@ -53,18 +29,16 @@ public class GameController {
 
         if (DataManager.getInstance().isGameDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: \n");
-            //clearPlayerArrayList();
-            //players.add(DataManager.getInstance().initializePreviousPlayerData());
             System.out.println(getPlayer());
+            level.printFieldArray(getPlayer().getCurrentTile());
 
             System.out.println("\nWould you like to load previous data? ");
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
             String input = sc.nextLine().toLowerCase(Locale.ROOT);
 
             if (input.equals("l")) { //Load previous PlayerData
-                //clearPlayerArrayList();
+                System.out.println("Loading previous save");
                 initializeFullGame(SaveState.OLD_SAVE);
-
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeFullGame(SaveState.NEW_SAVE);
@@ -91,10 +65,12 @@ public class GameController {
 
     public void initializeFullGame(SaveState saveState) {
         DataManager.getInstance().initializeGame(saveState);
+        initializeLevel(saveState);
     }
 
-    private void saveFullGame() throws IOException {
-        DataManager.getInstance().setGameData(DataManager.getInstance().getInstance().getGameData());
+    private void saveFullGame() {
+        DataManager.getInstance().setGameData(DataManager.getInstance().getGameData());
+        DataManager.getInstance().getGameData().setFieldsID(level.returnFieldsIDs());
         DataManager.getInstance().saveGameData();
     }
 
@@ -110,7 +86,7 @@ public class GameController {
             }
         }
 
-        level.setLevelNr(level.getLevelNr());
+        level.setLevelNr(getPlayer().getCurrentLevel());
         System.out.println("[LEVEL " + level.getLevelNr() + "]");
     }
 
@@ -182,6 +158,30 @@ public class GameController {
                 idleOptions();
             }
         }
+    }
+
+    public Player getPlayer() {
+        return DataManager.getInstance().getGameData().getPlayer();
+    }
+
+    public void setPlayer(Player player) {
+        DataManager.getInstance().setPlayerData(player);
+    }
+
+    public ArrayList<Integer> getFields() {
+        return DataManager.getInstance().getGameData().getFieldsID();
+    }
+
+    public void setFields(ArrayList<Integer> fieldsData) {
+        DataManager.getInstance().setFieldData(fieldsData);
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
     }
 
 }
