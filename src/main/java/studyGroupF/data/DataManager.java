@@ -16,6 +16,7 @@ public class DataManager {
     private File gameValuesJsonFile = new File("src/main/resources/data/GameValues.json");
 
     public static DataManager getInstance() {
+
         if (dataManagerInstance == null) {
             dataManagerInstance = new DataManager();
         }

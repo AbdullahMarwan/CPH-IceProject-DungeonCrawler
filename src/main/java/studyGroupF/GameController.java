@@ -29,6 +29,7 @@ public class GameController {
 
         if (DataManager.getInstance().isGameDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: \n");
+            initializeFullGame(SaveState.OLD_SAVE);
             System.out.println(getPlayer());
             level.printFieldArray(getPlayer().getCurrentTile());
 
@@ -66,6 +67,9 @@ public class GameController {
     public void initializeFullGame(SaveState saveState) {
         DataManager.getInstance().initializeGame(saveState);
         initializeLevel(saveState);
+        if (saveState == SaveState.NEW_SAVE) {
+            getPlayer().changePlayerName();
+        }
     }
 
     private void saveFullGame() {
@@ -87,7 +91,6 @@ public class GameController {
         }
 
         level.setLevelNr(getPlayer().getCurrentLevel());
-        System.out.println("[LEVEL " + level.getLevelNr() + "]");
     }
 
     public void goToNextLevel() {

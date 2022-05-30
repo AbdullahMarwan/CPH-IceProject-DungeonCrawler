@@ -6,23 +6,22 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 import studyGroupF.shared.Level;
 import studyGroupF.shared.Monster;
+import studyGroupF.shared.SaveState;
 
 import java.util.ArrayList;
 
 public class GameData {
     private Player player;
     private ArrayList<Integer> fieldsID;
+    boolean createNewPlayer = false;
 
     public GameData() {
-        System.out.println("Previous game is empty");
 
         if (player == null) {
-            System.out.println("Creating new player");
             player = new Player();
         }
 
         if (fieldsID == null) {
-            System.out.println("Creating FieldsID list");
             fieldsID = new ArrayList<>();
         }
     }

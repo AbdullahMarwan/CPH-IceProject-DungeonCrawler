@@ -1,127 +1,28 @@
 {
   "player": {
-    "playerName": "dwad",
-    "maxHP": 370,
-    "currentHP": 86,
-    "damage": 82,
-    "gold": 1090,
+    "playerName": "adad",
+    "maxHP": 100,
+    "currentHP": 84,
+    "damage": 10,
+    "gold": 88,
     "currentLevel": 2,
     "currentTile": 0,
     "amountOfPotions": 3,
-    "extraGoldGain": 85,
-    "playerItems": [
-      {
-        "itemName": "Epic Extra maxHP",
-        "itemType": "Extra maxHP",
-        "rarityName": "Epic",
-        "rarityValue": 5,
-        "id": 3,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Uncommon Extra Gold",
-        "itemType": "Extra Gold",
-        "rarityName": "Uncommon",
-        "rarityValue": 3,
-        "id": 1,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Uncommon Extra Gold",
-        "itemType": "Extra Gold",
-        "rarityName": "Uncommon",
-        "rarityValue": 3,
-        "id": 1,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Rare Extra Damage",
-        "itemType": "Extra Damage",
-        "rarityName": "Rare",
-        "rarityValue": 4,
-        "id": 2,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Rare Extra maxHP",
-        "itemType": "Extra maxHP",
-        "rarityName": "Rare",
-        "rarityValue": 4,
-        "id": 3,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Epic Extra maxHP",
-        "itemType": "Extra maxHP",
-        "rarityName": "Epic",
-        "rarityValue": 5,
-        "id": 3,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Rare Extra maxHP",
-        "itemType": "Extra maxHP",
-        "rarityName": "Rare",
-        "rarityValue": 4,
-        "id": 3,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Uncommon Extra Gold",
-        "itemType": "Extra Gold",
-        "rarityName": "Uncommon",
-        "rarityValue": 3,
-        "id": 1,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Epic Extra Gold",
-        "itemType": "Extra Gold",
-        "rarityName": "Epic",
-        "rarityValue": 5,
-        "id": 1,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Common Extra Damage",
-        "itemType": "Extra Damage",
-        "rarityName": "Common",
-        "rarityValue": 2,
-        "id": 2,
-        "goldCost": 0,
-        "inUse": true
-      },
-      {
-        "itemName": "Common Extra maxHP",
-        "itemType": "Extra maxHP",
-        "rarityName": "Common",
-        "rarityValue": 2,
-        "id": 3,
-        "goldCost": 0,
-        "inUse": true
-      }
-    ]
+    "extraGoldGain": 1,
+    "playerItems": []
   },
   "fieldsID": [
     5,
+    6,
+    3,
+    5,
+    1,
+    1,
+    2,
     2,
     1,
     1,
     6,
-    1,
-    2,
-    3,
-    1,
-    5,
     2
   ]
 }
