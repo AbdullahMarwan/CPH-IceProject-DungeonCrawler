@@ -6,26 +6,29 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 import studyGroupF.shared.Level;
 import studyGroupF.shared.Monster;
+import studyGroupF.shared.SaveState;
 
 import java.util.ArrayList;
 
 public class GameData {
     private Player player;
-    private Level level;
+    private ArrayList<Integer> fieldsID;
+    boolean createNewPlayer = false;
 
     public GameData() {
+
         if (player == null) {
             player = new Player();
         }
 
-        if (level == null) {
-            level = new Level();
+        if (fieldsID == null) {
+            fieldsID = new ArrayList<>();
         }
     }
 
-    public GameData(Player player, Level level) {
+    public GameData(Player player, ArrayList<Integer> fieldsID) {
         this.player = player;
-        this.level = level;
+        this.fieldsID = fieldsID;
     }
 
     public Player getPlayer() {
@@ -36,11 +39,11 @@ public class GameData {
         this.player = player;
     }
 
-    public Level getLevel() {
-        return level;
+    public ArrayList<Integer> getFieldsID() {
+        return fieldsID;
     }
 
-    public void setLevel(Level level) {
-        this.level = level;
+    public void setFieldsID(ArrayList<Integer> fieldsID) {
+        this.fieldsID = fieldsID;
     }
 }

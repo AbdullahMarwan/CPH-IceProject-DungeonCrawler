@@ -10,6 +10,7 @@ import studyGroupF.shared.Monster;
 import studyGroupF.shared.SaveState;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -20,31 +21,7 @@ public class GameController {
     Item item;
     BattleSystem battleSystem;
 
-    public Player getPlayer() {
-        return DataManager.getInstance().getGameData().getPlayer();
-    }
-
-    public void setPlayer(Player player) {
-        DataManager.getInstance().setPlayerData(player);
-    }
-
-    public Level getLevel() {
-        return DataManager.getInstance().getGameData().getLevel();
-    }
-
-    public void setLevel(Level level) {
-        DataManager.getInstance().setLevelData(level);
-    }
-
-    public Monster getMonster() {
-        return monster;
-    }
-
-    public void setMonster(Monster monster) {
-        this.monster = monster;
-    }
-
-    public void setUpGame() throws IOException {
+    public void setUpGame() {
         Scanner sc = new Scanner(System.in);
         level = new Level();
         item = new Item();
@@ -52,18 +29,17 @@ public class GameController {
 
         if (DataManager.getInstance().isGameDataAvailable()) {
             System.out.println("This is the current PlayerData in the Database: \n");
-            //clearPlayerArrayList();
-            //players.add(DataManager.getInstance().initializePreviousPlayerData());
+            initializeFullGame(SaveState.OLD_SAVE);
             System.out.println(getPlayer());
+            level.printFieldArray(getPlayer().getCurrentTile());
 
             System.out.println("\nWould you like to load previous data? ");
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
             String input = sc.nextLine().toLowerCase(Locale.ROOT);
 
             if (input.equals("l")) { //Load previous PlayerData
-                //clearPlayerArrayList();
+                System.out.println("Loading previous save");
                 initializeFullGame(SaveState.OLD_SAVE);
-
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeFullGame(SaveState.NEW_SAVE);
@@ -80,9 +56,9 @@ public class GameController {
     }
 
     public void playGame() throws IOException {
-        getLevel().printFieldArray(getPlayer().getCurrentTile());
+        level.printFieldArray(getPlayer().getCurrentTile());
 
-        Field currentField = getLevel().getCurrentField(getPlayer().getCurrentTile());
+        Field currentField = level.getCurrentField(getPlayer().getCurrentTile());
         System.out.println("Current field: " + currentField);
 
         idleOptions();
@@ -90,28 +66,38 @@ public class GameController {
 
     public void initializeFullGame(SaveState saveState) {
         DataManager.getInstance().initializeGame(saveState);
+        initializeLevel(saveState);
+        if (saveState == SaveState.NEW_SAVE) {
+            getPlayer().changePlayerName();
+        }
     }
 
-    private void saveFullGame() throws IOException {
-        DataManager.getInstance().setGameData(DataManager.getInstance().getInstance().getGameData());
+    private void saveFullGame() {
+        DataManager.getInstance().setGameData(DataManager.getInstance().getGameData());
+        DataManager.getInstance().getGameData().setFieldsID(level.returnFieldsIDs());
         DataManager.getInstance().saveGameData();
     }
 
     public void initializeLevel(SaveState saveState) {
-        if (saveState == SaveState.NEW_SAVE) {
-            level.addRandomsFieldsToLevel();
+
+        switch (saveState) {
+
+            case OLD_SAVE -> {
+                level.loadPreviousFieldsToLevel(getFields());
+            }
+            case NEW_SAVE -> {
+                level.addRandomsFieldsToLevel();
+            }
         }
 
-        setLevel(level);
-        getLevel().setLevelNr(getLevel().getLevelNr());
-        System.out.println("[LEVEL " + getLevel().getLevelNr() + "]");
+        level.setLevelNr(getPlayer().getCurrentLevel());
     }
 
     public void goToNextLevel() {
-        int newLevelNr = getLevel().getLevelNr() + 1;
+        int newLevelNr = level.getLevelNr() + 1;
 
         initializeLevel(SaveState.NEW_SAVE);
-        getLevel().setLevelNr(newLevelNr);
+        level.setLevelNr(newLevelNr);
         getPlayer().setCurrentLevel(newLevelNr);
 
         getPlayer().setCurrentTile(0);
@@ -132,17 +118,17 @@ public class GameController {
         switch (choice) {
 
             case "1" -> { //Go to next field
-                if (getLevel().fields.length < getPlayer().getCurrentTile() + 2) {
+                if (level.fields.size() < getPlayer().getCurrentTile() + 2) {
                     goToNextLevel();
                 } else {
                     System.out.println("Moving to next field: ");
                     getPlayer().setCurrentTile(getPlayer().getCurrentTile() + 1);
 
                     //System.out.println("New tile: " + getPlayer().getCurrentTile()); //+1 for Visual clarity
-                    Field newField = getLevel().getCurrentField(getPlayer().getCurrentTile());
+                    Field newField = level.getCurrentField(getPlayer().getCurrentTile());
                     System.out.println("You have landed on " + newField);
 
-                    getLevel().doFieldFunction(item, getPlayer(), getPlayer().getCurrentTile());
+                    level.doFieldFunction(item, getPlayer(), getPlayer().getCurrentTile());
                 }
             }
             case "2" -> { //View Inventory
@@ -175,6 +161,30 @@ public class GameController {
                 idleOptions();
             }
         }
+    }
+
+    public Player getPlayer() {
+        return DataManager.getInstance().getGameData().getPlayer();
+    }
+
+    public void setPlayer(Player player) {
+        DataManager.getInstance().setPlayerData(player);
+    }
+
+    public ArrayList<Integer> getFields() {
+        return DataManager.getInstance().getGameData().getFieldsID();
+    }
+
+    public void setFields(ArrayList<Integer> fieldsData) {
+        DataManager.getInstance().setFieldData(fieldsData);
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
     }
 
 }

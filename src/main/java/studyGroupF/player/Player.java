@@ -34,9 +34,9 @@ public class Player {
 
     //When creating a new player, the user is asked for a name
     //Player stats are loaded with the defaults
+
     public Player() {
-        System.out.println("\nWhat's your name?");
-        this.playerName = sc.nextLine();
+
     }
 
     public void addLootToPlayer(Item item, Player player) {
@@ -46,7 +46,7 @@ public class Player {
 
     public void addGoldToPlayer(int goldGiven) {
         int combinedGold = goldGiven + getExtraGoldGain();
-        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " ["+ combinedGold + "] ");
+        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " [" + combinedGold + "] ");
         this.gold = getGold() + goldGiven + getExtraGoldGain();
     }
 
@@ -70,6 +70,11 @@ public class Player {
                 + "\n Current tile: " + currentTile
                 + "\n Amount of potions: " + amountOfPotions
                 + "\n Extra gold gain: " + extraGoldGain;
+    }
+
+    public void changePlayerName() {
+        System.out.println("\nWhat's your name?");
+        this.playerName = sc.nextLine();
     }
 
     public String getPlayerName() {

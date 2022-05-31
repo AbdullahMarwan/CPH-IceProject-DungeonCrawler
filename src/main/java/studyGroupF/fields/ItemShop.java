@@ -6,11 +6,15 @@ import studyGroupF.player.Player;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ItemShop extends Field {
     ArrayList<Item> shopItems = new ArrayList<>();
     private int amountOfShopItems = 3;
+    Random r = new Random();
+    private int amountOfPotionsInShop = r.nextInt((3 - 1) + 1) + 1;
+    private int potionGoldCost = 150;
     private boolean shopInProgress = true;
 
     public ItemShop(Item item, String fieldType, int fieldID) {
@@ -19,6 +23,7 @@ public class ItemShop extends Field {
 
     @Override
     void doFunction(Item item, Player player) throws IOException {
+        potionGoldCost += player.getCurrentLevel() * 50;
         createShopItems(item);
         while (shopInProgress) {
             shopOptions(item, player);
@@ -66,6 +71,26 @@ public class ItemShop extends Field {
         System.out.println("Returning to Shop Options");
     }
 
+    public void buyPotion(Player player) {
+        Scanner sc = new Scanner(System.in);
+
+        if (player.getGold() >= potionGoldCost) {
+            System.out.println("Would you like to buy " + "a Healing Potion" + " for " + potionGoldCost + " ? Y/N");
+            if (sc.nextLine().equalsIgnoreCase("y")) {
+                System.out.println("You have bought a Healing Potion");
+                player.setGold(player.getGold() - potionGoldCost);
+                player.setAmountOfPotions(player.getAmountOfPotions() + 1);
+                amountOfPotionsInShop--;
+            }
+        } else {
+            System.out.println("Not enough gold");
+        }
+
+        System.out.println("Returning to Shop Options");
+    }
+
+
+
 
     public void viewShopItems(Item item, Player player) throws IOException {
         int count = 1;
@@ -73,6 +98,12 @@ public class ItemShop extends Field {
         System.out.println("You have " + player.getGold() + " gold.");
         System.out.println("Select the item you want by Typing it's number: ");
         System.out.println("These are the items currently available in this shop: ");
+
+        System.out.println("Item " + count + " ) \n Cost: " + potionGoldCost +
+                " Gold.\n  Item Name: " + "Healing Potion" + "\n  Item type: " + "Healing " +
+                "\n  Amount of healing potions available in shop: " + amountOfPotionsInShop
+        );
+        count++;
 
         for (Item i : shopItems) {
             System.out.println("Item " + count + " ) \n Cost: " + i.getGoldCost() +
@@ -86,16 +117,21 @@ public class ItemShop extends Field {
 
         switch (choice) {
             case "1" -> {
+                if (amountOfPotionsInShop > 0) {
+                    buyPotion(player);
+                }
+            }
+            case "2" -> {
                 if (shopItems.size() >= 1) {
                     buyItem(shopItems.get(0), player);
                 }
             }
-            case "2" -> {
+            case "3" -> {
                 if (shopItems.size() >= 2) {
                     buyItem(shopItems.get(1), player);
                 }
             }
-            case "3" -> {
+            case "4" -> {
                 if (shopItems.size() >= 3) {
                     buyItem(shopItems.get(2), player);
                 }
