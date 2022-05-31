@@ -1,0 +1,285 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!pragma layout smetana
+
+skinparam backgroundColor gray
+
+class main {
+    + Public Boolean isGameInProgress()
+    + Public Void setGameInProgress(Boolean)
+}
+
+class Player {
+    - String playerName;
+    - int maxHP;
+    - int currentHP;
+    - int damage;
+    - int gold;
+    - int currentLevel;
+    - int currentTile;
+    - int amountOfPotions;
+    - int extraGoldGain;
+    - Storage storage;
+    - Item item;
+    - ArrayList<Item> playerItems;
+
+    + Player();
+    + addGoldToPlayer(int);
+    + addLootToPlayer(Item, Player);
+    + int getAmountOfPotions();
+    + int getCurrentHP();
+    + int getCurrentLevel();
+    + int getCurrentTile();
+    + int getDamage();
+    + int getExtraGoldGain();
+    + int getGold();
+    + int getMaxHp();
+    + ArrayList<Item> getPlayerItems();
+    + String getPlayerName();
+    + setAmountOfPotions(int);
+    + setCurrentHP(int);
+    + setCurrentLevel(int);
+    + setCurrentTile(int);
+    + setDamage(int);
+    + setExtraGoldGain(int);
+    + setGold(int);
+    + setMaxHP(int);
+    + setPlayerItems(ArrayList <Item> playerItems);
+    + setPlayerName(String)
+    + viewStorage();
+}
+
+class Monsters {
+    - int hitPoints;
+    - int damage;
+    - String monsterName;
+
+    + createMonster();
+}
+
+class BattleSystem {
+    + int turnNr;
+    - Monster monster;
+    - Player player;
+
+    + Boolean areAlive();
+    + attack();
+    + int getTurnNr();
+    + heal();
+    + setTurnNr(int);
+}
+
+class GameController{
+    + ArrayList <String)> addItemStorageToData();
+    + ArrayList <String)> addLevelToData();
+    + ArrayList <String)> addPlayerToData();
+    + clearLevelArrayList();
+    + clearPlayerArrayList();
+    + goToNextLevel();
+    + idleOption();
+    + initializeNewLevel();
+    + initializeNewSave();
+    + initializeOldItemStorage();
+    + initializeOldLevel();
+    + initializeOldSave();
+    + initializePreviousPlayerData();
+    + playGame();
+    + saveData();
+    + setUpGame();
+
+    - Player player;
+    - Level level;
+    - FileIO fileIO;
+    - Monster monster;
+    - Storage storage;
+    - Item item;
+    - BattleSystem battleSystem;
+}
+
+class Storage {
+    - Item item;
+
+    + addLootToStorage(ArrayList<Item> playerItems, Item item);
+    + loadPlayerItemFromFileToArrayList();
+    + removeItemFromPlayerItemList();
+}
+
+class Level {
+    - ArrayList<Field> fields;
+
+    + addFieldToArrayList();
+}
+
+class Item {
+    - String itemName;
+    - String itemType;
+    - rarityName;
+    - int rarityValue;
+    - int id;
+    - int goldCost;
+    - boolean inUse;
+
+    + Item createItem();
+    + int getGoldCost();
+    + int getId();
+    + String getItemName();
+    + String[] getItemRarities();
+    + String getItemType();
+    + String[] getItemTypes();
+    + String getRarityName();
+    + int getRarityValue();
+    + boolean isInUse();
+    + String selectRandomItemRarity();
+    + String selectRandomType(int);
+    + SelectGoldCost(int);
+    + String toString();
+    + useItems(ArrayList <Item> playerItems, Player);
+}
+
+class LootChest {
+    - int minGold;
+    - int maxGold;
+
+    + doFunction(Item,Player);
+    + int getMaxGold();
+    + int getMinGold();
+    + setMaxGold(int);
+    + setMinGold(int);
+}
+
+abstract class Field {
+    # String fieldType;
+    # int fieldID;
+    # Item item;
+    # Player player;
+
+    + doFunction(Item,Player);
+    + int getField();
+    + String getFieldType();
+    + setFieldType(String);
+    String toString();
+}
+
+class EmptyField{
+    + doFunction(Item,Player);
+}
+
+class CampFire{
+    + boolean brokenCampFire;
+    + String campFireState;
+    + String campFireIntroduction;
+    + int campFireSalvageGold;
+    + int eatMaxHP;
+    + double restHealAmount;
+    - int min;
+    - int max;
+
+    + campFireOptions(player);
+    + doFunction(Item,Player);
+    + eatOption(Player);
+    + randomizeCampFireState();
+    + restOption(Player);
+    + salvageOption(Player);
+}
+
+class weaponSmith{
+    + WeaponSmith(Item, String, int);
+    - doFunction(Item, Player);
+}
+
+class MonsterBattle {
+    - Monster monster;
+    - BattleSystem battleSystem;
+    - boolean inCombat;
+    - int minGold;
+    - int maxGold;
+    - int battleTurn;
+
+    + MonsterBattle(Item, String, Int)
+    + checkWinner(Player);
+    + combatOptions(Player);
+    + displayHP(Player);
+    + doFunction(Item, Player);
+    + int getMaxGold();
+    + int getMinGold();
+    + boolean isInCombat();
+    + setInCombat(boolean);
+    + setMaxGold(int);
+    + setMinGold(int);
+}
+
+class ItemShop {
+    - ArrayList<Item> shopItems;
+    - int amountOfShopItems;
+    - boolean shopInProgress;
+
+    + ItemShop(Item,String,int);
+    + buyItem(Item,Player);
+    + createShopItems(item);
+    + doFunction(Item, Player);
+    + giveItemCost(Item);
+    + ShopOptions(Item, Player);
+}
+
+class FieldList{
+    - Item item;
+    - int i;
+    - Field[] fields;
+    - boolean itemShop;
+    - boolean weaponSmith;
+
+    + FieldList(int);
+    + FieldList(int[]);
+    + currentField(int);
+    + doFunction(item,Player,int);
+    + Field getFieldByID(int)
+    + Field[] getFields();
+    + int getI();
+    + Field getRandomField();
+    + setFields(Field[]);
+    + setI(int);
+}
+
+interface IO {
+    + boolean isPlayerDataAvailable();
+    + ArrayList <String> readItemData();
+    + ArrayList <String> readLevelData();
+    + ArrayList <String> readMonsterData();
+    + ArrayList <String> readPlayerData();
+    + saveItemToStorageData(ArrayList <String>);
+    + saveLevelData(ArrayList <String>);
+    + savePlayerData(ArrayList <String>);
+}
+
+class FileIO {
+    + File playerDataFile;
+    + File monsterDataFile;
+    + File levelDataFile;
+    + File itemStorageFile;
+    + int amountOfLinesInMonsterDataFile;
+
+    + int getAmountOfLinesInMonsterDataFile();
+}
+
+main *-- GameController
+GameController *-- Player
+GameController *-- Level
+Player *-- Storage
+Storage *-- Item
+Level *-- Field
+Field <|-- EmptyField
+Field <|-- CampFire
+Field <|-- ItemShop
+Field <|-- LootChest
+Field <|-- weaponSmith
+Field <|-- MonsterBattle
+Field <|-- FieldList
+GameController *-- FileIO
+MonsterBattle *-- Monsters
+MonsterBattle *-- BattleSystem
+
+FileIO --|> IO
+Field *-- Item
+
+@enduml

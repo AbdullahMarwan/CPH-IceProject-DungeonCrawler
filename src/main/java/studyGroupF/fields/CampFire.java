@@ -45,11 +45,15 @@ public class CampFire extends Field {
         int healAmount = (int) (player.getMaxHP() * restHealAmount);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
+        //TODO Checks if the healed amount exceeds MaxHP
+        if (player.getCurrentHP() > player.getMaxHP()) {
+            player.setCurrentHP(player.getMaxHP());
+        }
         System.out.println("You have healed for: " + healAmount);
     }
 
     public void salvageOption(Player player) {
-        System.out.println("\nYou salvage the " + campFireState + "Campfire for a total of " + campFireSalvageGold + " Gold");
+        System.out.println("\nYou salvage the " + campFireState + "Campfire for gold");
         player.addGoldToPlayer(campFireSalvageGold);
     }
 
@@ -60,7 +64,7 @@ public class CampFire extends Field {
 
     public void campFireOptions(Player player) {
         System.out.println("\n" + campFireIntroduction);
-        System.out.println("\n You are in Campfire, the following options are: \n" +
+        System.out.println("\nYou are in Campfire, the following options are: \n" +
                 "1: Rest (Heal " + restHealAmount + ")\n" +
                 "2: Eat (Gain " + eatMaxHP + " MaxHP)\n" +
                 "3: Salvage (Gain " + campFireSalvageGold + " Gold)\n" +
@@ -79,7 +83,7 @@ public class CampFire extends Field {
                     eatOption(player);
 
             case "3" ->  //Salvage
-                salvageOption(player);
+                    salvageOption(player);
 
             case "4" -> { //View stats
                 System.out.println("Your stats: ");

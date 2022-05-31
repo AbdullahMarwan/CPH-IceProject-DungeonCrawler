@@ -4,35 +4,39 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class FieldList {
     private Item item;
-    private Field[] fields;
+    private int i;
+    private ArrayList<Field> fields;
     boolean itemShop = false;
     boolean weaponSmith = false;
 
-    public FieldList(int i) {
 
-        Field[] tempFields = new Field[i];
+    public FieldList(int i) { //Loads random amount of random fields
+        this.i = i;
+
+        ArrayList<Field> tempFields = new ArrayList<>();
 
         for (int o = 0; o < i; o++) {
             if (o == 0) {
-                tempFields[o] = getFieldByID(5);
+                tempFields.add(getFieldByID(5));
             } else {
-                tempFields[o] = getRandomField();
+                tempFields.add(getRandomField());
             }
         }
 
         fields = tempFields;
     }
 
-    public FieldList(int[] id) {
-        Field[] tempFields = new Field[id.length];
-        int i = id.length;
+    public FieldList(ArrayList<Integer> id) { //Loads previous fields from ID arraylist
+        ArrayList<Field> tempFields = new ArrayList<>();
+        int i = id.size();
 
         for (int o = 0; o < i; o++) {
-            tempFields[o] = getFieldByID(id[o]);
+            tempFields.add(getFieldByID(id.get(o)));
         }
 
         fields = tempFields;
@@ -52,12 +56,20 @@ public class FieldList {
 
     }
 
+    public ArrayList<Integer> fieldsToIDList(ArrayList<Field> fields) {
+        ArrayList<Integer> allFieldsIDs = new ArrayList<>();
+        for (Field f : fields) {
+            allFieldsIDs.add(f.getFieldID());
+        }
+        return allFieldsIDs;
+    }
+
     public Field currentField(int index) {
-        return fields[index];
+        return fields.get(index);
     }
 
     public void doFunction(Item item, Player player, int index) throws IOException {
-        Field currentField = fields[index];
+        Field currentField = fields.get(index);
 
         currentField.doFunction(item, player);
     }
@@ -85,15 +97,19 @@ public class FieldList {
         return new MonsterBattle(item, "MonsterBattle", 1);
     }
 
-    public Field[] getFields() {
+    public ArrayList<Field> getFields() {
         return fields;
     }
 
-    public void setFields(Field[] fields) {
+    public void setFields(ArrayList<Field> fields) {
         this.fields = fields;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 }

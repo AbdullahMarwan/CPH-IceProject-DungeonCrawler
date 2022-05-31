@@ -1,6 +1,6 @@
-package studyGroupF;
+package studyGroupF.shared;
 
-import studyGroupF.data.FileIO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import studyGroupF.fields.FieldList;
 
 import java.io.IOException;
@@ -11,22 +11,28 @@ import studyGroupF.fields.*;
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
+@JsonIgnoreProperties(value = {"fieldList"})
 public class Level {
-    FileIO fileIO = new FileIO();
-    FieldList fieldList;
-    Field[] fields;
-
+    public FieldList fieldList;
+    public ArrayList<Field> fields;
     public int levelNr = 1;
 
     public Level() {
+        addRandomsFieldsToLevel();
     }
-
 
     public void addRandomsFieldsToLevel() {
         Random r = new Random();
         int i = r.nextInt((15 - 9) + 1) + 9;
 
         fieldList = new FieldList(i);
+
+        fields = fieldList.getFields();
+    }
+
+    public void loadPreviousFieldsToLevel(ArrayList<Integer> fieldIDs) {
+
+        fieldList = new FieldList(fieldIDs);
 
         fields = fieldList.getFields();
     }
@@ -40,10 +46,10 @@ public class Level {
     }
 
     public void printFieldArray(int playerCurrentTile) {
-        StringBuilder allFields = new StringBuilder("Level map: ");
+        StringBuilder allFields = new StringBuilder("LEVEL " + levelNr + " MAP: ");
 
-        for (int i = 0; i < fields.length; i++) {
-            String fieldToString;
+        for (int i = 0; i < fields.size(); i++) {
+            String fieldToString = "";
             if (playerCurrentTile == i) {
                 fieldToString = fieldToString(0);
             } else {
@@ -70,25 +76,8 @@ public class Level {
         };
     }
 
-    public void loadPreviousFieldsToLevel() {
-        ArrayList<String> data;
-        data = fileIO.readLevelData();
-
-        for (String s : data) {
-            //System.out.println(s);
-            String[] values = s.split(", ");
-
-            int[] id = new int[values.length];
-
-            for (int i = 0; i < values.length; i++) {
-                id[i] = Integer.parseInt(values[i]);
-            }
-
-            fieldList = new FieldList(id);
-
-            fields = fieldList.getFields();
-        }
-
+    public ArrayList<Integer> returnFieldsIDs() {
+        return fieldList.fieldsToIDList(fields);
     }
 
     @Override

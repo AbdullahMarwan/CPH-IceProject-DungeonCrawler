@@ -1,8 +1,14 @@
 package studyGroupF.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+@JsonIgnoreProperties(value = {
+        "itemRarities",
+        "itemTypes"
+})
 public class Item {
     private String itemName;
     private String itemType;
@@ -23,7 +29,9 @@ public class Item {
         this.inUse = inUse;
     }
 
+    //Empty constructor used to call methods
     public Item() {
+
     }
 
     public int setItemRarityValue(String rarityName) {
@@ -55,8 +63,8 @@ public class Item {
 
     //Method to perform the chosen items effect
     public void useItems(ArrayList<Item> playerItems, Player player) {
-        int extraGold = 10;
-        int extraMaxHP = 5;
+        int extraGold = 1;
+        int extraMaxHP = 2;
         int extraDMG = 2;
 
         for (Item i : playerItems) {
@@ -87,6 +95,7 @@ public class Item {
         }
     }
 
+    //Created a fully randomized item
     public Item createItem() {
         //Randomly chooses item rarity
         String rarityName = selectRandomItemRarity();
@@ -129,11 +138,12 @@ public class Item {
     }
 
     public String selectRandomItemType(int id) {
+        String itemType = "";
 
         return switch (id) {
-            case 1 -> itemTypes[0];
-            case 2 -> itemTypes[1];
-            case 3 -> itemTypes[2];
+            case 1 -> itemType = itemTypes[0];
+            case 2 -> itemType = itemTypes[1];
+            case 3 -> itemType = itemTypes[2];
             default -> "Broken";
         };
     }

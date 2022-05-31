@@ -13,13 +13,13 @@ public class Player {
     private int currentTile = 0;
     private int amountOfPotions = 3;
     private int extraGoldGain = 1;
-    private final Storage storage = new Storage();
+    private Item item;
 
     private ArrayList<Item> playerItems = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
-    //Constructor used to load previous available player Data
+    //Constructor used to load previous available playerdata
     public Player(String playerName, int maxHP, int currentHP, int damage, int gold, int currentLevel, int currentTile, int amountOfPotions, int extraGoldGain) {
         this.playerName = playerName;
         this.maxHP = maxHP;
@@ -34,19 +34,19 @@ public class Player {
 
     //When creating a new player, the user is asked for a name
     //Player stats are loaded with the defaults
+
     public Player() {
-        System.out.println("\nWhat's your name?");
-        this.playerName = sc.nextLine();
+
     }
 
     public void addLootToPlayer(Item item, Player player) {
-        storage.addLootToStorage(playerItems, item);
+        playerItems.add(item);
         item.useItems(playerItems, player);
     }
 
     public void addGoldToPlayer(int goldGiven) {
         int combinedGold = goldGiven + getExtraGoldGain();
-        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " ["+ combinedGold + "] ");
+        System.out.println("Gold Received: " + goldGiven + " + Extra Gold Gain: " + getExtraGoldGain() + " [" + combinedGold + "] ");
         this.gold = getGold() + goldGiven + getExtraGoldGain();
     }
 
@@ -70,6 +70,11 @@ public class Player {
                 + "\n Current tile: " + currentTile
                 + "\n Amount of potions: " + amountOfPotions
                 + "\n Extra gold gain: " + extraGoldGain;
+    }
+
+    public void changePlayerName() {
+        System.out.println("\nWhat's your name?");
+        this.playerName = sc.nextLine();
     }
 
     public String getPlayerName() {

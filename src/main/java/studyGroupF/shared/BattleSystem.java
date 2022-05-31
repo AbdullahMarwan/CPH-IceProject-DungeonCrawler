@@ -1,4 +1,4 @@
-package studyGroupF;
+package studyGroupF.shared;
 
 import studyGroupF.player.Player;
 
@@ -11,28 +11,26 @@ public class BattleSystem {
         this.monster = monster;
     }
 
-    public void attack() {
-        if(areAlive())
-        {
+    public void attack(boolean isPlayerTheAttacker) {
+        if (isPlayerTheAttacker) {
             monster.setHP(monster.getHP() - player.getDamage());
-            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!\n");
-            if(areAlive())
-            {
+            System.out.println(player.getPlayerName() + " dealt " + player.getDamage() + " to monster!");
+        } else if (!isPlayerTheAttacker) {
             player.setCurrentHP(player.getCurrentHP() - monster.getDamage());
             System.out.println(monster.getMonsterType() + " dealt " + monster.getDamage() + " to " + player.getPlayerName() + "\n");
-            }
         }
+
     }
 
-    public boolean areAlive()
-    {
-        return monster.getHP()>0&&player.getCurrentHP()>0;
-    }
-
-    public void heal() {
+    public void heal() { //TODO Move to player and cap heal to max HP
         int healAmount = (int) (player.getMaxHP() * 0.5);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
+        //TODO Checks if the healed amount exceeds MaxHP
+        if(player.getCurrentHP() > player.getMaxHP()){
+            player.setCurrentHP(player.getMaxHP());
+        }
         System.out.println("You have healed for: " + healAmount);
     }
+
 }
