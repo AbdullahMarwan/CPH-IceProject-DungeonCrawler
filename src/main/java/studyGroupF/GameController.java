@@ -21,6 +21,8 @@ public class GameController {
     Item item;
     BattleSystem battleSystem;
 
+    public boolean gameInProgress = true;
+
     public void setUpGame() {
         Scanner sc = new Scanner(System.in);
         level = new Level();
@@ -159,6 +161,22 @@ public class GameController {
                 System.out.println("Saving game.");
                 saveFullGame();
             }
+            case "6" -> { //Exit Game
+                System.out.println("Would you like to save before quitting? Y/N");
+                String input = scan.nextLine().toLowerCase(Locale.ROOT);
+
+                if (input.equals("y")) { //Saves then Quits
+                    System.out.println("Saving and quitting");
+                    saveFullGame();
+                    gameInProgress = false;
+                } else if (input.equals("n")) { //Quits without saving
+                    System.out.println("Quitting without saving");
+                    gameInProgress = false;
+                } else {
+                    System.out.println("\n---Invalid input, try again---");
+                    idleOptions();
+                }
+            }
 
             default -> {
                 System.out.println("\n---Invalid input, try again---");
@@ -191,4 +209,11 @@ public class GameController {
         this.monster = monster;
     }
 
+    public boolean isGameInProgress() {
+        return gameInProgress;
+    }
+
+    public void setGameInProgress(boolean gameInProgress) {
+        this.gameInProgress = gameInProgress;
+    }
 }

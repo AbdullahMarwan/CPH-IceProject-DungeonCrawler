@@ -3,7 +3,6 @@ package studyGroupF;
 import java.io.IOException;
 
 public class Main {
-    public static boolean gameInProgress = true;
 
     public static void main(String[] args) throws IOException {
         GameController gC = new GameController();
@@ -14,19 +13,13 @@ public class Main {
         gC.setUpGame();
 
         //Starts the game
-        while (gameInProgress){
+        while (gC.isGameInProgress()){
             gC.playGame();
             if (gC.getPlayer().getCurrentHP() <= 0) {
-                gameInProgress = false;
+                System.out.println("Game Over");
+                gC.setGameInProgress(false);
             }
         }
     }
 
-    public static boolean isGameInProgress() {
-        return gameInProgress;
-    }
-
-    public static void setGameInProgress(boolean gameInProgress) {
-        Main.gameInProgress = gameInProgress;
-    }
 }
