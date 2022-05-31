@@ -15,7 +15,6 @@ public class Main {
 
         //Starts the game
         while (gameInProgress){
-            System.out.println("----------------------------------------------------------------------------------------------------");
             gC.playGame();
             if (gC.getPlayer().getCurrentHP() <= 0) {
                 gameInProgress = false;

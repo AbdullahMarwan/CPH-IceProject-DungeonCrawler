@@ -90,25 +90,23 @@ public class ItemShop extends Field {
     }
 
 
-
-
     public void viewShopItems(Item item, Player player) throws IOException {
         int count = 1;
 
-        System.out.println("You have " + player.getGold() + " gold.");
-        System.out.println("Select the item you want by Typing it's number: ");
-        System.out.println("These are the items currently available in this shop: ");
+        System.out.println("You have " + player.getGold() + " gold.\n");
+        System.out.println("Select the item you want by Typing it's number. ");
+        System.out.println("These are the items currently available in this shop:\n ");
 
         System.out.println("Item " + count + " ) \n Cost: " + potionGoldCost +
                 " Gold.\n  Item Name: " + "Healing Potion" + "\n  Item type: " + "Healing " +
                 "\n  Amount of healing potions available in shop: " + amountOfPotionsInShop
-        );
+                + "\n");
         count++;
 
         for (Item i : shopItems) {
             System.out.println("Item " + count + " ) \n Cost: " + i.getGoldCost() +
                     " Gold.\n  Item Name: " + i.getItemName() + "\n  Item type: " + i.getItemType()
-            );
+                    + "\n");
             count++;
         }
 

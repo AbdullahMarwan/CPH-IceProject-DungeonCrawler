@@ -56,6 +56,7 @@ public class GameController {
     }
 
     public void playGame() throws IOException {
+        System.out.println("----------------------------------------------------------------------------------------------------");
         level.printFieldArray(getPlayer().getCurrentTile());
 
         Field currentField = level.getCurrentField(getPlayer().getCurrentTile());
@@ -109,7 +110,8 @@ public class GameController {
                 "2: View Item Storage\n" +
                 "3: View player stats\n" +
                 "4: View Map Icons\n" +
-                "5: Save game\n"
+                "5: Save game\n" +
+                "6: Exit game\n"
         );
 
         Scanner scan = new Scanner(System.in);
@@ -121,6 +123,8 @@ public class GameController {
                 if (level.fields.size() < getPlayer().getCurrentTile() + 2) {
                     goToNextLevel();
                 } else {
+                    System.out.println("----------------------------------------------------------------------------------------------------");
+
                     System.out.println("Moving to next field: ");
                     getPlayer().setCurrentTile(getPlayer().getCurrentTile() + 1);
 

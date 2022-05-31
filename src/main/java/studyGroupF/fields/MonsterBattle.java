@@ -61,7 +61,7 @@ public class MonsterBattle extends Field {
             Random r = new Random();
             int randomGoldAmount = r.nextInt((maxGold - minGold) + 1) + minGold;
 
-            System.out.println("You have received " + randomGoldAmount + " gold!");
+            //System.out.println("You have received " + randomGoldAmount + " gold!");
             player.addGoldToPlayer(randomGoldAmount);
         }
 
@@ -73,7 +73,7 @@ public class MonsterBattle extends Field {
     }
 
     public void combatOptions(Player player) {
-        System.out.println("\n You are in Combat, the following options are: \n" +
+        System.out.println("\nYou are in Combat, the following options are: \n" +
                 "1: Attack monster\n" +
                 "2: Heal up (" + player.getAmountOfPotions() + " potions)\n" +
                 "3: View player stats\n"
