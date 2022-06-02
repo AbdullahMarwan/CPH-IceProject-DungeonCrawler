@@ -120,30 +120,30 @@ public class Item {
         Random r = new Random();
         int randomNr = r.nextInt((100 - 1) + 1) + 1;
 
-        String rarityName = "";
+        String rarityName;
 
-        if (randomNr >= 1 && randomNr <= 40) { //Common
+        if (randomNr <= 40) { //Common
             rarityName = itemRarities[0];
-        } else if (randomNr >= 41 && randomNr <= 65) { //Uncommon
+        } else if (randomNr <= 65) { //Uncommon
             rarityName = itemRarities[1];
-        } else if (randomNr >= 66 && randomNr <= 85) { //Rare
+        } else if (randomNr <= 85) { //Rare
             rarityName = itemRarities[2];
-        } else if (randomNr >= 86 && randomNr <= 95) { //Epic
+        } else if (randomNr <= 95) { //Epic
             rarityName = itemRarities[3];
-        } else if (randomNr >= 96 && randomNr <= 100) { //Legendary
+        } else
+        { //Legendary
             rarityName = itemRarities[4];
         }
 
         return rarityName;
     }
 
-    public String selectRandomItemType(int id) {
-        String itemType = "";
-
+    public String selectRandomItemType(int id)
+    {
         return switch (id) {
-            case 1 -> itemType = itemTypes[0];
-            case 2 -> itemType = itemTypes[1];
-            case 3 -> itemType = itemTypes[2];
+            case 1 -> itemTypes[0];
+            case 2 -> itemTypes[1];
+            case 3 -> itemTypes[2];
             default -> "Broken";
         };
     }
