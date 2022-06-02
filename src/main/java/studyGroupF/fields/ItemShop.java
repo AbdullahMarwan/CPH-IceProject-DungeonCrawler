@@ -4,14 +4,13 @@ import studyGroupF.player.Item;
 import studyGroupF.player.Player;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class ItemShop extends Field {
     ArrayList<Item> shopItems = new ArrayList<>();
-    private int amountOfShopItems = 3;
+    private final int amountOfShopItems = 3;
     Random r = new Random();
     private int amountOfPotionsInShop = r.nextInt((3 - 1) + 1) + 1;
     private int potionGoldCost = 150;
@@ -139,11 +138,14 @@ public class ItemShop extends Field {
     }
 
     public void shopOptions(Item item, Player player) throws IOException {
-        System.out.println("\nYou are in the Item Shop, the following options are: \n" +
-                "1: View items in shop\n" +
-                "2: View Player item Storage\n" +
-                "3: View player stats\n" +
-                "4: Exit the shop\n"
+        System.out.println("""
+
+                You are in the Item Shop, the following options are:\s
+                1: View items in shop
+                2: View Player item Storage
+                3: View player stats
+                4: Exit the shop
+                """
         );
 
         Scanner scan = new Scanner(System.in);
