@@ -34,13 +34,11 @@ public class Item {
 
     }
 
-    public Item matchNewItemProperties(Item item, int rarityValue) {
+    public void matchNewItemProperties(Item item, int rarityValue) {
 
         item.setRarityValue(rarityValue);
         item.setRarityName(getRarityName(rarityValue));
         item.setItemName(item.getRarityName() + " " + item.getItemType());
-
-        return item;
     }
 
 
