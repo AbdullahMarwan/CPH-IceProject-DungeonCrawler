@@ -12,8 +12,8 @@ public class Main {
         //Sets up game
         gC.setUpGame();
 
-        //Starts the game
-        while (gC.isGameInProgress()){
+        //Keeps running the game until either player dies, or player quits the game
+        while (gC.isGameInProgress()) {
             gC.playGame();
             if (gC.getPlayer().getCurrentHP() <= 0) {
                 System.out.println("Game Over");

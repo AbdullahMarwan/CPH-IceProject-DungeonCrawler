@@ -34,6 +34,27 @@ public class Item {
 
     }
 
+    public Item matchNewItemProperties(Item item, int rarityValue) {
+
+        item.setRarityValue(rarityValue);
+        item.setRarityName(getRarityName(rarityValue));
+        item.setItemName(item.getRarityName() + " " + item.getItemType());
+
+        return item;
+    }
+
+
+    public String getRarityName(int rarityValue) {
+        return switch (rarityValue) {
+            case 2 -> "Common";
+            case 3 -> "Uncommon";
+            case 4 -> "Rare";
+            case 5 -> "Epic";
+            case 6 -> "Legendary";
+            default -> throw new IllegalStateException("Unexpected value: " + rarityValue);
+        };
+    }
+
     public int setItemRarityValue(String rarityName) {
         int commonRarity = 2;
         int uncommonRarity = 3;
@@ -130,16 +151,14 @@ public class Item {
             rarityName = itemRarities[2];
         } else if (randomNr <= 95) { //Epic
             rarityName = itemRarities[3];
-        } else
-        { //Legendary
+        } else { //Legendary
             rarityName = itemRarities[4];
         }
 
         return rarityName;
     }
 
-    public String selectRandomItemType(int id)
-    {
+    public String selectRandomItemType(int id) {
         return switch (id) {
             case 1 -> itemTypes[0];
             case 2 -> itemTypes[1];

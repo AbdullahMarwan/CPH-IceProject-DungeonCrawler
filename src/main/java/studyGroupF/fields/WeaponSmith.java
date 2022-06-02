@@ -16,47 +16,44 @@ public class WeaponSmith extends Field {
         System.out.println("Would you like to upgrade your equipment? [Y] / [N] \n");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        if(input.equalsIgnoreCase("y"))
-        {
+        if (input.equalsIgnoreCase("y")) {
             player.getPlayerItems().get(0);
-        }
-        else if(input.equalsIgnoreCase("n"))
-        {
+        } else if (input.equalsIgnoreCase("n")) {
             System.out.println("You walk away from the weaponsmith...");
-        }
-        else
-        {
+        } else {
             System.out.println("\n---Invalid input, try again!---");
             doFunction(item, player);
         }
     }
-    void printItemsByType(int id, Player player)
-    {
-        int commonAmount=0;
-        int uncommonAmount=0;
-        int rareAmount=0;
-        int epicAmount=0;
-        int legendaryAmount=0;
 
-        for (Item item: player.getPlayerItems()) {
-            if(item.getId()==id)
-            {
-                switch(item.getRarityValue())
-                {
-                    case 2-> commonAmount++;
-                    case 3-> uncommonAmount++;
-                    case 4-> rareAmount++;
-                    case 5-> epicAmount++;
-                    case 6-> legendaryAmount++;
+    void printItemsByType(int id, Player player) {
+        int commonAmount = 0;
+        int uncommonAmount = 0;
+        int rareAmount = 0;
+        int epicAmount = 0;
+        int legendaryAmount = 0;
+
+        int newRarityValue = 0;
+
+        for (Item item : player.getPlayerItems()) {
+            if (item.getId() == id) {
+                switch (item.getRarityValue()) {
+                    case 2 -> commonAmount++;
+                    case 3 -> uncommonAmount++;
+                    case 4 -> rareAmount++;
+                    case 5 -> epicAmount++;
+                    case 6 -> legendaryAmount++;
                 }
             }
+            item.matchNewItemProperties(item, newRarityValue);
         }
         System.out.println("""
-               Amount of commons: """+commonAmount+"""
-               Amount of uncommons: """+uncommonAmount+"""
-               Amount of rares: """+rareAmount+"""
-               Amount of epics: """+epicAmount+"""
-               Amount of legendaries: """+legendaryAmount
-                );
+                Amount of commons: """ + commonAmount + """
+                Amount of uncommons: """ + uncommonAmount + """
+                Amount of rares: """ + rareAmount + """
+                Amount of epics: """ + epicAmount + """
+                Amount of legendaries: """ + legendaryAmount
+        );
+
     }
 }

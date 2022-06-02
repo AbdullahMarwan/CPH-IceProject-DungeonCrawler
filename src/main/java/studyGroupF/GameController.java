@@ -23,7 +23,7 @@ public class GameController {
 
     public boolean gameInProgress = true;
 
-    public void setUpGame() {
+    public void setUpGame() { //Gives the player option to start a new save or load the old one
         Scanner sc = new Scanner(System.in);
         level = new Level();
         item = new Item();
