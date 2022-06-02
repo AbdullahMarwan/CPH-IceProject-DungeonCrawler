@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class WeaponSmith extends Field {
     boolean weaponSmithInProgress = true;
+    int goldCost = 0;
 
     public WeaponSmith(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
@@ -38,10 +39,10 @@ public class WeaponSmith extends Field {
             }
         }
         System.out.println("""
-                Amount of commons: """ + commonAmount + """
-                Amount of uncommons: """ + uncommonAmount + """
-                Amount of rares: """ + rareAmount + """
-                Amount of epics: """ + epicAmount + """
+                Amount of commons: """ + commonAmount + "(Cost: "+ accumulativeItemUpgradePrice(commonAmount, 2)+ ")"+ """
+                Amount of uncommons: """ + uncommonAmount + "(Cost: "+ accumulativeItemUpgradePrice(uncommonAmount, 3)+ ")"+ """
+                Amount of rares: """ + rareAmount + "(Cost: "+ accumulativeItemUpgradePrice(rareAmount, 4)+ ")"+ """
+                Amount of epics: """ + epicAmount + "(Cost: "+ accumulativeItemUpgradePrice(epicAmount, 5)+ ")"+ """
                 Amount of legendaries: """ + legendaryAmount
         );
 
@@ -50,8 +51,8 @@ public class WeaponSmith extends Field {
     void weaponSmithOptions(Item item, Player player) {
         System.out.println("""
 
-                You are in the Item Shop, the following options are:\s
-                1: View items in shop
+                You are at the weaponsmith, the following options are:
+                1: Choose an equipment type to upgrade
                 2: View Player item Storage
                 3: View player stats
                 4: Exit the shop
@@ -87,33 +88,49 @@ public class WeaponSmith extends Field {
         }
     }
 
-    void viewEquipmentOptions(Item item, Player player)
-    {
+    void viewEquipmentOptions(Item item, Player player) {
         System.out.println("""
-                    Which item type would you like to upgrade?
-                    1. - Extra Gold
-                    2. - Extra Damage
-                    3. - Extra HP
-                    
-                    4. - View previous options
-                                        
-                    """);
+                Which item type would you like to upgrade?
+                1. - Extra Gold
+                2. - Extra Damage
+                3. - Extra HP
+                                    
+                4. - View previous options
+                                    
+                """);
         Scanner sc = new Scanner(System.in);
         int inputInt = sc.nextInt();
         if (inputInt >= 1 && inputInt <= 3) {
             printItemsByType(inputInt, player);
-        }
-        else if(inputInt==4)
-        {
+            upgradeItemsByRarity(player);
+        } else if (inputInt == 4) {
             weaponSmithOptions(item, player);
-        }
-        else {
+        } else {
             System.out.println("\n---Invalid input, try again!---");
             viewEquipmentOptions(item, player);
         }
     }
 
-    void upgradeItemsByRarity(Player player, int desiredItemRarity) {
+    int accumulativeItemUpgradePrice(int itemAmount, int rarityValue) { //Calculates cost based on rarity and quantity of items
+        return (int) (itemAmount*rarityCost(rarityValue)*Math.pow(0.95, itemAmount-1));
+    }
+
+    public int rarityCost(int rarityValue) {
+        return switch (rarityValue) { //2 = upgrade common to uncommon, 3 = uncommon to rare, etc.
+            case 2 -> 150;
+            case 3 -> 225;
+            case 4 -> 375;
+            case 5 -> 600;
+            default -> 0;
+        };
+    }
+
+    void upgradeItemsByRarity(Player player) {
+        System.out.println("""
+                                
+                """);
+        Scanner sc = new Scanner(System.in);
+        int desiredItemRarity = 0;
         for (Item item : player.getPlayerItems()) {
             if (item.getRarityValue() == desiredItemRarity) {
                 item.matchNewItemProperties(item, item.getRarityValue() + 1);
