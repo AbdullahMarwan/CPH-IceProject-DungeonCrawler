@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class WeaponSmith extends Field {
     boolean weaponSmithInProgress = true;
+    int commonAmount = 0;
+    int uncommonAmount = 0;
+    int rareAmount = 0;
+    int epicAmount = 0;
+    int legendaryAmount = 0;
     int goldCost = 0;
 
     public WeaponSmith(Item item, String fieldType, int fieldID) {
@@ -21,12 +26,13 @@ public class WeaponSmith extends Field {
         }
     }
 
-    void printItemsByType(int id, Player player) {
-        int commonAmount = 0;
-        int uncommonAmount = 0;
-        int rareAmount = 0;
-        int epicAmount = 0;
-        int legendaryAmount = 0;
+    void countRarities(int id, Player player) {
+        commonAmount = 0;
+        uncommonAmount = 0;
+        rareAmount = 0;
+        epicAmount = 0;
+        legendaryAmount = 0;
+
         for (Item item : player.getPlayerItems()) {
             if (item.getId() == id) {
                 switch (item.getRarityValue()) {
@@ -39,13 +45,23 @@ public class WeaponSmith extends Field {
             }
         }
         System.out.println("""
-                Amount of commons: """ + commonAmount + "(Cost: "+ accumulativeItemUpgradePrice(commonAmount, 2)+ ")"+ """
-                Amount of uncommons: """ + uncommonAmount + "(Cost: "+ accumulativeItemUpgradePrice(uncommonAmount, 3)+ ")"+ """
-                Amount of rares: """ + rareAmount + "(Cost: "+ accumulativeItemUpgradePrice(rareAmount, 4)+ ")"+ """
-                Amount of epics: """ + epicAmount + "(Cost: "+ accumulativeItemUpgradePrice(epicAmount, 5)+ ")"+ """
+                Amount of commons: """ + commonAmount + "(Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")" + """
+                Amount of uncommons: """ + uncommonAmount + "(Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")" + """
+                Amount of rares: """ + rareAmount + "(Cost: " + accumulativeItemUpgradePrice(rareAmount, 4) + ")" + """
+                Amount of epics: """ + epicAmount + "(Cost: " + accumulativeItemUpgradePrice(epicAmount, 5) + ")" + """
                 Amount of legendaries: """ + legendaryAmount
         );
 
+    }
+
+    int returnSpecificRarityAmount(int rarityValue) {
+        return switch (rarityValue) {
+            case 2 -> commonAmount;
+            case 3 -> uncommonAmount;
+            case 4 -> rareAmount;
+            case 5 -> epicAmount;
+            default -> 0;
+        };
     }
 
     void weaponSmithOptions(Item item, Player player) {
@@ -101,8 +117,8 @@ public class WeaponSmith extends Field {
         Scanner sc = new Scanner(System.in);
         int inputInt = sc.nextInt();
         if (inputInt >= 1 && inputInt <= 3) {
-            printItemsByType(inputInt, player);
-            upgradeItemsByRarity(player);
+            countRarities(inputInt, player);
+            upgradeItemsByRarity(player, inputInt);
         } else if (inputInt == 4) {
             weaponSmithOptions(item, player);
         } else {
@@ -112,7 +128,7 @@ public class WeaponSmith extends Field {
     }
 
     int accumulativeItemUpgradePrice(int itemAmount, int rarityValue) { //Calculates cost based on rarity and quantity of items
-        return (int) (itemAmount*rarityCost(rarityValue)*Math.pow(0.95, itemAmount-1));
+        return (int) (itemAmount * rarityCost(rarityValue) * Math.pow(0.95, itemAmount - 1));
     }
 
     public int rarityCost(int rarityValue) {
@@ -125,16 +141,55 @@ public class WeaponSmith extends Field {
         };
     }
 
-    void upgradeItemsByRarity(Player player) {
+    void upgradeItemsByRarity(Player player, int id) {
         System.out.println("""
+                Which rarity would you like to upgrade?
+                1. - Common -> Uncommon
+                2. - Uncommon -> Rare
+                3. - Rare -> Epic
+                4. - Epic -> Legendary
                                 
+                5. - View previous options
                 """);
         Scanner sc = new Scanner(System.in);
-        int desiredItemRarity = 0;
-        for (Item item : player.getPlayerItems()) {
-            if (item.getRarityValue() == desiredItemRarity) {
-                item.matchNewItemProperties(item, item.getRarityValue() + 1);
+        int desiredItemRarity = sc.nextInt() + 1;
+
+        int inputInt = sc.nextInt();
+        if (inputInt >= 1 && inputInt <= 4) {
+            if (hasRarity(returnSpecificRarityAmount(desiredItemRarity))) {
+                if (player.getGold() >= accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity)) {
+                    for (Item item : player.getPlayerItems()) {
+                        if (item.getRarityValue() == desiredItemRarity && item.getId() == id) {
+                            item.matchNewItemProperties(item, item.getRarityValue() + 1);
+                        }
+                    }
+
+                    player.setGold(player.getGold() - accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity));
+
+                } else {
+                    System.out.println("Not enough money!");
+                    upgradeItemsByRarity(player, id);
+                }
+            } else {
+                System.out.println("You don't have any equipment of that rarity.");
+                upgradeItemsByRarity(player, id);
             }
+        } else if (inputInt == 5) {
+            weaponSmithOptions(item, player);
+
+        } else {
+            System.out.println("\n---Invalid input, try again!---");
+            upgradeItemsByRarity(player, id);
         }
+    }
+
+    boolean hasRarity(int rarityAmount) {
+        boolean hasRarity = false;
+
+        if (rarityAmount > 0) {
+            hasRarity = true;
+        }
+
+        return hasRarity;
     }
 }
