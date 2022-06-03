@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"studyGroupF"},{"l":"studyGroupF.data"},{"l":"studyGroupF.fields"},{"l":"studyGroupF.player"},{"l":"studyGroupF.shared"}];updateSearchResults();
