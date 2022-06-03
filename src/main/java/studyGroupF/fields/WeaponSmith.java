@@ -2,8 +2,6 @@ package studyGroupF.fields;
 
 import studyGroupF.player.Item;
 import studyGroupF.player.Player;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WeaponSmith extends Field {
@@ -13,7 +11,6 @@ public class WeaponSmith extends Field {
     int rareAmount = 0;
     int epicAmount = 0;
     int legendaryAmount = 0;
-    int goldCost = 0;
 
     public WeaponSmith(Item item, String fieldType, int fieldID) {
         super(item, fieldType, fieldID);
@@ -45,10 +42,10 @@ public class WeaponSmith extends Field {
             }
         }
         System.out.println(
-                "\nAmount of commons: " + commonAmount + "(Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")" +
-                "\nAmount of uncommons: " + uncommonAmount + "(Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")" +
-                "\nAmount of rares: " + rareAmount + "(Cost: " + accumulativeItemUpgradePrice(rareAmount, 4) + ")" +
-                "\nAmount of epics: " + epicAmount + "(Cost: " + accumulativeItemUpgradePrice(epicAmount, 5) + ")" +
+                "\nAmount of commons: " + commonAmount +
+                "\nAmount of uncommons: " + uncommonAmount +
+                "\nAmount of rares: " + rareAmount +
+                "\nAmount of epics: " + epicAmount +
                 "\nAmount of legendaries:" + legendaryAmount
         );
 
@@ -68,10 +65,11 @@ public class WeaponSmith extends Field {
         System.out.println("""
 
                 You are at the weaponsmith, the following options are:
-                1: Choose an equipment type to upgrade
-                2: View Player item Storage
-                3: View player stats
-                4: Exit the shop
+                    1: Choose an equipment type to upgrade
+                    2: View Player item Storage
+                    3: View player stats
+                    
+                    4: Exit the shop
                 """
         );
 
@@ -107,11 +105,11 @@ public class WeaponSmith extends Field {
     void viewEquipmentOptions(Item item, Player player) {
         System.out.println("""
                 Which item type would you like to upgrade?
-                1. - Extra Gold
-                2. - Extra Damage
-                3. - Extra HP
+                    1. - Extra Gold
+                    2. - Extra Damage
+                    3. - Extra HP
                                     
-                4. - View previous options
+                    4. - View previous options
                                     
                 """);
         Scanner sc = new Scanner(System.in);
@@ -142,19 +140,16 @@ public class WeaponSmith extends Field {
     }
 
     void upgradeItemsByRarity(Player player, int id) {
-        System.out.println("""
-                Which rarity would you like to upgrade?
-                1. - Common -> Uncommon
-                2. - Uncommon -> Rare
-                3. - Rare -> Epic
-                4. - Epic -> Legendary
-                                
-                5. - View previous options
-                """);
+        System.out.println(
+                "\nWhich rarity would you like to upgrade?\n " +
+                        "\t1. - Common -> Uncommon" + " (Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")\n"+
+                        "\t2. - Uncommon -> Rare" +  " (Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")\n"+
+                        "\t3. - Rare -> Epic" + " (Cost: " + accumulativeItemUpgradePrice(rareAmount, 4) + ")\n"+
+                        "\t4. - Epic -> Legendary" + " (Cost: " + accumulativeItemUpgradePrice(epicAmount, 5) + ")\n"+
+                        "\t5. - View previous options\n");
         Scanner sc = new Scanner(System.in);
-        int desiredItemRarity = sc.nextInt() + 1;
-
         int inputInt = sc.nextInt();
+        int desiredItemRarity = inputInt+1;
         if (inputInt >= 1 && inputInt <= 4) {
             if (hasRarity(returnSpecificRarityAmount(desiredItemRarity))) {
                 if (player.getGold() >= accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity)) {
@@ -163,9 +158,10 @@ public class WeaponSmith extends Field {
                             item.matchNewItemProperties(item, item.getRarityValue() + 1);
                         }
                     }
-
-                    player.setGold(player.getGold() - accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity));
-
+                    int goldSpent=accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity);
+                    int goldRemaining=player.getGold() - goldSpent;
+                    player.setGold(goldRemaining);
+                    System.out.println("You used "+goldSpent+" gold! (Remaining gold: "+goldRemaining+")");
                 } else {
                     System.out.println("Not enough money!");
                     upgradeItemsByRarity(player, id);
@@ -183,13 +179,8 @@ public class WeaponSmith extends Field {
         }
     }
 
-    boolean hasRarity(int rarityAmount) {
-        boolean hasRarity = false;
-
-        if (rarityAmount > 0) {
-            hasRarity = true;
-        }
-
-        return hasRarity;
+    boolean hasRarity(int rarityAmount)
+    {
+        return rarityAmount>0;
     }
 }
