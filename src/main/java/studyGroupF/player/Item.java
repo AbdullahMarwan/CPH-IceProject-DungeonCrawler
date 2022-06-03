@@ -83,7 +83,7 @@ public class Item {
     //Method to perform the chosen items effect
     public void useItems(ArrayList<Item> playerItems, Player player) {
         int extraGold = 1;
-        int extraMaxHP = 2;
+        int extraMaxHP = 5;
         int extraDMG = 2;
 
         for (Item i : playerItems) {
