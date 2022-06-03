@@ -44,12 +44,12 @@ public class WeaponSmith extends Field {
                 }
             }
         }
-        System.out.println("""
-                Amount of commons: """ + commonAmount + "(Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")" + """
-                Amount of uncommons: """ + uncommonAmount + "(Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")" + """
-                Amount of rares: """ + rareAmount + "(Cost: " + accumulativeItemUpgradePrice(rareAmount, 4) + ")" + """
-                Amount of epics: """ + epicAmount + "(Cost: " + accumulativeItemUpgradePrice(epicAmount, 5) + ")" + """
-                Amount of legendaries: """ + legendaryAmount
+        System.out.println(
+                "\nAmount of commons: " + commonAmount + "(Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")" +
+                "\nAmount of uncommons: " + uncommonAmount + "(Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")" +
+                "\nAmount of rares: " + rareAmount + "(Cost: " + accumulativeItemUpgradePrice(rareAmount, 4) + ")" +
+                "\nAmount of epics: " + epicAmount + "(Cost: " + accumulativeItemUpgradePrice(epicAmount, 5) + ")" +
+                "\nAmount of legendaries:" + legendaryAmount
         );
 
     }
