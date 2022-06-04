@@ -231,11 +231,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item name: " + itemName
-                + "\n  Item type: " + itemType
-                + "\n  Rarity name: " + rarityName
-                + "\n  Rarity value: " + rarityValue
-                + "\n  ID: " + id
-                + "\n  Active? " + inUse;
+        return "Item name: " + itemName;
     }
 }

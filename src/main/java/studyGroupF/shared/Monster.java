@@ -58,8 +58,6 @@ public class Monster {
         return Math.pow(1.5, levelNr - 1);
     }
 
-    //TODO method for setting up BossFights, where the chosen MonsterType becomes a Boss with 3-5x the stats of a normal minion of its typ
-
     public int getHP() {
         return HP;
     }
