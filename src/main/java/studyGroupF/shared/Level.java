@@ -16,6 +16,8 @@ public class Level {
     public FieldList fieldList;
     public ArrayList<Field> fields;
     public int levelNr = 1;
+    private int maxFields = 15;
+    private int minFields = 9;
 
     public Level() {
         addRandomsFieldsToLevel();
@@ -23,7 +25,7 @@ public class Level {
 
     public void addRandomsFieldsToLevel() {
         Random r = new Random();
-        int i = r.nextInt((15 - 9) + 1) + 9;
+        int i = r.nextInt((maxFields - minFields) + 1) + minFields;
 
         fieldList = new FieldList(i);
 

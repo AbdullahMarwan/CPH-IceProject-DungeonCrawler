@@ -84,7 +84,6 @@ public class GameController {
     public void initializeLevel(SaveState saveState) {
 
         switch (saveState) {
-
             case OLD_SAVE -> {
                 level.loadPreviousFieldsToLevel(getFields());
             }
