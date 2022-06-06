@@ -123,7 +123,10 @@ public class ItemShop extends Field {
                     buyItem(shopItems.get(2), player);
                 }
             }
-            default -> shopOptions(item, player);
+            default -> {
+                System.out.println("\n---Invalid input, returning to shop options-");
+                shopOptions(item, player);
+            }
         }
     }
 
