@@ -9,19 +9,19 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ItemShop extends Field {
-    ArrayList<Item> shopItems = new ArrayList<>();
+    private ArrayList<Item> shopItems = new ArrayList<>();
     private final int amountOfShopItems = 3;
-    Random r = new Random();
+    private Random r = new Random();
     private int amountOfPotionsInShop = r.nextInt((3 - 1) + 1) + 1;
     private int potionGoldCost = 150;
     private boolean shopInProgress = true;
 
-    public ItemShop(Item item, String fieldType, int fieldID) {
+    public ItemShop(Item item, String fieldType, int fieldID) { //FieldList
         super(item, fieldType, fieldID);
     }
 
     @Override
-    void doFunction(Item item, Player player) throws IOException {
+    void doFunction(Item item, Player player) throws IOException { //Called one time when first landing on the function on each floor
         potionGoldCost += player.getCurrentLevel() * 50;
         createShopItems(item);
         while (shopInProgress) {
@@ -29,18 +29,15 @@ public class ItemShop extends Field {
         }
     }
 
-    public void createShopItems(Item item) {
+    public void createShopItems(Item item) { //Creates three random items (3 items only because of amountOfShopItems is set to 3)
         for (int i = 0; i < amountOfShopItems; i++) {
             item = item.createItem();
-
             item.setGoldCost(giveItemCost(item));
-
             shopItems.add(item);
         }
     }
 
-    public int giveItemCost(Item item) {
-
+    public int giveItemCost(Item item) { //Used in createShopItem based on the rarity of the item created
         return switch (item.getRarityName()) {
             case "Common" -> 50;
             case "Uncommon" -> 75;
@@ -49,13 +46,11 @@ public class ItemShop extends Field {
             case "Legendary" -> 325;
             default -> 0;
         };
-
     }
 
-    public void buyItem(Item item, Player player) {
+    public void buyItem(Item item, Player player) { // buy item method, removes the item bought afterwards
         Scanner sc = new Scanner(System.in);
-
-        if (player.getGold() >= item.getGoldCost()) {
+        if (player.getGold() >= item.getGoldCost()) { //Checks if player has enough gold to buy the item
             System.out.println("Would you like to buy " + item.getItemName() + " for " + item.getGoldCost() + " ? Y/N");
             if (sc.nextLine().equalsIgnoreCase("y")) {
                 System.out.println("You have bought " + item.getItemName());
@@ -66,13 +61,11 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-
         System.out.println("Returning to Shop Options");
     }
 
-    public void buyPotion(Player player) {
+    public void buyPotion(Player player) { // buy potion method, checks the price altered in doFunction. Similar to buyItem
         Scanner sc = new Scanner(System.in);
-
         if (player.getGold() >= potionGoldCost) {
             System.out.println("Would you like to buy " + "a Healing Potion" + " for " + potionGoldCost + " ? Y/N");
             if (sc.nextLine().equalsIgnoreCase("y")) {
@@ -84,12 +77,10 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-
         System.out.println("Returning to Shop Options");
     }
 
-
-    public void viewShopItems(Item item, Player player) throws IOException {
+    public void viewShopItems(Item item, Player player) throws IOException { // viewShopItems used in first shop options case
         int count = 1;
 
         System.out.println("You have " + player.getGold() + " gold.\n");
@@ -102,7 +93,7 @@ public class ItemShop extends Field {
                 + "\n");
         count++;
 
-        for (Item i : shopItems) {
+        for (Item i : shopItems) { // Prints out all items in the shop
             System.out.println("Item " + count + " ) \n Cost: " + i.getGoldCost() +
                     " Gold.\n  Item Name: " + i.getItemName() + "\n  Item type: " + i.getItemType()
                     + "\n");
@@ -111,7 +102,6 @@ public class ItemShop extends Field {
 
         Scanner scan = new Scanner(System.in);
         String choice = scan.nextLine();
-
         switch (choice) {
             case "1" -> {
                 if (amountOfPotionsInShop > 0) {
@@ -152,7 +142,6 @@ public class ItemShop extends Field {
         String choice = scan.nextLine();
 
         switch (choice) {
-
             case "1" -> { //View items in shop
                 System.out.println("-----Viewing items in shop-----");
                 viewShopItems(item, player);
@@ -169,12 +158,10 @@ public class ItemShop extends Field {
                 System.out.println("Exiting shop ");
                 shopInProgress = false;
             }
-
             default -> {
                 System.out.println("\n---Invalid input, try again---");
                 shopOptions(item, player);
             }
         }
     }
-
 }
