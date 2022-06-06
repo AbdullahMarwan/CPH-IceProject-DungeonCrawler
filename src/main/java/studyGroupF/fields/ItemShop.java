@@ -61,7 +61,7 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-        System.out.println("Returning to Shop Options");
+        System.out.println("---Returning to Shop Options---");
     }
 
     public void buyPotion(Player player) { // buy potion method, checks the price altered in doFunction. Similar to buyItem
@@ -77,7 +77,7 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-        System.out.println("Returning to Shop Options");
+        System.out.println("---Returning to Shop Options---");
     }
 
     public void viewShopItems(Item item, Player player) throws IOException { // viewShopItems used in first shop options case
@@ -124,7 +124,7 @@ public class ItemShop extends Field {
                 }
             }
             default -> {
-                System.out.println("\n---Invalid input, returning to shop options-");
+                System.out.println("\n---Invalid input, returning to shop options---");
                 shopOptions(item, player);
             }
         }
