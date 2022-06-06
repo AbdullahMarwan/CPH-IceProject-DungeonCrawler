@@ -56,7 +56,7 @@ public class FieldList {
 
     }
 
-    public ArrayList<Integer> fieldsToIDList(ArrayList<Field> fields) {
+    public ArrayList<Integer> fieldsToIDList(ArrayList<Field> fields) { //Return list of IDs from each field. Used to save the fields in GameData
         ArrayList<Integer> allFieldsIDs = new ArrayList<>();
         for (Field f : fields) {
             allFieldsIDs.add(f.getFieldID());
@@ -78,11 +78,11 @@ public class FieldList {
         Random r = new Random();
         int randomField = r.nextInt((130 - 1) + 1) + 1;
 
-        if (randomField >= 1 && randomField <= 40) { //MonsterBattle
+        if (randomField <= 40) { //MonsterBattle
             return new MonsterBattle(item, "MonsterBattle", 1);
-        } else if (randomField >= 41 && randomField <= 65) { //LootChest
+        } else if (randomField <= 65) { //LootChest
             return new LootChest(item, "LootChest", 2);
-        } else if (randomField >= 66 && randomField <= 85 && !itemShop) { //ItemShop
+        } else if (randomField <= 85 && !itemShop) { //ItemShop
             itemShop = true;
             return new ItemShop(item, "ItemShop", 3);
         } else if (randomField >= 86 && randomField <= 95 && !weaponSmith) { //WeaponSmith
@@ -90,7 +90,7 @@ public class FieldList {
             return new WeaponSmith(item, "WeaponSmith", 4);
         } else if (randomField >= 96 && randomField <= 115) { //EmptyField
             return new EmptyField(item, "EmptyField", 5);
-        } else if (randomField >= 116 && randomField <= 130) { //EmptyField
+        } else if (randomField >= 116) { //EmptyField
             return new CampFire(item, "CampFire", 6);
         }
 
