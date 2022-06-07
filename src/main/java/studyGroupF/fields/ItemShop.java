@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class ItemShop extends Field {
     private ArrayList<Item> shopItems = new ArrayList<>();
-    private final int amountOfShopItems = 3;
     private Random r = new Random();
     private int amountOfPotionsInShop = r.nextInt((3 - 1) + 1) + 1;
     private int potionGoldCost = 150;
@@ -30,6 +29,7 @@ public class ItemShop extends Field {
     }
 
     public void createShopItems(Item item) { //Creates three random items (3 items only because of amountOfShopItems is set to 3)
+        int amountOfShopItems = 3;
         for (int i = 0; i < amountOfShopItems; i++) {
             item = item.createItem();
             item.setGoldCost(giveItemCost(item));
@@ -37,7 +37,7 @@ public class ItemShop extends Field {
         }
     }
 
-    public int giveItemCost(Item item) { //Used in createShopItem based on the rarity of the item created
+    public int giveItemCost(Item item) {            //Used in createShopItem based on the rarity of the item created
         return switch (item.getRarityName()) {
             case "Common" -> 50;
             case "Uncommon" -> 75;
@@ -61,7 +61,7 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-        System.out.println("---Returning to Shop Options---");
+        System.out.println("Returning to Shop Options");
     }
 
     public void buyPotion(Player player) { // buy potion method, checks the price altered in doFunction. Similar to buyItem
@@ -77,7 +77,7 @@ public class ItemShop extends Field {
         } else {
             System.out.println("Not enough gold");
         }
-        System.out.println("---Returning to Shop Options---");
+        System.out.println("Returning to Shop Options");
     }
 
     public void viewShopItems(Item item, Player player) throws IOException { // viewShopItems used in first shop options case
@@ -123,10 +123,7 @@ public class ItemShop extends Field {
                     buyItem(shopItems.get(2), player);
                 }
             }
-            default -> {
-                System.out.println("\n---Invalid input, returning to shop options---");
-                shopOptions(item, player);
-            }
+            default -> shopOptions(item, player);
         }
     }
 
