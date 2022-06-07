@@ -34,13 +34,12 @@ public class Item {
 
     }
 
-    public void matchNewItemProperties(Item item, int rarityValue, Player player) {
+    public void matchNewItemProperties(Item item, int rarityValue, Player player) { //Changes an item's rarity and value corresponding to desired rarity
 
         item.setRarityValue(rarityValue);
         item.setRarityName(getRarityName(rarityValue));
         item.setItemName(item.getRarityName() + " " + item.getItemType());
-        item.setInUse(false);
-        useItems(player);
+        reApplyAllItems(player);
     }
 
     public String getRarityName(int rarityValue) {
@@ -81,13 +80,19 @@ public class Item {
         return 1;
     }
 
-    public void reApplyAllItems(Player currentPlayer){
+    public void reApplyAllItems(Player currentPlayer){ //Resets player's stats to default and re-applies all item effects
         Player playerDummy = new Player();
+
 
         for (Item i : currentPlayer.getPlayerItems()) {
             i.setInUse(false);
         }
 
+        currentPlayer.setMaxHP(playerDummy.getMaxHP());
+        currentPlayer.setDamage(playerDummy.getDamage());
+        currentPlayer.setExtraGoldGain(playerDummy.getExtraGoldGain());
+
+        useItems(currentPlayer);
     }
 
     //Method to perform the chosen items effect
