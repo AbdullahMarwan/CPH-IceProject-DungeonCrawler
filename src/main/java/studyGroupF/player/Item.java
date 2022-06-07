@@ -34,13 +34,14 @@ public class Item {
 
     }
 
-    public void matchNewItemProperties(Item item, int rarityValue) {
+    public void matchNewItemProperties(Item item, int rarityValue, Player player) {
 
         item.setRarityValue(rarityValue);
         item.setRarityName(getRarityName(rarityValue));
         item.setItemName(item.getRarityName() + " " + item.getItemType());
+        item.setInUse(false);
+        useItems(player);
     }
-
 
     public String getRarityName(int rarityValue) {
         return switch (rarityValue) {
@@ -80,31 +81,42 @@ public class Item {
         return 1;
     }
 
+    public void reApplyAllItems(Player currentPlayer){
+        Player playerDummy = new Player();
+
+        for (Item i : currentPlayer.getPlayerItems()) {
+            i.setInUse(false);
+        }
+
+    }
+
     //Method to perform the chosen items effect
-    public void useItems(ArrayList<Item> playerItems, Player player) {
+    public void useItems(Player player) {
         int extraGold = 1;
         int extraMaxHP = 5;
         int extraDMG = 2;
 
-        for (Item i : playerItems) {
+        for (Item i : player.getPlayerItems()) {
 
             switch (i.getId()) {
                 case 1 -> { //Increase Gold Gained
-                    if (!inUse) {
+                    if (!i.inUse) {
                         player.setExtraGoldGain(player.getExtraGoldGain() + extraGold * i.getRarityValue());
                         i.inUse = true;
                     }
                 }
 
                 case 2 -> { //Increase Sword Damage
-                    if (!inUse) {
+                    if (!i.inUse) {
+                        System.out.println("Before buff: " + player.getDamage());
                         player.setDamage(player.getDamage() + extraDMG * i.getRarityValue());
+                        System.out.println("After buff: " + player.getDamage());
                         i.inUse = true;
                     }
                 }
 
                 case 3 -> { //Increase MaxHP
-                    if (!inUse) {
+                    if (!i.inUse) {
                         player.setMaxHP(player.getMaxHP() + extraMaxHP * i.getRarityValue());
                         i.inUse = true;
                     }

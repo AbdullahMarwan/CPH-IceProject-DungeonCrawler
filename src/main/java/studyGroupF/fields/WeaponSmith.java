@@ -155,7 +155,7 @@ public class WeaponSmith extends Field {
                 if (player.getGold() >= accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity)) {
                     for (Item item : player.getPlayerItems()) {
                         if (item.getRarityValue() == desiredItemRarity && item.getId() == id) {
-                            item.matchNewItemProperties(item, item.getRarityValue() + 1);
+                            item.matchNewItemProperties(item, item.getRarityValue() + 1, player);
                         }
                     }
                     int goldSpent=accumulativeItemUpgradePrice(returnSpecificRarityAmount(desiredItemRarity), desiredItemRarity);
