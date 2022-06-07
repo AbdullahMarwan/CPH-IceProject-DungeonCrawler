@@ -3,41 +3,41 @@
     {
       "monsterType": "Skeleton",
       "minHP": 15,
-      "maxHP": 25,
-      "minDMG": 5,
+      "maxHP": 20,
+      "minDMG": 10,
       "maxDMG": 15
     },
     {
       "monsterType": "Zombie",
-      "minHP": 20,
+      "minHP": 25,
       "maxHP": 30,
       "minDMG": 5,
       "maxDMG": 10
     },
     {
       "monsterType": "Baby Dragon",
-      "minHP": 35,
+      "minHP": 45,
       "maxHP": 50,
-      "minDMG": 5,
+      "minDMG": 10,
       "maxDMG": 15
     },
     {
       "monsterType": "Spider",
       "minHP": 5,
       "maxHP": 10,
-      "minDMG": 1,
-      "maxDMG": 5
-    },
-    {
-      "monsterType": "Gorilla",
-      "minHP": 10,
-      "maxHP": 25,
       "minDMG": 10,
       "maxDMG": 15
     },
     {
+      "monsterType": "Gorilla",
+      "minHP": 20,
+      "maxHP": 25,
+      "minDMG": 25,
+      "maxDMG": 30
+    },
+    {
       "monsterType": "Boar",
-      "minHP": 10,
+      "minHP": 15,
       "maxHP": 20,
       "minDMG": 10,
       "maxDMG": 15

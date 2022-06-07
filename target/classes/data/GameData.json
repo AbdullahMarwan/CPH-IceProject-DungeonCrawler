@@ -1,1 +1,50 @@
-{"player":{"playerName":"Abdu","maxHP":100,"currentHP":100,"damage":10,"gold":15,"currentLevel":1,"currentTile":0,"amountOfPotions":3,"extraGoldGain":1,"playerItems":[]},"fieldsID":[5,4,2,3,5,1,1,1,1,1,1]}
+{
+  "player": {
+    "playerName": "Abd",
+    "maxHP": 110,
+    "currentHP": 100,
+    "damage": 18,
+    "gold": 14700,
+    "currentLevel": 1,
+    "currentTile": 1,
+    "amountOfPotions": 4,
+    "extraGoldGain": 1,
+    "playerItems": [
+      {
+        "itemName": "Common Extra Damage",
+        "itemType": "Extra Damage",
+        "rarityName": "Common",
+        "rarityValue": 2,
+        "id": 2,
+        "goldCost": 50,
+        "inUse": true
+      },
+      {
+        "itemName": "Common Extra maxHP",
+        "itemType": "Extra maxHP",
+        "rarityName": "Common",
+        "rarityValue": 2,
+        "id": 3,
+        "goldCost": 50,
+        "inUse": true
+      }
+    ]
+  },
+  "fieldsID": [
+    5,
+    3,
+    6,
+    5,
+    1,
+    1,
+    4,
+    6,
+    2,
+    1,
+    2,
+    1,
+    1,
+    2,
+    1
+  ]
+}

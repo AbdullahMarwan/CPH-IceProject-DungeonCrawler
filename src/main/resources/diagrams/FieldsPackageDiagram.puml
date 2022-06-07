@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/component-diagram
+!pragma layout smetana
+
+folder "src : folder" {
+folder "main : folder" {
+
+    folder "java : folder" {
+        package "studyGroupF : package" {
+           package "fields : package" {
+           [CampFire]
+           [EmptyField]
+           [ItemShop]
+           [Field]
+           [FieldList]
+           [LootChest]
+           [MonsterBattle]
+           [WeaponSmith]
+           }
+        }
+    }
+
+    folder "resources : folder" {
+         folder "data : folder" {
+         [GameData.json]
+         }
+    }
+  }
+}
+
+
+[CampFire] .up.> [Field] : extends
+[EmptyField] .up.> [Field] : extends
+[LootChest] .up.> [Field] : extends
+[WeaponSmith] .up.> [Field] : extends
+[MonsterBattle] .up.> [Field] : extends
+[ItemShop] .up.> [Field] : extends
+
+
+@enduml

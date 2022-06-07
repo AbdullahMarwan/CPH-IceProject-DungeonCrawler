@@ -211,15 +211,19 @@ class MonsterBattle {
 
 class ItemShop {
     - ArrayList<Item> shopItems;
-    - int amountOfShopItems;
+    - Random r;
+    - int amountOfPotionsInShop;
+    - int potionGoldCost;
     - boolean shopInProgress;
 
     + ItemShop(Item,String,int);
     + buyItem(Item,Player);
+    + buyPotion(Player);
     + createShopItems(item);
     + doFunction(Item, Player);
-    + giveItemCost(Item);
+    + int giveItemCost(Item);
     + ShopOptions(Item, Player);
+    + viewShopItems(Item, Player);
 }
 
 class FieldList{

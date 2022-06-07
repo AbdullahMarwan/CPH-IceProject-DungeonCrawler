@@ -41,7 +41,7 @@ public class Player {
 
     public void addLootToPlayer(Item item, Player player) {
         playerItems.add(item);
-        item.useItems(playerItems, player);
+        item.useItems(player);
     }
 
     public void addGoldToPlayer(int goldGiven) {

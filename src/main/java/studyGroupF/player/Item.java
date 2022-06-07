@@ -34,6 +34,25 @@ public class Item {
 
     }
 
+    public void matchNewItemProperties(Item item, int rarityValue, Player player) { //Changes an item's rarity and value corresponding to desired rarity
+
+        item.setRarityValue(rarityValue);
+        item.setRarityName(getRarityName(rarityValue));
+        item.setItemName(item.getRarityName() + " " + item.getItemType());
+        reApplyAllItems(player);
+    }
+
+    public String getRarityName(int rarityValue) {
+        return switch (rarityValue) {
+            case 2 -> "Common";
+            case 3 -> "Uncommon";
+            case 4 -> "Rare";
+            case 5 -> "Epic";
+            case 6 -> "Legendary";
+            default -> throw new IllegalStateException("Unexpected value: " + rarityValue);
+        };
+    }
+
     public int setItemRarityValue(String rarityName) {
         int commonRarity = 2;
         int uncommonRarity = 3;
@@ -61,31 +80,46 @@ public class Item {
         return 1;
     }
 
+    public void reApplyAllItems(Player currentPlayer){ //Resets player's stats to default and re-applies all item effects
+        Player playerDummy = new Player();
+
+
+        for (Item i : currentPlayer.getPlayerItems()) {
+            i.setInUse(false);
+        }
+
+        currentPlayer.setMaxHP(playerDummy.getMaxHP());
+        currentPlayer.setDamage(playerDummy.getDamage());
+        currentPlayer.setExtraGoldGain(playerDummy.getExtraGoldGain());
+
+        useItems(currentPlayer);
+    }
+
     //Method to perform the chosen items effect
-    public void useItems(ArrayList<Item> playerItems, Player player) {
+    public void useItems(Player player) {
         int extraGold = 1;
-        int extraMaxHP = 2;
+        int extraMaxHP = 5;
         int extraDMG = 2;
 
-        for (Item i : playerItems) {
+        for (Item i : player.getPlayerItems()) {
 
             switch (i.getId()) {
                 case 1 -> { //Increase Gold Gained
-                    if (!inUse) {
+                    if (!i.inUse) {
                         player.setExtraGoldGain(player.getExtraGoldGain() + extraGold * i.getRarityValue());
                         i.inUse = true;
                     }
                 }
 
                 case 2 -> { //Increase Sword Damage
-                    if (!inUse) {
+                    if (!i.inUse) {
                         player.setDamage(player.getDamage() + extraDMG * i.getRarityValue());
                         i.inUse = true;
                     }
                 }
 
                 case 3 -> { //Increase MaxHP
-                    if (!inUse) {
+                    if (!i.inUse) {
                         player.setMaxHP(player.getMaxHP() + extraMaxHP * i.getRarityValue());
                         i.inUse = true;
                     }
@@ -120,17 +154,17 @@ public class Item {
         Random r = new Random();
         int randomNr = r.nextInt((100 - 1) + 1) + 1;
 
-        String rarityName = "";
+        String rarityName;
 
-        if (randomNr >= 1 && randomNr <= 40) { //Common
+        if (randomNr <= 40) { //Common
             rarityName = itemRarities[0];
-        } else if (randomNr >= 41 && randomNr <= 65) { //Uncommon
+        } else if (randomNr <= 65) { //Uncommon
             rarityName = itemRarities[1];
-        } else if (randomNr >= 66 && randomNr <= 85) { //Rare
+        } else if (randomNr <= 85) { //Rare
             rarityName = itemRarities[2];
-        } else if (randomNr >= 86 && randomNr <= 95) { //Epic
+        } else if (randomNr <= 95) { //Epic
             rarityName = itemRarities[3];
-        } else if (randomNr >= 96 && randomNr <= 100) { //Legendary
+        } else { //Legendary
             rarityName = itemRarities[4];
         }
 
@@ -138,12 +172,10 @@ public class Item {
     }
 
     public String selectRandomItemType(int id) {
-        String itemType = "";
-
         return switch (id) {
-            case 1 -> itemType = itemTypes[0];
-            case 2 -> itemType = itemTypes[1];
-            case 3 -> itemType = itemTypes[2];
+            case 1 -> itemTypes[0];
+            case 2 -> itemTypes[1];
+            case 3 -> itemTypes[2];
             default -> "Broken";
         };
     }
@@ -214,11 +246,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item name: " + itemName
-                + "\n  Item type: " + itemType
-                + "\n  Rarity name: " + rarityName
-                + "\n  Rarity value: " + rarityValue
-                + "\n  ID: " + id
-                + "\n  Active? " + inUse;
+        return "Item name: " + itemName;
     }
 }

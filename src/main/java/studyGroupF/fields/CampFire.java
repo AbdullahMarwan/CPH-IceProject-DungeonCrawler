@@ -45,7 +45,7 @@ public class CampFire extends Field {
         int healAmount = (int) (player.getMaxHP() * restHealAmount);
 
         player.setCurrentHP(player.getCurrentHP() + healAmount);
-        //TODO Checks if the healed amount exceeds MaxHP
+
         if (player.getCurrentHP() > player.getMaxHP()) {
             player.setCurrentHP(player.getMaxHP());
         }

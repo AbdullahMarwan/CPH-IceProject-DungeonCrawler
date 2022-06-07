@@ -23,7 +23,7 @@ public class GameController {
 
     public boolean gameInProgress = true;
 
-    public void setUpGame() {
+    public void setUpGame() { //Gives the player option to start a new save or load the old one
         Scanner sc = new Scanner(System.in);
         level = new Level();
         item = new Item();
@@ -39,13 +39,13 @@ public class GameController {
             System.out.println("To load it press 'L' or start a new 'N' save \n ");
             String input = sc.nextLine().toLowerCase(Locale.ROOT);
 
-            if (input.equals("l")) { //Load previous PlayerData
+            if (input.equals("l")) { //Load previous save
                 System.out.println("Loading previous save");
                 initializeFullGame(SaveState.OLD_SAVE);
             } else if (input.equals("n")) { //Initialize a new save
                 System.out.println("Starting a new save: ");
                 initializeFullGame(SaveState.NEW_SAVE);
-            } else {
+            } else { //Ask about input again
                 System.out.println("\n---Invalid input, try again---");
                 setUpGame();
             }
@@ -84,7 +84,6 @@ public class GameController {
     public void initializeLevel(SaveState saveState) {
 
         switch (saveState) {
-
             case OLD_SAVE -> {
                 level.loadPreviousFieldsToLevel(getFields());
             }

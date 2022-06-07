@@ -5,6 +5,10 @@ import studyGroupF.player.Player;
 
 import java.io.IOException;
 
+/**
+ * Abstract class that serves to create different types of fields and their method actions
+ */
+
 public abstract class Field {
     protected String fieldType;
     protected int fieldID;
