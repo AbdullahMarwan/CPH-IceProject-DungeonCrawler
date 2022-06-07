@@ -113,9 +113,7 @@ public class Item {
 
                 case 2 -> { //Increase Sword Damage
                     if (!i.inUse) {
-                        System.out.println("Before buff: " + player.getDamage());
                         player.setDamage(player.getDamage() + extraDMG * i.getRarityValue());
-                        System.out.println("After buff: " + player.getDamage());
                         i.inUse = true;
                     }
                 }

@@ -141,6 +141,7 @@ public class WeaponSmith extends Field {
 
     void upgradeItemsByRarity(Player player, int id) {
         System.out.println(
+                "\nYou have ["+player.getGold()+"] gold."+
                 "\nWhich rarity would you like to upgrade?\n " +
                         "\t1. - Common -> Uncommon" + " (Cost: " + accumulativeItemUpgradePrice(commonAmount, 2) + ")\n"+
                         "\t2. - Uncommon -> Rare" +  " (Cost: " + accumulativeItemUpgradePrice(uncommonAmount, 3) + ")\n"+
@@ -175,7 +176,7 @@ public class WeaponSmith extends Field {
 
         } else {
             System.out.println("\n---Invalid input, try again!---");
-            upgradeItemsByRarity(player, id);
+            viewEquipmentOptions(item, player);
         }
     }
 
