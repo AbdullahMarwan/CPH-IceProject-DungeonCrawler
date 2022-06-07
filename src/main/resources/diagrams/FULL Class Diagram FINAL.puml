@@ -1,39 +1,37 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-!pragma layout smetana
 
 top to bottom direction
 skinparam linetype ortho
+!pragma layout smetana
 
 class BattleSystem {
   + BattleSystem(Player, Monster):
-  + attack(boolean): void
   + heal(): void
+  + attack(boolean): void
 }
 class CampFire {
   + CampFire(Item, String, int):
+  + salvageOption(Player): void
+  + doFunction(Item, Player): void
   + restOption(Player): void
   + campFireOptions(Player): void
   + eatOption(Player): void
-  + doFunction(Item, Player): void
   + randomizeCampFireState(): void
-  + salvageOption(Player): void
 }
 class DataManager {
   + DataManager():
-  + gameData: GameData
   + gameValues: GameValues
-  + saveGameValues(): void
-  + initializePreviousPlayerData(): Player
-  + initializePreviousFieldsToLevel(): ArrayList<Integer>
-  + initializeNewPlayerData(): Player
-  + initializePreviousGame(): void
+  + gameData: GameData
   + initializeGame(SaveState): void
-  + initializePreviousItemStorage(): ArrayList<Item>
-  + loadGameData(): void
-  + saveGameData(): void
+  + initializePreviousFieldsToLevel(): ArrayList<Integer>
   + loadGameValues(): void
+  + initializeNewPlayerData(): Player
+  + initializePreviousPlayerData(): Player
+  + initializePreviousGame(): void
+  + loadGameData(): void
+  + saveGameValues(): void
+  + saveGameData(): void
+  + initializePreviousItemStorage(): ArrayList<Item>
   + instance: DataManager
   + gameDataAvailable: boolean
   + gameValues: GameValues
@@ -48,8 +46,8 @@ class EmptyField {
 class Field {
   + Field(int):
   + Field(Item, String, int):
-  + fieldType: String
   + fieldID: int
+  + fieldType: String
   + toString(): String
   + doFunction(Item, Player): void
   + fieldID: int
@@ -58,11 +56,11 @@ class Field {
 class FieldList {
   + FieldList(int):
   + FieldList(ArrayList<Integer>):
-  + fields: ArrayList<Field>
   + i: int
+  + fields: ArrayList<Field>
   + getFieldByID(int): Field
-  + currentField(int): Field
   + fieldsToIDList(ArrayList<Field>): ArrayList<Integer>
+  + currentField(int): Field
   + doFunction(Item, Player, int): void
   + i: int
   + fields: ArrayList<Field>
@@ -70,16 +68,16 @@ class FieldList {
 }
 class GameController {
   + GameController():
-  + monster: Monster
   + gameInProgress: boolean
   + player: Player
-  + initializeLevel(SaveState): void
-  + saveFullGame(): void
-  + setUpGame(): void
+  + monster: Monster
   + idleOptions(): void
-  + initializeFullGame(SaveState): void
-  + playGame(): void
+  + initializeLevel(SaveState): void
   + goToNextLevel(): void
+  + setUpGame(): void
+  + saveFullGame(): void
+  + playGame(): void
+  + initializeFullGame(SaveState): void
   + player: Player
   + monster: Monster
   + fields: ArrayList<Integer>
@@ -94,77 +92,78 @@ class GameData {
   + fieldsID: ArrayList<Integer>
 }
 class GameValues {
-  + GameValues():
   + GameValues(ArrayList<Monster>):
+  + GameValues():
   + monsters: ArrayList<Monster>
   + monsters: ArrayList<Monster>
 }
 class Item {
   + Item(String, String, String, int, int, boolean):
   + Item():
-  + itemType: String
   + goldCost: int
-  + rarityValue: int
-  + rarityName: String
   + inUse: boolean
-  + itemTypes: String[]
   + itemName: String
+  + itemType: String
   + id: int
   + itemRarities: String[]
-  + useItems(ArrayList<Item>, Player): void
+  + itemTypes: String[]
+  + rarityValue: int
+  + rarityName: String
+  + matchNewItemProperties(Item, int, Player): void
+  + setItemRarityValue(String): int
   + getRarityName(int): String
+  + selectRandomItemRarity(): String
+  + useItems(Player): void
+  + reApplyAllItems(Player): void
+  + selectRandomItemType(int): String
   + createItem(): Item
   + toString(): String
-  + matchNewItemProperties(Item, int): void
-  + selectRandomItemRarity(): String
-  + selectRandomItemType(int): String
-  + setItemRarityValue(String): int
   + itemName: String
-  + itemType: String
-  + itemRarities: String[]
-  + rarityValue: int
-  + rarityName: String
   + goldCost: int
+  + rarityValue: int
+  + itemType: String
+  + id: int
+  + itemRarities: String[]
+  + rarityName: String
   + itemTypes: String[]
   + inUse: boolean
-  + id: int
 }
 class ItemShop {
   + ItemShop(Item, String, int):
+  + doFunction(Item, Player): void
+  + giveItemCost(Item): int
   + buyPotion(Player): void
+  + createShopItems(Item): void
   + viewShopItems(Item, Player): void
   + shopOptions(Item, Player): void
-  + giveItemCost(Item): int
   + buyItem(Item, Player): void
-  + doFunction(Item, Player): void
-  + createShopItems(Item): void
 }
 class JSONHelper {
   + JSONHelper():
-  + readJSON(File, Class): Object
   + writeJSON(File, Object): void
+  + readJSON(File, Class): Object
   + instance: JSONHelper
 }
 class Level {
   + Level():
   + levelNr: int
-  + printFieldArray(int): void
-  + loadPreviousFieldsToLevel(ArrayList<Integer>): void
-  + doFieldFunction(Item, Player, int): void
-  + fieldToString(int): String
-  + returnFieldsIDs(): ArrayList<Integer>
   + addRandomsFieldsToLevel(): void
+  + printFieldArray(int): void
+  + returnFieldsIDs(): ArrayList<Integer>
+  + fieldToString(int): String
   + getCurrentField(int): Field
+  + doFieldFunction(Item, Player, int): void
   + toString(): String
+  + loadPreviousFieldsToLevel(ArrayList<Integer>): void
   + levelNr: int
 }
 class LootChest {
   + LootChest(Item, String, int):
-  + minGold: int
   + maxGold: int
+  + minGold: int
   + doFunction(Item, Player): void
-  + minGold: int
   + maxGold: int
+  + minGold: int
 }
 class Main {
   + Main():
@@ -173,68 +172,68 @@ class Main {
 class Monster {
   + Monster():
   + Monster(String, int, int, int):
-  + minDMG: int
+  + statIncrease: double
   + HP: int
+  + minDMG: int
+  + minHP: int
   + maxDMG: int
   + damage: int
-  + monsterType: String
-  + statIncrease: double
-  + minHP: int
   + maxHP: int
-  + toString(): String
+  + monsterType: String
   + increaseDifficulty(int): double
-  + createMonster(int): Monster
   + randomFromMinMax(int, int): int
-  + maxHP: int
-  + maxDMG: int
-  + minHP: int
-  + statIncrease: double
+  + createMonster(int): Monster
+  + toString(): String
   + damage: int
-  + HP: int
-  + monsters: ArrayList<Monster>
-  + monsterType: String
   + minDMG: int
+  + statIncrease: double
+  + HP: int
+  + maxHP: int
+  + monsters: ArrayList<Monster>
+  + minHP: int
+  + maxDMG: int
+  + monsterType: String
 }
 class MonsterBattle {
   + MonsterBattle(Item, String, int):
-  + minGold: int
   + maxGold: int
+  + minGold: int
+  + checkWinner(Player): void
   + doFunction(Item, Player): void
   + displayHP(Player): void
-  + checkWinner(Player): void
-  + playerFinishedTurn(Player): void
   + combatOptions(Player): void
-  + minGold: int
+  + playerFinishedTurn(Player): void
   + maxGold: int
+  + minGold: int
 }
 class Player {
   + Player(String, int, int, int, int, int, int, int, int):
   + Player():
-  + currentTile: int
-  + damage: int
-  + maxHP: int
-  + gold: int
-  + amountOfPotions: int
-  + playerItems: ArrayList<Item>
-  + currentHP: int
-  + playerName: String
-  + currentLevel: int
   + extraGoldGain: int
-  + toString(): String
-  + addLootToPlayer(Item, Player): void
-  + viewStorage(): void
+  + playerItems: ArrayList<Item>
+  + maxHP: int
+  + currentLevel: int
+  + amountOfPotions: int
+  + damage: int
+  + gold: int
+  + currentTile: int
+  + playerName: String
+  + currentHP: int
   + changePlayerName(): void
   + addGoldToPlayer(int): void
-  + currentLevel: int
-  + extraGoldGain: int
-  + playerName: String
-  + maxHP: int
-  + amountOfPotions: int
-  + gold: int
-  + playerItems: ArrayList<Item>
+  + toString(): String
+  + viewStorage(): void
+  + addLootToPlayer(Item, Player): void
   + damage: int
+  + amountOfPotions: int
+  + playerName: String
   + currentTile: int
+  + currentLevel: int
   + currentHP: int
+  + playerItems: ArrayList<Item>
+  + maxHP: int
+  + extraGoldGain: int
+  + gold: int
 }
 enum SaveState << enumeration >> {
   + SaveState():
@@ -243,15 +242,15 @@ enum SaveState << enumeration >> {
 }
 class WeaponSmith {
   + WeaponSmith(Item, String, int):
-  + rarityCost(int): int
-  + upgradeItemsByRarity(Player, int): void
-  + viewEquipmentOptions(Item, Player): void
   + hasRarity(int): boolean
-  + countRarities(int, Player): void
-  + weaponSmithOptions(Item, Player): void
-  + doFunction(Item, Player): void
-  + returnSpecificRarityAmount(int): int
   + accumulativeItemUpgradePrice(int, int): int
+  + doFunction(Item, Player): void
+  + viewEquipmentOptions(Item, Player): void
+  + returnSpecificRarityAmount(int): int
+  + weaponSmithOptions(Item, Player): void
+  + upgradeItemsByRarity(Player, int): void
+  + countRarities(int, Player): void
+  + rarityCost(int): int
 }
 
 CampFire        -[#000082,plain]-^  Field
